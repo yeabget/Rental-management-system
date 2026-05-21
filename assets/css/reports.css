@@ -1,0 +1,164 @@
+/* ================= RESET ================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f3f4f6;
+    color:#111827;
+}
+
+/* ================= LAYOUT ================= */
+.dashboard{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ================= MAIN (FIX SIDEBAR OVERLAP) ================= */
+.main{
+    flex:1;
+    padding:25px;
+    overflow-x:hidden;
+
+    margin-left:270px;
+}
+
+/* ================= PAGE TITLE ================= */
+.main h1{
+    font-size:28px;
+    font-weight:800;
+    margin-bottom:20px;
+}
+
+/* ================= PAGE TOP ================= */
+.page-top{
+    width:100%;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    border-radius:30px;
+    padding:45px;
+    color:white;
+    position:relative;
+    overflow:hidden;
+    margin-bottom:35px;
+    box-shadow:6px 0 30px rgba(0,0,0,0.15);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+.page-top::before{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    top:-80px;
+    right:-60px;
+}
+
+.page-top::after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.06);
+    bottom:-60px;
+    left:-40px;
+}
+
+.welcome-box{
+    position:relative;
+    z-index:2;
+}
+
+.welcome-box h1{
+    font-size:40px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+/* ================= TABLE ================= */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:16px;
+    overflow:hidden;
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
+}
+
+/* HEADER */
+table th{
+    background:#111827;
+    color:white;
+    text-align:left;
+    padding:14px;
+    font-size:14px;
+}
+
+/* CELLS */
+table td{
+    padding:14px;
+    border-bottom:1px solid #e5e7eb;
+    font-size:14px;
+}
+
+/* HOVER */
+table tr:hover{
+    background:#f9fafb;
+}
+
+/* ================= TYPE BADGES ================= */
+.badge{
+    font-weight:bold;
+    padding:5px 10px;
+    border-radius:8px;
+    display:inline-block;
+}
+
+.badge-spam{
+    color:white;
+    background:#ef4444;
+}
+
+.badge-report{
+    color:#92400e;
+    background:#fef3c7;
+}
+
+/* ================= RESPONSIVE TABLE ================= */
+@media(max-width:900px){
+  
+    table{
+        display:block;
+        overflow-x:auto;
+        white-space:nowrap;
+    }
+}
+
+/* ================= MOBILE ================= */
+@media(max-width:768px){
+
+    .main{
+        margin-left:0;
+        padding:15px;
+    }
+
+    .main h1{
+        font-size:22px;
+    }
+
+    table th,
+    table td{
+        font-size:13px;
+        padding:10px;
+    }
+}

@@ -1,0 +1,491 @@
+/* ================= RESET ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f3f4f6;
+    color:#111827;
+    overflow-x:hidden;
+}
+
+/* ================= MAIN CONTENT ================= */
+
+.main{
+    margin-left:260px;
+    width:calc(100% - 260px);
+    padding:30px;
+    min-height:100vh;
+}
+
+/* ================= PAGE TOP ================= */
+
+.page-top{
+
+    width:100%;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    border-radius:30px;
+
+    padding:45px;
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin-bottom:35px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+/* TOP DECORATION */
+
+.page-top::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.08);
+
+    top:-80px;
+    right:-60px;
+}
+
+.page-top::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.06);
+
+    bottom:-60px;
+    left:-40px;
+}
+
+/* ================= WELCOME ================= */
+
+.welcome-box{
+    position:relative;
+    z-index:2;
+}
+
+.welcome-box h1{
+    font-size:40px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.welcome-box p{
+    font-size:16px;
+    opacity:0.9;
+}
+
+/* ================= PAGE TITLE ================= */
+
+.page-title{
+    margin-bottom:25px;
+}
+
+.page-title h1{
+    font-size:30px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.page-title p{
+    color:#6b7280;
+}
+
+/* ================= EMPTY BOX ================= */
+
+.empty{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 8px 20px rgba(0,0,0,0.05);
+
+    font-weight:600;
+}
+
+/* ================= GRID ================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3, 1fr);
+
+    gap:28px;
+
+    align-items:start;
+}
+
+/* ================= CARD ================= */
+
+.card{
+
+    background:#ffffff;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    transition:0.35s ease;
+
+    display:flex;
+    flex-direction:column;
+
+    border:1px solid #e5e7eb;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,0.05),
+    0 4px 10px rgba(0,0,0,0.03);
+
+    min-height:440px;
+}
+
+/* CARD HOVER */
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+    0 20px 35px rgba(37,99,235,0.12),
+    0 10px 15px rgba(0,0,0,0.06);
+}
+
+/* ================= IMAGE ================= */
+
+.card img{
+
+    width:100%;
+
+    height:230px;
+
+    object-fit:cover;
+
+    transition:0.4s;
+}
+
+.card:hover img{
+    transform:scale(1.04);
+}
+
+/* ================= CONTENT ================= */
+
+.card h3{
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:#111827;
+
+    margin:18px 18px 10px;
+
+    line-height:1.4;
+}
+
+/* ================= TEXT ================= */
+
+.card p{
+
+    margin:6px 18px;
+
+    color:#6b7280;
+
+    font-size:14px;
+
+    line-height:1.7;
+}
+
+/* ================= PRICE ================= */
+
+.card strong{
+
+    color:#2563eb;
+
+    font-size:19px;
+
+    font-weight:700;
+}
+
+/* ================= BUTTON AREA ================= */
+
+.card a{
+
+    margin-top:auto;
+
+    text-decoration:none;
+}
+
+/* ================= BUTTON ================= */
+
+.card button{
+
+    width:calc(100% - 36px);
+
+    margin:20px 18px 18px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+/* BUTTON HOVER */
+
+.card button:hover{
+
+    transform:translateY(-2px);
+
+    background:linear-gradient(135deg,#1d4ed8,#4338ca);
+
+    box-shadow:0 10px 20px rgba(37,99,235,0.25);
+}
+
+/* ================= SIDEBAR ================= */
+
+.sidebar{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:260px;
+
+    height:100vh;
+
+    background:#111827;
+
+    color:white;
+
+    padding:20px;
+
+    overflow-y:auto;
+
+    z-index:1000;
+
+    transition:0.3s;
+}
+
+/* SIDEBAR LINKS */
+
+.sidebar a{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    padding:14px 16px;
+
+    margin-bottom:10px;
+
+    border-radius:14px;
+
+    color:#d1d5db;
+
+    text-decoration:none;
+
+    transition:0.3s;
+}
+
+/* LINK HOVER */
+
+.sidebar a:hover{
+
+    background:#1f2937;
+
+    color:white;
+
+    transform:translateX(5px);
+}
+
+/* ACTIVE LINK */
+
+.sidebar a.active{
+
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+
+    color:white;
+
+    box-shadow:0 10px 20px rgba(37,99,235,0.2);
+}
+
+/* ================= MENU TOGGLE ================= */
+
+.menu-toggle{
+
+    display:none;
+
+    position:fixed;
+
+    top:15px;
+    left:15px;
+
+    width:45px;
+    height:45px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#111827;
+
+    color:white;
+
+    cursor:pointer;
+
+    z-index:1100;
+
+    font-size:18px;
+}
+
+/* ================= OVERLAY ================= */
+
+.overlay{
+
+    display:none;
+
+    position:fixed;
+
+    inset:0;
+
+    background:rgba(0,0,0,0.5);
+
+    z-index:999;
+}
+
+/* ================= TABLET ================= */
+
+@media(max-width:1200px){
+
+    .grid{
+        grid-template-columns:repeat(2, 1fr);
+    }
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:768px){
+
+    .sidebar{
+        transform:translateX(-100%);
+    }
+
+    .sidebar.active{
+        transform:translateX(0);
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+        padding:20px;
+    }
+
+    .menu-toggle{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+
+    .overlay.active{
+        display:block;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .page-top{
+        padding:30px 25px;
+        border-radius:24px;
+    }
+
+    .welcome-box h1{
+        font-size:30px;
+    }
+}
+
+/* ================= SMALL MOBILE ================= */
+
+@media(max-width:500px){
+
+    .card{
+        min-height:auto;
+    }
+
+    .card img{
+        height:190px;
+    }
+
+    .page-top{
+        padding:25px 20px;
+    }
+
+    .welcome-box h1{
+        font-size:24px;
+    }
+
+    .welcome-box p{
+        font-size:14px;
+    }
+
+    .page-title h1{
+        font-size:24px;
+    }
+}

@@ -1,0 +1,341 @@
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:#f4f7fb;
+color:#111827;
+}
+
+/* DASHBOARD */
+.dashboard{
+display:flex;
+min-height:100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+width:260px;
+background:#111827;
+padding:30px 20px;
+display:flex;
+flex-direction:column;
+gap:12px;
+position:sticky;
+top:0;
+height:100vh;
+}
+
+.sidebar h2{
+color:white;
+margin-bottom:20px;
+font-size:28px;
+}
+
+.sidebar a{
+text-decoration:none;
+color:#d1d5db;
+padding:14px;
+border-radius:12px;
+display:flex;
+align-items:center;
+gap:10px;
+transition:0.3s;
+font-weight:500;
+}
+
+.sidebar a:hover{
+background:#1f2937;
+color:white;
+}
+
+.sidebar .active{
+background:#2563eb;
+color:white;
+}
+
+.badge{
+background:red;
+color:white;
+padding:3px 8px;
+border-radius:20px;
+font-size:12px;
+margin-left:auto;
+}
+
+/* MAIN */
+.main{
+flex:1;
+padding:35px;
+}
+
+/* HERO */
+.hero-section{
+width:100%;
+height:420px;
+overflow:hidden;
+border-radius:24px;
+margin-bottom:30px;
+box-shadow:0 10px 25px rgba(0,0,0,0.1);
+}
+
+.hero-image{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+/* DETAILS */
+.details-container{
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+/* HEADER */
+.details-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+background:white;
+padding:30px;
+border-radius:22px;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.details-header h1{
+font-size:38px;
+margin-bottom:10px;
+}
+
+.location{
+color:#6b7280;
+font-size:16px;
+margin-bottom:12px;
+}
+
+.rating{
+color:#f59e0b;
+font-weight:600;
+}
+
+.price-box{
+text-align:right;
+}
+
+.price-box h2{
+font-size:42px;
+color:#2563eb;
+}
+
+.price-box span{
+color:#6b7280;
+}
+
+/* FEATURES */
+.features-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.feature-card{
+background:white;
+padding:25px;
+border-radius:20px;
+text-align:center;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
+transition:0.3s;
+}
+
+.feature-card:hover{
+transform:translateY(-5px);
+}
+
+.feature-card i{
+font-size:28px;
+color:#2563eb;
+margin-bottom:15px;
+}
+
+.feature-card h3{
+margin-bottom:8px;
+}
+
+/* SECTION */
+.section-card{
+background:white;
+padding:30px;
+border-radius:22px;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.section-card h2{
+margin-bottom:18px;
+font-size:28px;
+}
+
+.section-card p{
+line-height:1.8;
+color:#4b5563;
+}
+
+/* AMENITIES */
+.amenities{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:18px;
+margin-top:20px;
+}
+
+.amenities div{
+background:#f3f4f6;
+padding:16px;
+border-radius:14px;
+font-weight:500;
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.amenities i{
+color:#2563eb;
+}
+
+/* OWNER */
+.owner-card{
+background:white;
+padding:25px;
+border-radius:22px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+box-shadow:0 5px 20px rgba(0,0,0,0.05);
+}
+
+.owner-info{
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+.owner-avatar{
+width:70px;
+height:70px;
+background:#2563eb;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:50%;
+font-size:28px;
+font-weight:bold;
+}
+
+.chat-btn{
+background:#2563eb;
+color:white;
+padding:14px 22px;
+border-radius:14px;
+text-decoration:none;
+font-weight:600;
+transition:0.3s;
+}
+
+.chat-btn:hover{
+background:#1d4ed8;
+}
+
+/* BUTTONS */
+.action-buttons{
+display:flex;
+gap:20px;
+}
+
+.book-btn,
+.save-btn{
+flex:1;
+padding:18px;
+text-align:center;
+border-radius:16px;
+font-size:18px;
+font-weight:600;
+text-decoration:none;
+transition:0.3s;
+}
+
+.book-btn{
+background:#2563eb;
+color:white;
+}
+
+.book-btn:hover{
+background:#1d4ed8;
+}
+
+.save-btn{
+background:white;
+border:2px solid #2563eb;
+color:#2563eb;
+}
+
+.save-btn:hover{
+background:#2563eb;
+color:white;
+}
+
+/* GUARANTEE */
+.guarantee-box{
+background:linear-gradient(135deg,#2563eb,#1d4ed8);
+padding:35px;
+border-radius:24px;
+color:white;
+}
+
+.guarantee-box h2{
+margin-bottom:12px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+
+.dashboard{
+flex-direction:column;
+}
+
+.sidebar{
+width:100%;
+height:auto;
+position:relative;
+flex-direction:row;
+overflow:auto;
+}
+
+.main{
+padding:20px;
+}
+
+.details-header{
+flex-direction:column;
+align-items:flex-start;
+gap:20px;
+}
+
+.owner-card{
+flex-direction:column;
+gap:20px;
+align-items:flex-start;
+}
+
+.action-buttons{
+flex-direction:column;
+}
+
+.hero-section{
+height:280px;
+}
+
+}

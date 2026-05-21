@@ -1,0 +1,525 @@
+/* ================= RESET ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f3f7fb;
+    color:#111827;
+    overflow-x:hidden;
+}
+
+/* ================= DASHBOARD ================= */
+
+.dashboard{
+    display:flex;
+    min-height:100vh;
+    width:100%;
+}
+
+/* ================= SIDEBAR SPACE FIX ================= */
+
+.main{
+    flex:1;
+    margin-left:260px;
+    padding:35px;
+    min-height:100vh;
+    overflow-y:auto;
+}
+
+/* ================= CHAT PAGE ================= */
+
+.chat-page{
+    width:100%;
+}
+
+/* ================= TOP BAR ================= */
+
+.top-bar{
+    width:100%;
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    border-radius:30px;
+
+    padding:45px;
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin-bottom:35px;
+
+    box-shadow:
+    6px 0 30px rgba(0,0,0,0.15);
+}
+
+/* ================= EFFECTS ================= */
+
+.top-bar::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.08);
+
+    top:-80px;
+    right:-60px;
+}
+
+.top-bar::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.06);
+
+    bottom:-60px;
+    left:-40px;
+}
+
+.welcome-box{
+    position:relative;
+    z-index:2;
+}
+
+.welcome-box h1{
+
+    font-size:40px;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+}
+
+.welcome-box p{
+
+    font-size:16px;
+
+    opacity:0.9;
+}
+
+/* ================= CHAT LIST ================= */
+
+.chat-list{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+/* ================= CHAT CARD ================= */
+
+.chat-card{
+
+    background:white;
+
+    padding:20px;
+
+    border-radius:24px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    text-decoration:none;
+
+    color:#111827;
+
+    transition:0.3s ease;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,0.05);
+
+    border:1px solid transparent;
+}
+
+.chat-card:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#dbeafe;
+
+    box-shadow:
+    0 12px 28px rgba(37,99,235,0.12);
+}
+
+/* ================= AVATAR ================= */
+
+.avatar{
+
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    color:white;
+
+    font-weight:700;
+
+    font-size:22px;
+
+    flex-shrink:0;
+
+    box-shadow:
+    0 6px 18px rgba(37,99,235,0.25);
+}
+
+/* ================= DETAILS ================= */
+
+.chat-details{
+    flex:1;
+    min-width:0;
+}
+
+/* ================= TOP INFO ================= */
+
+.chat-top-info{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:10px;
+}
+
+.chat-top-info h3{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#111827;
+
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+}
+
+/* ================= TIME ================= */
+
+.chat-time{
+
+    font-size:12px;
+
+    color:#9ca3af;
+
+    white-space:nowrap;
+
+    flex-shrink:0;
+}
+
+/* ================= BOTTOM INFO ================= */
+
+.chat-bottom-info{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:12px;
+}
+
+.chat-bottom-info p{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    flex:1;
+
+    overflow:hidden;
+
+    white-space:nowrap;
+
+    text-overflow:ellipsis;
+
+    font-size:14px;
+
+    color:#6b7280;
+}
+
+/* ================= SENDER BADGE ================= */
+
+.sender-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:4px 10px;
+
+    border-radius:50px;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    flex-shrink:0;
+}
+
+/* YOU BADGE */
+
+.sender-badge.me{
+
+    background:#dbeafe;
+
+    color:#1d4ed8;
+}
+
+/* RENTER BADGE */
+
+.sender-badge.them{
+
+    background:#dcfce7;
+
+    color:#15803d;
+}
+
+/* ================= UNREAD COUNT ================= */
+
+.msg-count{
+
+    min-width:26px;
+    height:26px;
+
+    padding:0 8px;
+
+    border-radius:50px;
+
+    background:#2563eb;
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    flex-shrink:0;
+}
+
+/* ================= EMPTY STATE ================= */
+
+.empty-state{
+
+    background:white;
+
+    padding:80px 30px;
+
+    border-radius:30px;
+
+    text-align:center;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,0.05);
+}
+
+.empty-state i{
+
+    font-size:75px;
+
+    color:#2563eb;
+
+    margin-bottom:25px;
+}
+
+.empty-state h2{
+
+    font-size:30px;
+
+    margin-bottom:10px;
+
+    color:#111827;
+}
+
+.empty-state p{
+
+    font-size:16px;
+
+    color:#6b7280;
+}
+
+/* ================= SCROLLBAR ================= */
+
+.main::-webkit-scrollbar{
+    width:8px;
+}
+
+.main::-webkit-scrollbar-thumb{
+
+    background:#cbd5e1;
+
+    border-radius:20px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:1100px){
+
+    .main{
+
+        margin-left:0;
+
+        padding:
+        95px 20px 20px;
+    }
+}
+
+@media(max-width:768px){
+
+    .main{
+
+        margin-left:0;
+
+        padding:
+        90px 16px 20px;
+    }
+
+    .top-bar{
+
+        padding:35px 25px;
+
+        border-radius:24px;
+    }
+
+    .welcome-box h1{
+
+        font-size:30px;
+    }
+
+    .chat-card{
+
+        padding:16px;
+
+        border-radius:20px;
+
+        gap:14px;
+    }
+
+    .avatar{
+
+        width:55px;
+        height:55px;
+
+        font-size:18px;
+    }
+
+    .chat-top-info h3{
+
+        font-size:16px;
+    }
+
+    .chat-bottom-info p{
+
+        font-size:13px;
+    }
+}
+
+@media(max-width:500px){
+
+    .main{
+
+        padding:
+        85px 12px 20px;
+    }
+
+    .top-bar{
+
+        padding:28px 20px;
+    }
+
+    .welcome-box h1{
+
+        font-size:26px;
+    }
+
+    .welcome-box p{
+
+        font-size:14px;
+    }
+
+    .chat-card{
+
+        padding:14px;
+
+        border-radius:18px;
+    }
+
+    .avatar{
+
+        width:50px;
+        height:50px;
+
+        font-size:16px;
+    }
+
+    .sender-badge{
+
+        font-size:10px;
+
+        padding:3px 8px;
+    }
+
+    .msg-count{
+
+        min-width:22px;
+        height:22px;
+
+        font-size:11px;
+    }
+}

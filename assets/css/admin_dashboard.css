@@ -1,0 +1,200 @@
+/* ================= RESET ================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f3f4f6;
+    overflow-x:hidden;
+}
+
+/* ================= DASHBOARD LAYOUT ================= */
+.dashboard{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ================= MAIN ================= */
+.main{
+    flex:1;
+    padding:30px;
+    margin-left:270px;
+    transition:0.3s ease;
+}
+
+/* ================= PAGE TOP (SYSTEM REPORT TITLE) ================= */
+.page-top{
+
+    width:100%;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    border-radius:30px;
+
+    padding:45px;
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin-bottom:35px;
+
+    box-shadow:6px 0 30px rgba(0,0,0,0.15);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+/* TOP DECORATION */
+.page-top::before{
+    content:"";
+    position:absolute;
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    top:-80px;
+    right:-60px;
+}
+
+.page-top::after{
+    content:"";
+    position:absolute;
+    width:180px;
+    height:180px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.06);
+    bottom:-60px;
+    left:-40px;
+}
+
+/* TEXT */
+.welcome-box{
+    position:relative;
+    z-index:2;
+}
+
+.welcome-box h1{
+    font-size:40px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.welcome-box p{
+    font-size:16px;
+    opacity:0.9;
+}
+
+/* ================= STATS GRID ================= */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(5, 1fr);
+    gap:20px;
+}
+
+/* ================= STAT CARD ================= */
+.stat-box{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+    transition:0.3s ease;
+
+    position:relative;
+
+    overflow:hidden;
+
+    cursor:pointer;
+}
+
+/* HOVER EFFECT */
+.stat-box:hover{
+    transform:translateY(-8px);
+    box-shadow:0 18px 40px rgba(37,99,235,0.25);
+}
+
+/* TOP COLOR BAR */
+.stat-box::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:5px;
+    background:linear-gradient(90deg,#2563eb,#7c3aed);
+}
+
+/* NUMBER */
+.stat-box h2{
+    font-size:32px;
+    color:#111827;
+    margin-bottom:10px;
+}
+
+/* LABEL */
+.stat-box p{
+    font-size:14px;
+    color:#6b7280;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET */
+@media(max-width:1100px){
+    .stats{
+        grid-template-columns:repeat(3, 1fr);
+    }
+
+    .main{
+        margin-left:0;
+    }
+}
+
+/* MOBILE */
+@media(max-width:768px){
+    .stats{
+        grid-template-columns:repeat(2, 1fr);
+    }
+
+    .page-top{
+        padding:30px;
+    }
+
+    .welcome-box h1{
+        font-size:28px;
+    }
+}
+
+/* SMALL MOBILE */
+@media(max-width:500px){
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .stat-box{
+        padding:20px;
+    }
+
+    .welcome-box h1{
+        font-size:24px;
+    }
+
+    .welcome-box p{
+        font-size:14px;
+    }
+}

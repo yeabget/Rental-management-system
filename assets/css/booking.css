@@ -1,0 +1,186 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f7fb;
+}
+
+/* LAYOUT */
+.dashboard{
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar{
+    width: 260px;
+    background: #111827;
+    color: white;
+    padding: 25px 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.sidebar h2{
+    margin-bottom: 35px;
+    font-size: 26px;
+}
+
+.sidebar a{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    color: #d1d5db;
+    text-decoration: none;
+
+    padding: 14px 16px;
+    border-radius: 12px;
+
+    margin-bottom: 10px;
+
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+.sidebar a:hover{
+    background: #1f2937;
+    color: white;
+}
+
+/* MAIN */
+.main{
+    margin-left: 260px;
+    width: calc(100% - 260px);
+    padding: 35px;
+}
+
+/* PAGE TITLE */
+.page-title{
+    font-size: 32px;
+    margin-bottom: 25px;
+    color: #111827;
+}
+
+/* BOOKING TABLE */
+.booking-table{
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.06);
+}
+
+.booking-table th{
+    background: #111827;
+    color: white;
+    text-align: left;
+    padding: 18px;
+    font-size: 14px;
+}
+
+.booking-table td{
+    padding: 18px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #374151;
+}
+
+.booking-table tr:hover{
+    background: #f9fafb;
+}
+
+/* STATUS */
+.status{
+    padding: 8px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.pending{
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.approved{
+    background: #dcfce7;
+    color: #166534;
+}
+
+.rejected{
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ACTION BUTTONS */
+.actions{
+    display: flex;
+    gap: 10px;
+}
+
+.approve-btn,
+.reject-btn{
+    padding: 10px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.approve-btn{
+    background: #16a34a;
+}
+
+.approve-btn:hover{
+    background: #15803d;
+}
+
+.reject-btn{
+    background: #dc2626;
+}
+
+.reject-btn:hover{
+    background: #b91c1c;
+}
+
+/* EMPTY STATE */
+.empty-box{
+    background: white;
+    padding: 40px;
+    border-radius: 18px;
+    text-align: center;
+    color: #6b7280;
+    box-shadow: 0 10px 35px rgba(0,0,0,0.06);
+}
+
+/* MOBILE */
+@media(max-width:900px){
+
+    .sidebar{
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+
+    .main{
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .dashboard{
+        flex-direction: column;
+    }
+
+    .booking-table{
+        display: block;
+        overflow-x: auto;
+    }
+}

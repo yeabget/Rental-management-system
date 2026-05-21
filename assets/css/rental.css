@@ -1,0 +1,147 @@
+/* ================= RESET ================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f3f4f6;
+    color:#111827;
+    overflow-x:hidden;
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:270px;
+    height:100vh;
+    background:#0f172a;
+    color:white;
+    overflow-y:auto;
+    z-index:1000;
+}
+
+/* ================= MAIN CONTENT ================= */
+.main{
+    margin-left:270px; /* IMPORTANT FIX */
+    padding:25px;
+    min-height:100vh;
+    width:calc(100% - 270px);
+    overflow-x:hidden;
+}
+
+/* ================= PAGE TOP ================= */
+.page-top{
+    width:100%;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    color:white;
+    padding:30px;
+    border-radius:25px;
+    margin-bottom:25px;
+}
+
+.page-top h1{
+    font-size:32px;
+    font-weight:800;
+}
+
+.page-top p{
+    opacity:0.9;
+}
+
+/* ================= TABLE WRAPPER ================= */
+.table-wrapper{
+    width:100%;
+    overflow-x:auto;
+}
+
+/* ================= TABLE ================= */
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    border-radius:16px;
+    overflow:hidden;
+    min-width:700px;
+}
+
+table th{
+    background:#111827;
+    color:white;
+    padding:14px;
+    text-align:left;
+    font-size:14px;
+}
+
+table td{
+    padding:14px;
+    border-bottom:1px solid #e5e7eb;
+    font-size:14px;
+}
+
+table tr:hover{
+    background:#f9fafb;
+}
+
+/* ================= IMAGE ================= */
+.image{
+    width:80px;
+    height:60px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+/* ================= DELETE BUTTON ================= */
+.delete-btn{
+    background:#ef4444;
+    color:white;
+    padding:7px 12px;
+    border-radius:8px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:13px;
+    display:inline-block;
+    transition:0.3s;
+}
+
+.delete-btn:hover{
+    background:#dc2626;
+    transform:translateY(-2px);
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET */
+@media (max-width: 900px){
+
+    .sidebar{
+        position:relative;
+        width:100%;
+        height:auto;
+    }
+
+    .main{
+        margin-left:0;
+        width:100%;
+        padding:15px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 600px){
+
+    table th,
+    table td{
+        font-size:12px;
+        padding:10px;
+    }
+
+    .image{
+        width:60px;
+        height:45px;
+    }
+}
