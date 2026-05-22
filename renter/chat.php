@@ -25,7 +25,9 @@ $stmt = $db->prepare("
     FROM users
     WHERE id = ?
 ");
+
 $stmt->execute([$owner_id]);
+
 $owner = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$owner) {
@@ -33,41 +35,87 @@ if (!$owner) {
     exit();
 }
 
-/* UNREAD MESSAGES */
+/* UNREAD */
 $stmt = $db->prepare("
     SELECT COUNT(*)
     FROM messages
     WHERE receiver_id = ?
     AND is_read = 0
 ");
+
 $stmt->execute([$renter_id]);
+
 $unread = $stmt->fetchColumn();
 
-/* MARK AS READ */
+/* MARK READ */
 $stmt = $db->prepare("
     UPDATE messages
     SET is_read = 1
     WHERE sender_id = ?
     AND receiver_id = ?
 ");
+
 $stmt->execute([$owner_id, $renter_id]);
 
-/* SEND MESSAGE */
+/* SEND MESSAGE / FILE */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $message = trim($_POST['message']);
+    $message = trim($_POST['message'] ?? '');
 
-    if ($message !== '') {
+    $file_name = null;
+
+    /* FILE UPLOAD */
+    if (!empty($_FILES['file']['name'])) {
+
+        $uploadDir = "../assets/uploads/";
+
+        if (!is_dir($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+
+        $originalName = $_FILES['file']['name'];
+
+        $extension = strtolower(
+            pathinfo($originalName, PATHINFO_EXTENSION)
+        );
+
+        $allowed = [
+            'jpg','jpeg','png','gif','webp',
+            'pdf','doc','docx','txt','zip'
+        ];
+
+        if (in_array($extension, $allowed)) {
+
+            $newName =
+            time() . "_" . rand(1000,9999) . "." . $extension;
+
+            $target = $uploadDir . $newName;
+
+            if (
+                move_uploaded_file(
+                    $_FILES['file']['tmp_name'],
+                    $target
+                )
+            ) {
+                $file_name = $newName;
+            }
+        }
+    }
+
+    /* SAVE MESSAGE */
+    if ($message !== '' || $file_name !== null) {
 
         $stmt = $db->prepare("
-            INSERT INTO messages (sender_id, receiver_id, message, created_at)
-            VALUES (?, ?, ?, NOW())
+            INSERT INTO messages
+            (sender_id, receiver_id, message, file, created_at)
+            VALUES (?, ?, ?, ?, NOW())
         ");
 
         $stmt->execute([
             $renter_id,
             $owner_id,
-            $message
+            $message,
+            $file_name
         ]);
     }
 
@@ -94,104 +142,165 @@ $stmt->execute([
 ]);
 
 $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-/* PROFILE FIX */
-$fullname = $_SESSION['user']['fullname'] ?? 'User';
-$firstLetter = strtoupper(substr($fullname, 0, 1));
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>Chat</title>
 
-<link rel="stylesheet" href="../assets/css/chat.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet"
+href="../assets/css/renter_chat.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 </head>
 
 <body>
 
 <div class="dashboard">
 
-<!-- SIDEBAR -->
-<aside class="sidebar">
+<?php include "includes/sidebar.php"; ?>
 
-    <div class="sidebar-top">
-
-        <h2>RentFlow</h2>
-
-        <a href="../index.php">
-            <i class="fa fa-home"></i>
-            Home
-        </a>
-        <a href="dashboard.php">
-            <i class="fa fa-chart-line"></i>
-            Dashboard
-        </a>
-
-        <a href="saved.php">
-            <i class="fa fa-heart"></i> Saved
-        </a>
-
-        <a href="chat_list.php" class="active">
-            <i class="fa fa-comments"></i> Chat
-
-            <?php if ($unread > 0): ?>
-                <span class="badge"><?= $unread ?></span>
-            <?php endif; ?>
-        </a>
-
-        <a href="../auth/logout.php">
-            <i class="fa fa-right-from-bracket"></i> Logout
-        </a>
-
-    </div>
-
-    <!-- PROFILE -->
-    <div class="sidebar-profile">
-
-        <div class="profile-avatar">
-            <?= $firstLetter ?>
-        </div>
-
-        <div class="profile-info">
-            <h4><?= htmlspecialchars($fullname) ?></h4>
-            <p>Renter</p>
-        </div>
-
-    </div>
-
-</aside>
-
-<!-- MAIN -->
 <main class="main">
 
 <div class="chat-wrapper">
 
     <!-- HEADER -->
-    <div class="chat-header">
-        <h2><?= htmlspecialchars($owner['fullname']) ?></h2>
+
+    <div class="topbar">
+
+        <a href="chat_list.php" class="back-btn">
+
+            <i class="fa fa-arrow-left"></i>
+
+            Back
+
+        </a>
+
+        <h2>
+
+            <?= htmlspecialchars($owner['fullname']) ?>
+
+        </h2>
+
         <p>Property Owner</p>
+
     </div>
 
     <!-- CHAT BOX -->
+
     <div class="chat-box" id="chatBox">
 
         <?php if (empty($messages)): ?>
-            <div class="empty-chat">No messages yet 👋</div>
+
+            <div class="empty-chat">
+
+                No messages yet 👋
+
+            </div>
+
         <?php endif; ?>
 
         <?php foreach ($messages as $m): ?>
 
-            <div class="message <?= $m['sender_id'] == $renter_id ? 'me' : 'them' ?>">
+            <?php
 
-                <?= htmlspecialchars($m['message']) ?>
+            $isMe =
+            $m['sender_id'] == $renter_id;
+
+            $file =
+            $m['file'] ?? '';
+
+            $path =
+            "../assets/uploads/" . $file;
+
+            $ext =
+            strtolower(
+                pathinfo(
+                    $file,
+                    PATHINFO_EXTENSION
+                )
+            );
+
+            $isImage = in_array($ext, [
+                'jpg',
+                'jpeg',
+                'png',
+                'gif',
+                'webp'
+            ]);
+
+            ?>
+
+            <div class="message <?= $isMe ? 'me' : 'them' ?>">
+
+                <!-- TEXT -->
+
+                <?php if (!empty($m['message'])): ?>
+
+                    <div class="message-text">
+
+                        <?= nl2br(
+                            htmlspecialchars($m['message'])
+                        ) ?>
+
+                    </div>
+
+                <?php endif; ?>
+
+                <!-- IMAGE -->
+
+                <?php if (!empty($file) && $isImage): ?>
+
+                    <a href="<?= $path ?>" target="_blank">
+
+                        <img
+                        src="<?= $path ?>"
+                        class="chat-image">
+
+                    </a>
+
+                <?php endif; ?>
+
+                <!-- FILE -->
+
+                <?php if (!empty($file) && !$isImage): ?>
+
+                    <a
+                    href="<?= $path ?>"
+                    class="file-box"
+                    download>
+
+                        <i class="fa fa-file"></i>
+
+                        <span>
+
+                            <?= htmlspecialchars($file) ?>
+
+                        </span>
+
+                    </a>
+
+                <?php endif; ?>
+
+                <!-- TIME -->
 
                 <div class="msg-time">
-                    <?= date("h:i A", strtotime($m['created_at'])) ?>
+
+                    <?= date(
+                        "h:i A",
+                        strtotime($m['created_at'])
+                    ) ?>
+
                 </div>
 
             </div>
@@ -201,12 +310,39 @@ $firstLetter = strtoupper(substr($fullname, 0, 1));
     </div>
 
     <!-- INPUT -->
-    <form method="POST" class="chat-input">
 
-        <input type="text" name="message" placeholder="Type message..." required>
+    <form
+    method="POST"
+    enctype="multipart/form-data"
+    class="chat-input">
+
+        <!-- FILE BUTTON -->
+
+        <label class="file-upload">
+
+            <i class="fa fa-paperclip"></i>
+
+            <input
+            type="file"
+            name="file"
+            id="fileInput">
+
+        </label>
+
+        <!-- MESSAGE INPUT -->
+
+        <input
+        type="text"
+        name="message"
+        id="messageInput"
+        placeholder="Type message...">
+
+        <!-- SEND BUTTON -->
 
         <button type="submit">
+
             <i class="fa fa-paper-plane"></i>
+
         </button>
 
     </form>
@@ -214,12 +350,43 @@ $firstLetter = strtoupper(substr($fullname, 0, 1));
 </div>
 
 </main>
-
 </div>
 
+<!-- AUTO SCROLL -->
+
 <script>
-const chatBox = document.getElementById("chatBox");
-chatBox.scrollTop = chatBox.scrollHeight;
+
+const chatBox =
+document.getElementById("chatBox");
+
+chatBox.scrollTop =
+chatBox.scrollHeight;
+
+/* ================= SHOW FILE NAME ================= */
+
+const fileInput =
+document.getElementById("fileInput");
+
+const messageInput =
+document.getElementById("messageInput");
+
+fileInput.addEventListener("change", function(){
+
+    if(this.files.length > 0){
+
+        const fileName =
+        this.files[0].name;
+
+        messageInput.placeholder =
+        "Selected file: " + fileName;
+
+    }else{
+
+        messageInput.placeholder =
+        "Type message...";
+    }
+});
+
 </script>
 
 </body>

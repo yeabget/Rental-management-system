@@ -1,0 +1,780 @@
+/* ================= GOOGLE FONT ================= */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* ================= ROOT COLORS ================= */
+:root{
+
+    --primary:#2563eb;
+    --primary-dark:#1d4ed8;
+    --secondary:#7c3aed;
+
+    --success:#16a34a;
+    --warning:#f59e0b;
+    --danger:#e11d48;
+
+    --dark:#0f172a;
+    --gray:#64748b;
+
+    --white:#ffffff;
+    --border:#e2e8f0;
+
+    --shadow:
+    0 10px 30px rgba(15,23,42,0.08);
+
+    --hover-shadow:
+    0 22px 50px rgba(15,23,42,0.15);
+}
+
+/* ================= RESET ================= */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:'Poppins',sans-serif;
+
+    background:
+    linear-gradient(
+        to bottom right,
+        #f8fbff,
+        #eef4ff
+    );
+
+    color:var(--dark);
+
+    overflow-x:hidden;
+}
+
+/* ================= SCROLLBAR ================= */
+::-webkit-scrollbar{
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:#cbd5e1;
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#94a3b8;
+}
+
+/* ================= DASHBOARD ================= */
+.dashboard{
+    display:flex;
+    min-height:100vh;
+}
+
+/* ================= MAIN ================= */
+.main{
+    flex:1;
+    margin-left:260px;
+    padding:35px;
+    transition:0.3s ease;
+}
+
+/* ================= TOPBAR ================= */
+.topbar{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:32px;
+
+    padding:45px;
+
+    margin-bottom:35px;
+
+    background:
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+    );
+
+    box-shadow:
+    0 18px 40px rgba(37,99,235,0.28);
+}
+
+/* GLOW EFFECT */
+
+.topbar::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:320px;
+    height:320px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,0.08);
+
+    top:-140px;
+    right:-90px;
+}
+
+.topbar::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+    height:220px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,255,255,0.05);
+
+    bottom:-90px;
+    left:-60px;
+}
+
+/* ================= TOPBAR CONTENT ================= */
+.topbar-content{
+    position:relative;
+    z-index:2;
+}
+
+.topbar h1{
+
+    font-size:42px;
+
+    font-weight:800;
+
+    color:white;
+
+    margin-bottom:10px;
+}
+
+.topbar p{
+
+    color:rgba(255,255,255,0.9);
+
+    font-size:16px;
+
+    line-height:1.7;
+}
+
+/* ================= PROPERTY GRID ================= */
+
+.property-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2, minmax(0,1fr));
+
+    gap:28px;
+}
+
+/* ================= PROPERTY CARD ================= */
+.property-card{
+
+    position:relative;
+
+    background:rgba(255,255,255,0.95);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,0.5);
+
+    box-shadow:var(--shadow);
+
+    transition:0.4s ease;
+
+    display:flex;
+    flex-direction:column;
+
+    min-height:100%;
+}
+
+/* HOVER EFFECT */
+
+.property-card:hover{
+
+    transform:
+    translateY(-10px);
+
+    box-shadow:var(--hover-shadow);
+}
+
+/* ================= IMAGE ================= */
+.property-image{
+
+    width:100%;
+
+    height:240px;
+
+    object-fit:cover;
+
+    transition:0.5s ease;
+}
+
+.property-card:hover .property-image{
+
+    transform:scale(1.08);
+}
+
+/* ================= IMAGE OVERLAY ================= */
+.property-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:240px;
+
+    background:
+    linear-gradient(
+        to top,
+        rgba(15,23,42,0.35),
+        transparent
+    );
+
+    z-index:1;
+
+    pointer-events:none;
+}
+
+/* ================= CONTENT ================= */
+.property-content{
+
+    padding:24px;
+
+    display:flex;
+    flex-direction:column;
+
+    flex:1;
+}
+
+/* ================= TITLE + PRICE ================= */
+.title-price{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:14px;
+
+    margin-bottom:16px;
+}
+
+.title-price h3{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    line-height:1.5;
+
+    flex:1;
+
+    color:var(--dark);
+}
+
+/* ================= PRICE ================= */
+.price{
+
+    background:
+    linear-gradient(
+        135deg,
+        #eff6ff,
+        #dbeafe
+    );
+
+    color:var(--primary);
+
+    padding:10px 14px;
+
+    border-radius:14px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+    border:1px solid #bfdbfe;
+}
+
+/* ================= CATEGORY ================= */
+.category-badge{
+
+    width:fit-content;
+
+    background:
+    linear-gradient(
+        135deg,
+        #111827,
+        #1e293b
+    );
+
+    color:white;
+
+    padding:8px 16px;
+
+    border-radius:40px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    margin-bottom:18px;
+}
+
+/* ================= LOCATION + STATUS ================= */
+.location-approval{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:12px;
+
+    flex-wrap:wrap;
+
+    margin-bottom:18px;
+}
+
+/* ================= LOCATION ================= */
+.location{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:var(--gray);
+
+    font-size:14px;
+}
+
+.location i{
+    color:#ef4444;
+}
+
+/* ================= STATUS ================= */
+.status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:8px 14px;
+
+    border-radius:40px;
+
+    font-size:12px;
+
+    font-weight:700;
+}
+
+/* PENDING */
+
+.pending{
+
+    background:#fef3c7;
+
+    color:#92400e;
+}
+
+/* APPROVED */
+
+.approved{
+
+    background:#dcfce7;
+
+    color:#166534;
+}
+
+/* REJECTED */
+
+.rejected{
+
+    background:#ffe4e6;
+
+    color:#be123c;
+}
+
+/* ================= REJECT MESSAGE ================= */
+.reject-message{
+
+    background:#fff1f2;
+
+    border-left:4px solid var(--danger);
+
+    padding:14px;
+
+    border-radius:14px;
+
+    margin-bottom:18px;
+
+    color:#475569;
+
+    font-size:13px;
+
+    line-height:1.7;
+}
+
+/* ================= DESCRIPTION ================= */
+.description{
+
+    color:#475569;
+
+    font-size:14px;
+
+    line-height:1.9;
+
+    margin-bottom:22px;
+
+    display:-webkit-box;
+
+    -webkit-line-clamp:3;
+
+    -webkit-box-orient:vertical;
+
+    overflow:hidden;
+}
+
+/* ================= EXTRA INFO ================= */
+.extra-info{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-bottom:24px;
+}
+
+/* EXTRA BOX */
+
+.extra-info span{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    color:#334155;
+
+    padding:10px 14px;
+
+    border-radius:14px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    transition:0.3s ease;
+}
+
+/* EXTRA HOVER */
+
+.extra-info span:hover{
+
+    background:#eff6ff;
+
+    border-color:#bfdbfe;
+
+    transform:translateY(-2px);
+}
+
+.extra-info i{
+
+    color:var(--primary);
+
+    font-size:14px;
+}
+
+/* ================= BUTTONS ================= */
+.property-buttons{
+
+    display:flex;
+
+    gap:14px;
+
+    margin-top:auto;
+}
+
+/* BUTTON BASE */
+
+.edit-btn,
+.delete-btn{
+
+    flex:1;
+
+    padding:14px;
+
+    border-radius:16px;
+
+    text-decoration:none;
+
+    text-align:center;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    transition:0.35s ease;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+/* SHINE EFFECT */
+
+.edit-btn::before,
+.delete-btn::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:-100%;
+
+    width:100%;
+    height:100%;
+
+    background:
+    linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+    );
+
+    transition:0.6s;
+}
+
+.edit-btn:hover::before,
+.delete-btn:hover::before{
+
+    left:100%;
+}
+
+/* ================= EDIT BUTTON ================= */
+.edit-btn{
+
+    background:
+    linear-gradient(
+        135deg,
+        var(--primary),
+        var(--primary-dark)
+    );
+
+    color:white;
+
+    box-shadow:
+    0 10px 20px rgba(37,99,235,0.2);
+}
+
+.edit-btn:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 18px 30px rgba(37,99,235,0.35);
+}
+
+/* ================= DELETE BUTTON ================= */
+.delete-btn{
+
+    background:#fff1f2;
+
+    color:var(--danger);
+
+    border:1px solid #fecdd3;
+}
+
+.delete-btn:hover{
+
+    background:#ffe4e6;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 14px 25px rgba(225,29,72,0.18);
+}
+
+/* ================= EMPTY BOX ================= */
+.empty-box{
+
+    grid-column:1/-1;
+
+    background:white;
+
+    border-radius:30px;
+
+    padding:70px 30px;
+
+    text-align:center;
+
+    border:2px dashed #cbd5e1;
+
+    box-shadow:var(--shadow);
+}
+
+.empty-box i{
+
+    font-size:75px;
+
+    color:#94a3b8;
+
+    margin-bottom:20px;
+}
+
+.empty-box h3{
+
+    font-size:28px;
+
+    margin-bottom:10px;
+}
+
+.empty-box p{
+
+    color:var(--gray);
+
+    font-size:15px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+/* TABLET */
+
+@media(max-width:1100px){
+
+    .main{
+
+        margin-left:0;
+
+        padding:95px 22px 22px;
+    }
+
+    .topbar{
+
+        padding:38px 28px;
+    }
+
+    .topbar h1{
+
+        font-size:34px;
+    }
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .property-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .property-buttons{
+
+        flex-direction:column;
+    }
+
+    .title-price{
+
+        flex-direction:column;
+    }
+
+    .property-image{
+
+        height:220px;
+    }
+
+    .topbar{
+
+        border-radius:24px;
+    }
+
+    .topbar h1{
+
+        font-size:28px;
+    }
+
+    .topbar p{
+
+        font-size:14px;
+    }
+}
+
+/* SMALL MOBILE */
+
+@media(max-width:500px){
+
+    .main{
+
+        padding:90px 14px 20px;
+    }
+
+    .property-content{
+
+        padding:18px;
+    }
+
+    .property-image{
+
+        height:200px;
+    }
+
+    .topbar{
+
+        padding:28px 20px;
+    }
+
+    .topbar h1{
+
+        font-size:24px;
+    }
+
+    .title-price h3{
+
+        font-size:19px;
+    }
+
+    .extra-info span{
+
+        width:100%;
+
+        justify-content:center;
+    }
+}

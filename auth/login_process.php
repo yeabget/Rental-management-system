@@ -13,7 +13,6 @@ if($_SERVER["REQUEST_METHOD"] !== "POST"){
 
     header("Location: login.php");
     exit();
-
 }
 
 /* VALIDATE INPUTS */
@@ -25,7 +24,6 @@ if(
 
     header("Location: login.php?error=All fields are required");
     exit();
-
 }
 
 /* GET FORM DATA */
@@ -50,7 +48,6 @@ if(!$user){
 
     header("Location: login.php?error=User not found");
     exit();
-
 }
 
 /* VERIFY PASSWORD */
@@ -59,13 +56,20 @@ if(!password_verify($password, $user['password'])){
 
     header("Location: login.php?error=Wrong password");
     exit();
-
 }
+
+/* ACCOUNT STATUS */
+
 if($user['status'] !== 'active'){
 
     header("Location: login.php?error=Account suspended");
     exit();
 }
+
+/* NORMALIZE ROLE */
+
+$role = strtolower(trim($user['role']));
+
 /* CREATE SESSION */
 
 $_SESSION['user'] = [
@@ -73,21 +77,20 @@ $_SESSION['user'] = [
     'id' => $user['id'],
     'fullname' => $user['fullname'],
     'email' => $user['email'],
-    'role' => $user['role']
-
+    'role' => $role
 ];
 
 /* ROLE REDIRECT */
 
-if($user['role'] === 'admin'){
+if($role === 'admin'){
 
     header("Location: ../admin/dashboard.php");
 
-}elseif($user['role'] === 'owner'){
+}elseif($role === 'owner'){
 
     header("Location: ../owner/dashboard.php");
 
-}elseif($user['role'] === 'renter'){
+}elseif($role === 'renter'){
 
     header("Location: ../renter/dashboard.php");
 
@@ -96,7 +99,6 @@ if($user['role'] === 'admin'){
     session_destroy();
 
     header("Location: login.php?error=Invalid role");
-
 }
 
 exit();

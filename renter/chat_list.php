@@ -15,19 +15,7 @@ $name = $_SESSION['user']['fullname'];
 $firstLetter = strtoupper(substr($name, 0, 1));
 
 /* =========================
-   UNREAD CHAT BADGE
-========================= */
-$stmt = $db->prepare("
-    SELECT COUNT(*)
-    FROM messages
-    WHERE receiver_id = ?
-    AND is_read = 0
-");
-$stmt->execute([$user_id]);
-$unread = $stmt->fetchColumn();
-
-/* =========================
-   CHAT LIST
+   CHAT LIST WITH UNREAD PER USER
 ========================= */
 $stmt = $db->prepare("
     SELECT 
@@ -50,7 +38,15 @@ $stmt = $db->prepare("
                OR (sender_id = ? AND receiver_id = u.id)
             ORDER BY created_at DESC
             LIMIT 1
-        ) AS last_time
+        ) AS last_time,
+
+        (
+            SELECT COUNT(*)
+            FROM messages
+            WHERE sender_id = u.id
+              AND receiver_id = ?
+              AND is_read = 0
+        ) AS unread_count
 
     FROM users u
     WHERE u.role = 'owner'
@@ -65,7 +61,9 @@ $stmt = $db->prepare("
 $stmt->execute([
     $user_id, $user_id,
     $user_id, $user_id,
-    $user_id, $user_id
+    $user_id,
+    $user_id,
+    $user_id
 ]);
 
 $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -80,72 +78,21 @@ $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <title>Messages</title>
 
-<link rel="stylesheet" href="../assets/css/chat_list.css">
+<link rel="stylesheet" href="../assets/css/chats_list.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
 <div class="dashboard">
-
-<!-- ================= SIDEBAR ================= -->
-<aside class="sidebar">
-
-    <div class="sidebar-top">
-
-        <h2>RentFlow</h2>
-
-        <a href="../index.php">
-            <i class="fa fa-home"></i>
-            Home
-        </a>
-        <a href="dashboard.php">
-            <i class="fa fa-chart-line"></i>
-            Dashboard
-        </a>
-
-        <a href="saved.php">
-            <i class="fa fa-heart"></i>
-            Saved
-        </a>
-
-        <a href="chat_list.php" class="active">
-            <i class="fa fa-comments"></i>
-            Chat
-
-            <?php if ($unread > 0): ?>
-                <span class="badge"><?= $unread ?></span>
-            <?php endif; ?>
-        </a>
-
-        <a href="../auth/logout.php">
-            <i class="fa fa-right-from-bracket"></i>
-            Logout
-        </a>
-
-    </div>
-
-    <!-- PROFILE -->
-    <div class="sidebar-profile">
-
-        <div class="profile-avatar">
-            <?= $firstLetter ?>
-        </div>
-
-        <div class="profile-info">
-            <h4><?= htmlspecialchars($name) ?></h4>
-            <p>Renter</p>
-        </div>
-
-    </div>
-
-</aside>
+<?php include "includes/sidebar.php"; ?>
 
 <!-- ================= MAIN ================= -->
 <main class="main">
 
 <div class="chat-page">
 
+    <!-- TOP BAR -->
     <div class="top-bar">
         <div>
             <h1>Messages</h1>
@@ -153,6 +100,7 @@ $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
+    <!-- CHAT LIST -->
     <div class="chat-list">
 
         <?php if (empty($chats)): ?>
@@ -164,8 +112,10 @@ $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <a href="chat.php?owner=<?= $c['id'] ?>" class="chat-card">
 
+                <!-- AVATAR -->
                 <div class="avatar"><?= $letter ?></div>
 
+                <!-- CONTENT -->
                 <div class="chat-details">
 
                     <div class="chat-top-info">
@@ -190,11 +140,26 @@ $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     </div>
 
-                    <p>
-                        <?= htmlspecialchars($c['last_message'] ?? 'No messages yet') ?>
+                    <!-- MESSAGE PREVIEW -->
+                    <p class="<?= ($c['unread_count'] > 0) ? 'unread-text' : '' ?>">
+
+                        <?php if ($c['unread_count'] > 0): ?>
+                            <strong><?= htmlspecialchars($c['fullname']) ?></strong>
+                            sent you a message
+                        <?php else: ?>
+                            <?= htmlspecialchars($c['last_message'] ?? 'No messages yet') ?>
+                        <?php endif; ?>
+
                     </p>
 
                 </div>
+
+                <!-- UNREAD BADGE -->
+                <?php if ($c['unread_count'] > 0): ?>
+                    <span class="chat-badge">
+                        <?= $c['unread_count'] ?>
+                    </span>
+                <?php endif; ?>
 
             </a>
 

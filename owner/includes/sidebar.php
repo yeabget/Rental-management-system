@@ -1,19 +1,15 @@
 <?php
+
 if(session_status() === PHP_SESSION_NONE){
     session_start();
 }
-if (session_status() === PHP_SESSION_NONE) {
-    session_start();
-}
 
-if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'admin') {
-    header("Location: ../auth/login.php");
-    exit();
-}
+/* ================= AUTH CHECK ================= */
 
-$current = basename($_SERVER['PHP_SELF']);
-?>
-if(!isset($_SESSION['user'])){
+if(
+    !isset($_SESSION['user']) ||
+    $_SESSION['user']['role'] !== 'owner'
+){
     header("Location: ../auth/login.php");
     exit();
 }
@@ -29,7 +25,8 @@ strtoupper(substr($user['fullname'],0,1));
 
 /* ================= CURRENT PAGE ================= */
 
-$currentPage = basename($_SERVER['PHP_SELF']);
+$currentPage =
+basename($_SERVER['PHP_SELF']);
 
 /* ================= UNREAD CHATS ================= */
 
@@ -52,6 +49,7 @@ try{
 
     $unreadChats = 0;
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -67,7 +65,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Owner Sidebar</title>
 
 <link rel="stylesheet"
-href="../assets/css/owner_sidebar.css">
+href="../assets/css/owners_sidebar.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -80,7 +78,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <button class="menu-toggle" id="menuToggle">
 
-    <i class="fa fa-bars"></i>
+    <i class="fas fa-bars"></i>
 
 </button>
 
@@ -90,73 +88,126 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 id="sidebarOverlay"></div>
 
 <!-- ================= SIDEBAR ================= -->
-<button class="menu-toggle" id="menuToggle">
-    <i class="fas fa-bars"></i>
-</button>
-
-<!-- OVERLAY -->
-<div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <aside class="sidebar" id="sidebar">
 
-    <!-- TOP HEADER (THIS CHANGES ON MOBILE OPEN) -->
+    <!-- HEADER -->
+
     <div class="sidebar-header">
 
-        <h2 class="sidebar-title">Admin Panel</h2>
+        <h2 class="sidebar-title">
+            Owner Panel
+        </h2>
 
-        <button class="close-btn" id="closeSidebar">
+        <button class="close-btn"
+        id="closeSidebar">
+
             <i class="fas fa-times"></i>
+
         </button>
 
     </div>
 
+    <!-- NAVIGATION -->
+
     <div class="sidebar-top">
 
-        <a href="../index.php" class="<?= ($current == 'index.php') ? 'active' : '' ?>">
-            <i class="fas fa-home"></i> Home
+        <a
+        href="../index.php"
+        class="<?= ($currentPage == 'index.php') ? 'active' : '' ?>">
+
+            <i class="fas fa-home"></i>
+
+            Home
+
         </a>
 
-        <a href="dashboard.php" class="<?= ($current == 'dashboard.php') ? 'active' : '' ?>">
-            <i class="fas fa-chart-line"></i> Dashboard
+        <a
+        href="dashboard.php"
+        class="<?= ($currentPage == 'dashboard.php') ? 'active' : '' ?>">
+
+            <i class="fas fa-chart-line"></i>
+
+            Dashboard
+
         </a>
 
-        <a href="users.php" class="<?= ($current == 'users.php') ? 'active' : '' ?>">
-            <i class="fas fa-users"></i> Manage Users
+        <a
+        href="add_rental.php"
+        class="<?= ($currentPage == 'add_rental.php') ? 'active' : '' ?>">
+
+            <i class="fas fa-plus-circle"></i>
+
+            Add Rental
+
         </a>
 
-        <a href="reported_rentals.php" class="<?= ($current == 'reported_rentals.php') ? 'active' : '' ?>">
-            <i class="fas fa-flag"></i> Reported Rentals
+        <a
+        href="edit_posts.php"
+        class="<?= ($currentPage == 'edit_posts.php') ? 'active' : '' ?>">
+
+            <i class="fas fa-pen"></i>
+
+            Edit Posts
+
         </a>
 
-        <a href="rentals.php" class="<?= ($current == 'rentals.php') ? 'active' : '' ?>">
-            <i class="fas fa-motorcycle"></i> Manage Rentals
-        </a>
+        <a
+        href="owner_chat_list.php"
+        class="<?= ($currentPage == 'owner_chat_list.php') ? 'active' : '' ?>">
 
-        <a href="pending_posts.php" class="<?= ($current == 'pending_posts.php') ? 'active' : '' ?>">
-            <i class="fas fa-clock"></i> Pending Requests
+            <i class="fas fa-comments"></i>
+
+            Chats
+
+            <?php if($unreadChats > 0): ?>
+
+                <span class="chat-badge">
+
+                    <?= $unreadChats ?>
+
+                </span>
+
+            <?php endif; ?>
+
         </a>
 
         <a href="../auth/logout.php">
-            <i class="fas fa-right-from-bracket"></i> Logout
+
+            <i class="fas fa-right-from-bracket"></i>
+
+            Logout
+
         </a>
 
     </div>
 
     <!-- PROFILE -->
+
     <div class="sidebar-profile">
 
         <div class="profile-avatar">
-            <?= strtoupper(substr($_SESSION['user']['fullname'] ?? 'A', 0, 1)); ?>
+
+            <?= $firstLetter ?>
+
         </div>
 
         <div class="profile-info">
-            <h4><?= $_SESSION['user']['fullname'] ?? 'Admin User'; ?></h4>
-            <p>Administrator</p>
+
+            <h4>
+                <?= htmlspecialchars($user['fullname']) ?>
+            </h4>
+
+            <p>
+                Owner
+            </p>
+
         </div>
 
     </div>
 
 </aside>
+
 <!-- ================= JAVASCRIPT ================= -->
 
 <script>
@@ -181,20 +232,16 @@ menuToggle.onclick = () => {
 
     overlay.classList.add("active");
 
-    /* HIDE MENU BUTTON */
-
     menuToggle.style.display = "none";
 };
 
-/* ================= CLOSE FUNCTION ================= */
+/* ================= CLOSE SIDEBAR ================= */
 
 function closeMenu(){
 
     sidebar.classList.remove("active");
 
     overlay.classList.remove("active");
-
-    /* SHOW MENU BUTTON AGAIN */
 
     if(window.innerWidth <= 768){
 
@@ -216,7 +263,7 @@ overlay.onclick = () => {
     closeMenu();
 };
 
-/* ================= WINDOW RESIZE FIX ================= */
+/* ================= WINDOW RESIZE ================= */
 
 window.addEventListener("resize", () => {
 
@@ -237,7 +284,7 @@ window.addEventListener("resize", () => {
     }
 });
 
-/* ================= INITIAL MOBILE FIX ================= */
+/* ================= INITIAL LOAD ================= */
 
 window.addEventListener("load", () => {
 

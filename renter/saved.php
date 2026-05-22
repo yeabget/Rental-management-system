@@ -52,7 +52,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Saved Items</title>
 
 <link rel="stylesheet"
-href="../assets/css/saved.css">
+href="../assets/css/saved_item.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -62,57 +62,18 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <body>
 
 <div class="dashboard">
-
-<!-- SIDEBAR -->
-<aside class="sidebar">
-
-    <h2>RentFlow</h2>
-
-    <a href="../index.php">
-            <i class="fa fa-home"></i>
-            Home
-        </a>
-        <a href="dashboard.php">
-            <i class="fa fa-chart-line"></i>
-            Dashboard
-        </a>
-
-    <a href="saved.php" class="active">
-
-        <i class="fa fa-heart"></i>
-
-        Saved
-
-    </a>
-
-    <a href="chat_list.php">
-
-        <i class="fa fa-comments"></i>
-
-        Chat
-
-        <?php if($unread > 0): ?>
-            <span class="badge">
-                <?= $unread ?>
-            </span>
-        <?php endif; ?>
-
-    </a>
-
-    <a href="../auth/logout.php">
-        <i class="fa fa-right-from-bracket"></i>
-        Logout
-    </a>
-
-</aside>
+<?php include "includes/sidebar.php"; ?>
 
 <!-- MAIN -->
 <main class="main">
 
-<h1 class="page-title">
-    My Saved Items
-</h1>
-
+<div class="page-title">
+     <h1>
+           Saved Items
+           
+        </h1>
+  <p>find your saved rentals here</p>
+</div>
 <div class="property-grid">
 
 <?php if(empty($savedRentals)): ?>

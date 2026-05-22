@@ -32,12 +32,6 @@ if (!$user) {
     die("User not found");
 }
 
-$profileImage = !empty($user['profile_image'])
-    ? $user['profile_image']
-    : 'default.png';
-
-$firstLetter = strtoupper(substr($user['fullname'], 0, 1));
-
 /* ================= FILTERS ================= */
 
 $search = $_GET['search'] ?? '';
@@ -46,31 +40,19 @@ $category = $_GET['category'] ?? 'All';
 /* ================= RENTALS QUERY ================= */
 
 $query = "
-
 SELECT rentals.*,
 users.fullname AS owner_name
-
 FROM rentals
-
-JOIN users
-ON users.id = rentals.owner_id
-
+JOIN users ON users.id = rentals.owner_id
 WHERE rentals.status = 'approved'
-
 AND (
-
     rentals.title LIKE :search
-
     OR rentals.location LIKE :search
-
 )
-
 ";
 
 $params = [
-
     ':search' => "%$search%"
-
 ];
 
 /* CATEGORY FILTER */
@@ -78,49 +60,34 @@ $params = [
 if ($category !== 'All') {
 
     $map = [
-
         'Cars' => 'car',
         'Houses' => 'house',
         'Motor Cycles' => 'motorcycle',
         'Shop' => 'shop'
-
     ];
 
     if (isset($map[$category])) {
-
-        $query .= "
-        AND rentals.category = :category
-        ";
-
+        $query .= " AND rentals.category = :category ";
         $params[':category'] = $map[$category];
     }
 }
 
-$query .= "
-ORDER BY rentals.id DESC
-";
+$query .= " ORDER BY rentals.id DESC ";
 
 $stmt = $db->prepare($query);
-
 $stmt->execute($params);
-
 $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-/* ================= UNREAD MESSAGES ================= */
+/* ================= UNREAD ================= */
 
 $stmt = $db->prepare("
-
 SELECT COUNT(*)
-
 FROM messages
-
 WHERE receiver_id = ?
 AND is_read = 0
-
 ");
 
 $stmt->execute([$renter_id]);
-
 $unread = $stmt->fetchColumn();
 ?>
 
@@ -128,177 +95,169 @@ $unread = $stmt->fetchColumn();
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Renter Dashboard</title>
 
-<link rel="stylesheet"
-href="../assets/css/dashboardd.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+<link rel="stylesheet" href="../assets/css/renters_dashboard.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
 <div class="dashboard">
+
 <?php include "includes/sidebar.php"; ?>
-<!-- MAIN -->
 
 <main class="main">
 
-<!-- TOPBAR -->
-
-<div class="topbar">
-
-    <div>
-
-        <h1>
-            Welcome,
-            <?= htmlspecialchars($user['fullname']) ?>
-        </h1>
-
-        <p>
-            Find approved rentals easily
-        </p>
-
-    </div>
-
+<!-- TOP TITLE -->
+<div class="page-title">
+    <h1>Welcome, <?= htmlspecialchars($user['fullname']) ?></h1>
+    <p>Find approved rentals easily</p>
 </div>
 
 <!-- SEARCH -->
-
 <form class="search-bar" method="GET">
-
     <i class="fa fa-search"></i>
-
-    <input
-    type="text"
-    name="search"
-    placeholder="Search rentals..."
-    value="<?= htmlspecialchars($search) ?>">
-
-    <button type="submit">
-        Search
-    </button>
-
+    <input type="text" name="search"
+        placeholder="Search rentals..."
+        value="<?= htmlspecialchars($search) ?>">
+    <button type="submit">Search</button>
 </form>
 
 <!-- FILTERS -->
-
 <div class="filters">
 
 <?php
-
-$cats = [
-
-    'All',
-    'Cars',
-    'Houses',
-    'Motor Cycles',
-    'Shop'
-
-];
+$cats = ['All','Cars','Houses','Motor Cycles','Shop'];
 
 foreach ($cats as $c):
-
 ?>
 
-<a
-href="?category=<?= urlencode($c) ?>"
+<a href="?category=<?= urlencode($c) ?>"
 class="<?= $category == $c ? 'active-filter' : '' ?>">
-
-<?= $c ?>
-
+    <?= $c ?>
 </a>
 
 <?php endforeach; ?>
 
 </div>
 
-<!-- RENTALS -->
-
+<!-- GRID -->
 <div class="property-grid">
 
 <?php if (empty($rentals)): ?>
-
-<p style="padding:20px;">
-    No approved rentals found.
-</p>
-
+    <p style="padding:20px;">No approved rentals found.</p>
 <?php endif; ?>
 
 <?php foreach ($rentals as $r): ?>
 
+<?php
+/* ================= PRICE TYPE FIX ================= */
+$categoryLower = strtolower($r['category']);
+
+if ($categoryLower === 'house' || $categoryLower === 'shop') {
+    $priceType = "/month";
+} else {
+    $priceType = "/day";
+}
+?>
+
 <div class="property-card">
 
+    <!-- IMAGE -->
     <div class="card-image">
-
-        <img
-        src="../assets/images/<?= htmlspecialchars($r['image']) ?>"
-        class="main-card-image">
+        <img src="../assets/images/<?= htmlspecialchars($r['image']) ?>"
+             class="main-card-image">
 
         <div class="card-actions">
-
-            <a
-            href="chat.php?owner=<?= $r['owner_id'] ?>&rental=<?= $r['id'] ?>"
-            class="icon-btn">
-
+            <a href="chat.php?owner=<?= $r['owner_id'] ?>&rental=<?= $r['id'] ?>"
+               class="icon-btn">
                 <i class="fa fa-comments"></i>
-
             </a>
-
         </div>
-
     </div>
 
+    <!-- CONTENT -->
     <div class="property-content">
 
         <div class="title-price">
-
-            <h3>
-                <?= htmlspecialchars($r['title']) ?>
-            </h3>
+            <h3><?= htmlspecialchars($r['title']) ?></h3>
 
             <span>
-                $<?= htmlspecialchars($r['price']) ?>
+                $<?= number_format($r['price']) ?>
+                <?= $priceType ?>
             </span>
-
         </div>
 
         <p class="location">
-
             <i class="fa fa-location-dot"></i>
-
             <?= htmlspecialchars($r['location']) ?>
-
-        </p>
-
-        <p class="owner-name">
-
-            Owner:
-            <?= htmlspecialchars($r['owner_name']) ?>
-
         </p>
 
         <p class="status">
-
-            Status:
+            <i class="fa fa-circle-check"></i>
             <?= htmlspecialchars($r['status']) ?>
-
         </p>
 
-        <a
-        href="view.php?id=<?= $r['id'] ?>"
-        class="view-btn">
+        <?php if(!empty($r['description'])): ?>
+            <p class="description">
+                <?= htmlspecialchars(substr($r['description'],0,100)) ?>...
+            </p>
+        <?php endif; ?>
 
+        <!-- FEATURES -->
+        <div class="property-features">
+
+            <?php if($r['category'] == 'house'): ?>
+                <div class="feature-box">
+                    <i class="fa fa-bed"></i>
+                    <strong><?= $r['bedrooms'] ?></strong> Beds
+                </div>
+
+                <div class="feature-box">
+                    <i class="fa fa-bath"></i>
+                    <strong><?= $r['bathrooms'] ?></strong> Baths
+                </div>
+            <?php endif; ?>
+
+            <?php if($r['category'] == 'car'): ?>
+                <div class="feature-box">
+                    <i class="fa fa-car"></i>
+                    <strong><?= htmlspecialchars($r['brand']) ?></strong>
+                </div>
+
+                <div class="feature-box">
+                    <i class="fa fa-calendar"></i>
+                    <strong><?= $r['year'] ?></strong>
+                </div>
+            <?php endif; ?>
+
+            <?php if($r['category'] == 'motorcycle'): ?>
+                <div class="feature-box">
+                    <i class="fa fa-motorcycle"></i>
+                    <strong><?= htmlspecialchars($r['brand']) ?></strong>
+                </div>
+
+                <div class="feature-box">
+                    <i class="fa fa-gauge"></i>
+                    <strong><?= $r['mileage'] ?></strong>
+                </div>
+            <?php endif; ?>
+
+            <?php if($r['category'] == 'shop'): ?>
+                <div class="feature-box">
+                    <i class="fa fa-shop"></i>
+                    <strong>Shop</strong>
+                </div>
+            <?php endif; ?>
+
+        </div>
+
+        <a href="view.php?id=<?= $r['id'] ?>" class="view-btn">
             View Details
-
         </a>
 
     </div>
@@ -310,7 +269,6 @@ class="<?= $category == $c ? 'active-filter' : '' ?>">
 </div>
 
 </main>
-
 </div>
 
 </body>

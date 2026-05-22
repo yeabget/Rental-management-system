@@ -33,6 +33,9 @@ content="width=device-width, initial-scale=1.0">
 href="../assets/css/add_rentals.css">
 
 <link rel="stylesheet"
+href="../assets/css/owners_sidebar.css">
+
+<link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 </head>
@@ -40,6 +43,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <body>
 
 <div class="dashboard">
+
+    <!-- SIDEBAR -->
 
     <?php include "includes/sidebar.php"; ?>
 
@@ -68,13 +73,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         <!-- FORM -->
 
         <div class="form-box">
-<a href="owner_dashboard.php" class="back-btn">
+
+            <!-- BACK BUTTON -->
+
+            <a href="dashboard.php"
+            class="back-btn">
 
                 <i class="fa fa-arrow-left"></i>
 
-                Back 
+                Back
 
             </a>
+
+            <!-- FORM -->
 
             <form
             action="save_rental.php"
@@ -93,7 +104,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                     onchange="showForm()"
                     required>
 
-                        <option value="">Select</option>
+                        <option value="">
+                            Select
+                        </option>
 
                         <option value="house">
                             House
@@ -163,9 +176,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 <!-- HOUSE -->
 
-                <div id="house" class="section">
+                <div id="house"
+                class="section">
 
-                    <h3>House Details</h3>
+                    <h3>
+                        House Details
+                    </h3>
 
                     <div class="grid">
 
@@ -204,9 +220,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 <!-- SHOP -->
 
-                <div id="shop" class="section">
+                <div id="shop"
+                class="section">
 
-                    <h3>Shop Details</h3>
+                    <h3>
+                        Shop Details
+                    </h3>
 
                     <input
                     type="number"
@@ -231,9 +250,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 <!-- CAR -->
 
-                <div id="car" class="section">
+                <div id="car"
+                class="section">
 
-                    <h3>Car Details</h3>
+                    <h3>
+                        Car Details
+                    </h3>
 
                     <div class="grid">
 
@@ -291,9 +313,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 <!-- MOTOR -->
 
-                <div id="motorcycle" class="section">
+                <div id="motorcycle"
+                class="section">
 
-                    <h3>Motorcycle Details</h3>
+                    <h3>
+                        Motorcycle Details
+                    </h3>
 
                     <div class="grid">
 
@@ -353,9 +378,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 <div>
 
-                    <label>Rental Status</label>
+                    <label>
+                        Rental Status
+                    </label>
 
-                    <select name="status" required>
+                    <select
+                    name="status"
+                    required>
 
                         <option value="available">
                             Available
@@ -412,4 +441,5 @@ function showForm(){
 </script>
 
 </body>
+
 </html>

@@ -17,9 +17,6 @@ $db = (new Database())->connect();
 $user = $_SESSION['user'];
 $owner_id = $user['id'];
 
-$firstLetter =
-strtoupper(substr($user['fullname'], 0, 1));
-
 /* ================= TOTAL LISTINGS ================= */
 
 $stmt = $db->prepare("
@@ -60,19 +57,6 @@ $stmt->execute([$owner_id]);
 
 $totalEarnings = $stmt->fetchColumn() ?: 0;
 
-/* ================= UNREAD CHATS ================= */
-
-$stmt = $db->prepare("
-    SELECT COUNT(*)
-    FROM messages
-    WHERE receiver_id = ?
-    AND is_read = 0
-");
-
-$stmt->execute([$owner_id]);
-
-$unreadChats = $stmt->fetchColumn();
-
 /* ================= OWNER RENTALS ================= */
 
 $stmt = $db->prepare("
@@ -101,10 +85,10 @@ content="width=device-width, initial-scale=1.0">
 <title>Owner Dashboard</title>
 
 <link rel="stylesheet"
-href="../assets/css/owner_dashboard.css">
+href="../assets/css/owners_dashboard.css">
 
 <link rel="stylesheet"
-href="../assets/css/owner_sidebar.css">
+href="../assets/css/owners_sidebar.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -130,17 +114,19 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         <div>
 
             <h1>
+
                 Welcome,
-                <?= htmlspecialchars($user['fullname']) ?> 
+                <?= htmlspecialchars($user['fullname']) ?>
+
             </h1>
 
             <p>
+
                 Manage your rental business
+
             </p>
 
         </div>
-
-        
 
     </div>
 
@@ -153,7 +139,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
             <i class="fa fa-building"></i>
 
             <h2>
+
                 <?= $totalListings ?>
+
             </h2>
 
             <p>Total Listings</p>
@@ -165,7 +153,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
             <i class="fa fa-calendar-check"></i>
 
             <h2>
+
                 <?= $totalBookings ?>
+
             </h2>
 
             <p>Bookings</p>
@@ -177,7 +167,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
             <i class="fa fa-dollar-sign"></i>
 
             <h2>
+
                 $<?= number_format($totalEarnings,2) ?>
+
             </h2>
 
             <p>Earnings</p>
@@ -245,7 +237,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                         <div class="title-price">
 
                             <h3>
+
                                 <?= htmlspecialchars($rental['title']) ?>
+
                             </h3>
 
                             <span class="price">
@@ -268,60 +262,65 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                         </div>
 
                         <!-- LOCATION -->
-<div class="location-approval">
-                        <p class="location">
 
-                            <i class="fa fa-location-dot"></i>
+                        <div class="location-approval">
 
-                            <?= htmlspecialchars($rental['location']) ?>
+                            <p class="location">
 
-                        </p>
+                                <i class="fa fa-location-dot"></i>
 
-                        <!-- STATUS -->
+                                <?= htmlspecialchars($rental['location']) ?>
 
-                        <div class="status-box">
+                            </p>
 
-                            <?php if($rental['status'] == 'pending'): ?>
+                            <!-- STATUS -->
 
-                                <p class="status pending">
+                            <div class="status-box">
 
-                                    Pending Admin Approval
+                                <?php if($rental['status'] == 'pending'): ?>
 
-                                </p>
+                                    <p class="status pending">
 
-                            <?php elseif($rental['status'] == 'approved'): ?>
+                                        Pending Admin Approval
 
-                                <p class="status approved">
+                                    </p>
 
-                                    Approved & Live
+                                <?php elseif($rental['status'] == 'approved'): ?>
 
-                                </p>
+                                    <p class="status approved">
 
-                            <?php elseif($rental['status'] == 'rejected'): ?>
+                                        Approved & Live
 
-                                <p class="status rejected">
+                                    </p>
 
-                                    Rejected By Admin
+                                <?php elseif($rental['status'] == 'rejected'): ?>
 
-                                </p>
+                                    <p class="status rejected">
 
-                                <?php if(!empty($rental['reject_reason'])): ?>
+                                        Rejected By Admin
 
-                                    <div class="reject-message">
+                                    </p>
 
-                                        <strong>Reason:</strong>
-                                        <br>
+                                    <?php if(!empty($rental['reject_reason'])): ?>
 
-                                        <?= htmlspecialchars($rental['reject_reason']) ?>
+                                        <div class="reject-message">
 
-                                    </div>
+                                            <strong>Reason:</strong>
+
+                                            <br>
+
+                                            <?= htmlspecialchars($rental['reject_reason']) ?>
+
+                                        </div>
+
+                                    <?php endif; ?>
 
                                 <?php endif; ?>
 
-                            <?php endif; ?>
+                            </div>
 
                         </div>
-</div>
+
                         <!-- DESCRIPTION -->
 
                         <?php if(!empty($rental['description'])): ?>
@@ -435,7 +434,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                 <h3>No Rentals Added</h3>
 
                 <p>
+
                     Start by adding your first rental property.
+
                 </p>
 
             </div>

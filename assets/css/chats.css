@@ -1,0 +1,222 @@
+/* ================= RESET ================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f3f6fb;
+    color: #111827;
+    overflow-x: hidden;
+}
+
+/* ================= LAYOUT ================= */
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* sidebar space fix */
+.main {
+    flex: 1;
+    margin-left: 270px;
+    padding: 20px;
+    width: calc(100% - 270px);
+}
+
+/* ================= CHAT WRAPPER ================= */
+.chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 40px);
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+/* ================= HEADER ================= */
+.chat-header {
+    padding: 16px;
+    background: linear-gradient(135deg,#2563eb,#1d4ed8);
+    color: white;
+}
+
+.chat-header h2 {
+    font-size: 18px;
+}
+
+.chat-header p {
+    font-size: 12px;
+    opacity: 0.9;
+}
+
+/* ================= CHAT BOX ================= */
+.chat-box {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background: #f9fafb;
+}
+
+/* ================= MESSAGE ================= */
+.message {
+    max-width: 70%;
+    padding: 10px 12px;
+    border-radius: 14px;
+    position: relative;
+    word-wrap: break-word;
+}
+
+/* renter (me) */
+.message.me {
+    align-self: flex-end;
+    background: #2563eb;
+    color: white;
+    border-bottom-right-radius: 4px;
+}
+
+/* owner */
+.message.them {
+    align-self: flex-start;
+    background: #e5e7eb;
+    color: #111827;
+    border-bottom-left-radius: 4px;
+}
+
+/* ================= TEXT ================= */
+.message-text {
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* ================= TIME ================= */
+.msg-time {
+    font-size: 10px;
+    margin-top: 5px;
+    opacity: 0.7;
+    text-align: right;
+}
+
+/* ================= IMAGE FIX (IMPORTANT) ================= */
+.chat-image {
+    width: 100%;
+    max-width: 250px;   /* prevents huge images */
+    height: auto;
+    border-radius: 10px;
+    margin-top: 6px;
+    display: block;
+    object-fit: cover;
+}
+
+/* ================= FILE BOX ================= */
+.file-box {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    margin-top: 6px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 10px;
+    text-decoration: none;
+    color: inherit;
+    font-size: 13px;
+    word-break: break-all;
+}
+
+/* ================= INPUT ================= */
+.chat-input {
+    display: flex;
+    gap: 10px;
+    padding: 12px;
+    border-top: 1px solid #e5e7eb;
+    background: #fff;
+}
+
+.chat-input input[type="text"] {
+    flex: 1;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    outline: none;
+}
+
+/* file button */
+.file-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    background: #f3f4f6;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* send button */
+.chat-input button {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.back-btn {
+    width: fit-content;
+    margin-bottom: 10px;
+    align-self: flex-start;
+    color: white;
+    background: rgb(145, 145, 238);
+    text-decoration: none;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    
+    transition: 0.2s;
+}
+
+.back-btn:hover {
+    background: rgba(255,255,255,0.25);
+}
+/* ================= RESPONSIVE ================= */
+@media (max-width: 1024px) {
+    .main {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .message {
+        max-width: 85%;
+    }
+}
+
+@media (max-width: 600px) {
+    .main {
+        padding: 10px;
+    }
+
+    .chat-wrapper {
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .message {
+        max-width: 90%;
+    }
+
+    .chat-image {
+        max-width: 180px;
+    }
+
+    .chat-input {
+        flex-wrap: wrap;
+    }
+}

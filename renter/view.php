@@ -51,48 +51,26 @@ $category = strtolower($property['category']);
 
 <title><?= htmlspecialchars($property['title']) ?></title>
 
-<link rel="stylesheet" href="../assets/css/view_detail.css">
+<link rel="stylesheet" href="../assets/css/renter_view.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
 <div class="dashboard">
-
-<!-- ================= SIDEBAR ================= -->
-<aside class="sidebar">
-
-    <h2>RentFlow</h2>
-
-    <a href="../index.php">
-        <i class="fa fa-home"></i> Home
-    </a>
-
-    <a href="dashboard.php">
-        <i class="fa fa-gauge"></i> Dashboard
-    </a>
-
-    <a href="saved.php">
-        <i class="fa fa-heart"></i> Saved
-    </a>
-
-    <a href="chat_list.php">
-        <i class="fa fa-comments"></i> Chat
-
-        <?php if($unread > 0): ?>
-            <span class="badge"><?= $unread ?></span>
-        <?php endif; ?>
-    </a>
-
-    <a href="../auth/logout.php">
-        <i class="fa fa-right-from-bracket"></i> Logout
-    </a>
-
-</aside>
-
+<?php include "includes/sidebar.php"; ?>
 <!-- ================= MAIN ================= -->
 <main class="main">
-
+<div class="page-title">
+     <h1>
+           view Rental Details
+           
+        </h1>
+   <p>find your perfect rental today</p>
+</div>
+<a href="javascript:history.back()" class="back-btn">
+    <i class="fa fa-arrow-left"></i> Back
+</a>
 <!-- HERO IMAGE -->
 <div class="hero-section">
     <img src="../assets/images/<?= htmlspecialchars($property['image']) ?>" class="hero-image">
@@ -112,10 +90,7 @@ $category = strtolower($property['category']);
                 <?= htmlspecialchars($property['location']) ?>
             </p>
 
-            <div class="rating">
-                <i class="fa fa-star"></i>
-                4.9 Rating
-            </div>
+        
         </div>
 
         <!-- PRICE -->
@@ -278,7 +253,7 @@ $category = strtolower($property['category']);
     <div class="guarantee-box">
         <h2>RentFlow Protection</h2>
         <p>
-            This rental is protected by verified ownership and secure booking system.
+            This rental is protected by verified ownership and secure .
         </p>
     </div>
 

@@ -1,9 +1,9 @@
 <?php
 session_start();
-require "../config/database.php";
+require "../config/Database.php";
 
 /* AUTH CHECK */
-if(!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'owner'){
+if(!isset($_SESSION['user']) || strtolower($_SESSION['user']['role']) !== 'owner'){
     header("Location: ../auth/login.php");
     exit();
 }
@@ -30,7 +30,7 @@ $listings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>My Listings</title>
 
-<link rel="stylesheet" href="../assets/css/owner-dashboard.css">
+<link rel="stylesheet" href="../assets/css/owners-dashboard.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 

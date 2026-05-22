@@ -142,7 +142,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <title>Edit Rental</title>
 
-<link rel="stylesheet" href="../assets/css/a.css">
+<link rel="stylesheet" href="../assets/css/edit_rentals.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -159,14 +159,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="edit-container">
 
                 <!-- TOP BAR -->
-                <div class="top-bar">
+               
 
-                    <h1>Edit Rental</h1>
-
-
-
-                </div>
-
+   <div class="page-title">
+     <h1>
+           Saved Items
+           
+        </h1>
+ <p>Edit Your rental items post</p>
+</div>
+ 
                 <!-- FORM -->
                 <form method="POST" enctype="multipart/form-data" class="edit-form">
 <a href="edit_posts.php" class="back-btn">

@@ -27,376 +27,228 @@ body{
 /* ================= MAIN ================= */
 
 .main{
-
     flex:1;
-
-    margin-left:260px;
-
-    width:calc(100% - 260px);
-
+    margin-left:270px;
+    width:calc(100% - 270px);
     padding:30px;
-
-    transition:0.3s;
 }
 
 /* ================= TOPBAR ================= */
 
 .topbar{
-
-    background:linear-gradient(135deg,#2563eb,#4f46e5);
-
-    border-radius:30px;
-
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    border-radius:28px;
     padding:40px;
-
-    margin-bottom:30px;
-
     color:white;
-
+    margin-bottom:30px;
     position:relative;
-
     overflow:hidden;
-
-    box-shadow:
-    0 15px 35px rgba(37,99,235,0.18);
+    box-shadow:0 15px 40px rgba(37,99,235,0.18);
 }
 
-/* DECORATION */
-
 .topbar::before{
-
     content:"";
-
     position:absolute;
-
     width:220px;
     height:220px;
-
     border-radius:50%;
-
     background:rgba(255,255,255,0.08);
-
-    top:-80px;
+    top:-90px;
     right:-60px;
 }
 
-.topbar::after{
-
-    content:"";
-
-    position:absolute;
-
-    width:140px;
-    height:140px;
-
-    border-radius:50%;
-
-    background:rgba(255,255,255,0.06);
-
-    bottom:-40px;
-    left:-30px;
-}
-
 .topbar h1{
-
+    font-size:38px;
+    margin-bottom:10px;
     position:relative;
     z-index:2;
-
-    font-size:38px;
-
-    margin-bottom:10px;
 }
 
 .topbar p{
-
     position:relative;
     z-index:2;
-
+    opacity:0.9;
     font-size:15px;
-
-    opacity:0.92;
 }
 
-/* ================= SEARCH BAR ================= */
+/* ================= SEARCH ================= */
 
 .search-bar{
-
     background:white;
-
     border-radius:22px;
-
     padding:14px 18px;
-
     display:flex;
-
     align-items:center;
-
     gap:14px;
-
     margin-bottom:25px;
-
-    box-shadow:
-    0 8px 24px rgba(0,0,0,0.05);
+    box-shadow:0 10px 25px rgba(0,0,0,0.05);
 }
 
 .search-bar i{
-
     color:#6b7280;
-
-    font-size:16px;
 }
 
 .search-bar input{
-
     flex:1;
-
     border:none;
-
     outline:none;
-
     font-size:15px;
-
-    background:transparent;
-
-    color:#111827;
 }
 
 .search-bar button{
-
     border:none;
-
-    background:linear-gradient(135deg,#2563eb,#1d4ed8);
-
+    background:#2563eb;
     color:white;
-
     padding:12px 22px;
-
     border-radius:14px;
-
-    font-weight:600;
-
     cursor:pointer;
-
+    font-weight:600;
     transition:0.3s;
 }
 
 .search-bar button:hover{
-
+    background:#1d4ed8;
     transform:translateY(-2px);
-
-    box-shadow:
-    0 10px 20px rgba(37,99,235,0.25);
 }
 
 /* ================= FILTERS ================= */
 
 .filters{
-
     display:flex;
-
     gap:12px;
-
     flex-wrap:wrap;
-
     margin-bottom:30px;
 }
 
 .filters a{
-
     text-decoration:none;
-
-    background:white;
-
-    color:#374151;
-
     padding:12px 20px;
-
     border-radius:14px;
-
-    font-size:14px;
-
+    background:white;
+    color:#374151;
     font-weight:600;
-
     transition:0.3s;
-
-    box-shadow:
-    0 5px 15px rgba(0,0,0,0.04);
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
 }
 
 .filters a:hover{
-
-    transform:translateY(-2px);
-
     background:#eff6ff;
-
     color:#2563eb;
+    transform:translateY(-2px);
 }
 
-/* ACTIVE FILTER */
-
 .active-filter{
-
-    background:linear-gradient(135deg,#2563eb,#1d4ed8) !important;
-
+    background:#2563eb !important;
     color:white !important;
 }
 
-/* ================= PROPERTY GRID ================= */
+/* ================= GRID ================= */
 
 .property-grid{
-
     display:grid;
 
     grid-template-columns:
-    repeat(auto-fit,minmax(320px,1fr));
+    repeat(3, 1fr);
 
     gap:28px;
 }
 
-/* ================= PROPERTY CARD ================= */
+/* ================= CARD ================= */
 
 .property-card{
-
     background:white;
-
-    border-radius:28px;
-
+    border-radius:26px;
     overflow:hidden;
-
+    box-shadow:0 10px 25px rgba(0,0,0,0.06);
     transition:0.35s ease;
-
-    box-shadow:
-    0 10px 25px rgba(0,0,0,0.05);
-
     border:1px solid #e5e7eb;
-
-    position:relative;
+    display:flex;
+    flex-direction:column;
 }
 
 .property-card:hover{
-
     transform:translateY(-8px);
-
-    box-shadow:
-    0 20px 40px rgba(37,99,235,0.12);
+    box-shadow:0 20px 40px rgba(37,99,235,0.14);
 }
 
 /* ================= IMAGE ================= */
 
 .card-image{
-
     position:relative;
-
     overflow:hidden;
 }
 
 .main-card-image{
-
     width:100%;
-
     height:240px;
-
     object-fit:cover;
-
     transition:0.4s;
 }
 
 .property-card:hover .main-card-image{
-
     transform:scale(1.06);
 }
 
-/* ================= CARD ACTION ================= */
+/* ================= ACTIONS ================= */
 
 .card-actions{
-
     position:absolute;
-
-    top:16px;
-
-    right:16px;
+    top:15px;
+    right:15px;
 }
 
 .icon-btn{
-
     width:46px;
-
     height:46px;
-
     border-radius:50%;
-
     background:white;
-
     color:#2563eb;
-
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
     text-decoration:none;
-
     font-size:18px;
-
-    box-shadow:
-    0 8px 20px rgba(0,0,0,0.12);
-
+    box-shadow:0 10px 20px rgba(0,0,0,0.15);
     transition:0.3s;
 }
 
 .icon-btn:hover{
-
     background:#2563eb;
-
     color:white;
-
     transform:scale(1.08);
 }
 
 /* ================= CONTENT ================= */
 
 .property-content{
-
-    padding:24px;
+    padding:22px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
 }
 
-/* TITLE + PRICE */
+/* ================= TITLE PRICE ================= */
 
 .title-price{
-
     display:flex;
-
     justify-content:space-between;
-
     align-items:flex-start;
-
-    gap:15px;
-
-    margin-bottom:16px;
+    gap:10px;
+    margin-bottom:15px;
 }
 
 .title-price h3{
-
     font-size:22px;
-
-    color:#111827;
-
     line-height:1.4;
+    color:#111827;
 }
 
 .title-price span{
-
     background:#eff6ff;
-
     color:#2563eb;
-
     padding:8px 14px;
-
     border-radius:12px;
-
     font-weight:700;
-
     white-space:nowrap;
 }
 
@@ -405,205 +257,168 @@ body{
 .location,
 .owner-name,
 .status{
-
-    color:#6b7280;
-
-    font-size:14px;
-
-    margin-bottom:12px;
-
     display:flex;
-
     align-items:center;
-
     gap:10px;
+    color:#6b7280;
+    font-size:14px;
+    margin-bottom:12px;
 }
 
 .location i{
-
     color:#2563eb;
 }
 
-/* STATUS */
-
 .status{
-
-    font-weight:600;
-
     color:#16a34a;
+    font-weight:600;
+}
+
+/* ================= DESCRIPTION ================= */
+
+.description{
+    margin-top:8px;
+    color:#4b5563;
+    line-height:1.6;
+    font-size:14px;
+}
+
+/* ================= FEATURES ================= */
+
+.property-features{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
+    margin-top:18px;
+}
+
+.feature-box{
+    background:#f8fafc;
+    border-radius:14px;
+    padding:12px;
+    text-align:center;
+    border:1px solid #e5e7eb;
+}
+
+.feature-box i{
+    color:#2563eb;
+    margin-bottom:8px;
+    font-size:18px;
+}
+
+.feature-box span{
+    display:block;
+    font-size:13px;
+    color:#6b7280;
+}
+
+.feature-box strong{
+    display:block;
+    margin-top:4px;
+    color:#111827;
 }
 
 /* ================= BUTTON ================= */
 
 .view-btn{
-
+    margin-top:auto;
     display:flex;
-
     align-items:center;
-
     justify-content:center;
-
-    margin-top:20px;
-
     text-decoration:none;
-
     background:linear-gradient(135deg,#111827,#1f2937);
-
     color:white;
-
     padding:14px;
-
     border-radius:16px;
-
     font-weight:600;
-
     transition:0.3s;
+    margin-top:22px;
 }
 
 .view-btn:hover{
-
-    transform:translateY(-2px);
-
     background:linear-gradient(135deg,#2563eb,#1d4ed8);
-
-    box-shadow:
-    0 10px 20px rgba(37,99,235,0.25);
+    transform:translateY(-2px);
+    box-shadow:0 10px 20px rgba(37,99,235,0.25);
 }
 
 /* ================= EMPTY ================= */
 
 .property-grid p{
-
     background:white;
-
     padding:30px;
+    border-radius:20px;
+}
 
-    border-radius:22px;
+/* ================= LARGE TABLET ================= */
 
-    box-shadow:
-    0 8px 24px rgba(0,0,0,0.05);
+@media(max-width:1200px){
 
-    font-weight:600;
+    .property-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
 }
 
 /* ================= TABLET ================= */
 
-@media(max-width:1100px){
+@media(max-width:768px){
+
+    .main{
+        margin-left:0;
+        width:100%;
+        padding:20px;
+    }
+
+    .topbar{
+        padding:30px;
+    }
+
+    .topbar h1{
+        font-size:28px;
+    }
+
+    .search-bar{
+        flex-wrap:wrap;
+    }
+
+    .search-bar button{
+        width:100%;
+    }
+
+    .filters{
+        overflow-x:auto;
+        flex-wrap:nowrap;
+    }
 
     .property-grid{
-
-        grid-template-columns:
-        repeat(auto-fit,minmax(280px,1fr));
+        grid-template-columns:1fr;
     }
 }
 
 /* ================= MOBILE ================= */
 
-@media(max-width:768px){
-
-    .main{
-
-        margin-left:0;
-
-        width:100%;
-
-        padding:20px;
-    }
-
-    .topbar{
-
-        padding:30px 25px;
-
-        border-radius:24px;
-    }
-
-    .topbar h1{
-
-        font-size:28px;
-    }
-
-    .search-bar{
-
-        flex-wrap:wrap;
-
-        padding:16px;
-    }
-
-    .search-bar button{
-
-        width:100%;
-    }
-
-    .filters{
-
-        overflow-x:auto;
-
-        flex-wrap:nowrap;
-
-        padding-bottom:6px;
-    }
-
-    .filters::-webkit-scrollbar{
-
-        height:5px;
-    }
-
-    .filters::-webkit-scrollbar-thumb{
-
-        background:#cbd5e1;
-
-        border-radius:10px;
-    }
-
-    .property-grid{
-
-        grid-template-columns:1fr;
-    }
-
-    .main-card-image{
-
-        height:220px;
-    }
-}
-
-/* ================= SMALL MOBILE ================= */
-
 @media(max-width:500px){
 
     .topbar{
-
         padding:25px 20px;
     }
 
     .topbar h1{
-
         font-size:24px;
     }
 
-    .topbar p{
-
-        font-size:14px;
-    }
-
     .property-content{
-
-        padding:20px;
+        padding:18px;
     }
 
     .title-price{
-
         flex-direction:column;
-
-        align-items:flex-start;
     }
 
-    .title-price h3{
-
-        font-size:20px;
+    .property-features{
+        grid-template-columns:1fr 1fr;
     }
 
     .main-card-image{
-
-        height:200px;
+        height:210px;
     }
 }

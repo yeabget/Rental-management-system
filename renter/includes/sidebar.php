@@ -1,6 +1,8 @@
 <?php
-session_start();
-require "../config/Database.php";
+
+if(session_status() === PHP_SESSION_NONE){
+    session_start();
+}
 
 /* ================= AUTH CHECK ================= */
 
@@ -12,124 +14,42 @@ if(
     exit();
 }
 
+require_once "../config/Database.php";
+
 $db = (new Database())->connect();
 
-$renter_id = $_SESSION['user']['id'];
-
-/* ================= USER INFO ================= */
-
-$stmt = $db->prepare("
-    SELECT *
-    FROM users
-    WHERE id = ?
-");
-
-$stmt->execute([$renter_id]);
-
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-if(!$user){
-    die("User not found");
-}
-
-$profileImage = !empty($user['profile_image'])
-    ? $user['profile_image']
-    : 'default.png';
+$user = $_SESSION['user'];
 
 $firstLetter =
 strtoupper(substr($user['fullname'],0,1));
 
-/* ================= FILTERS ================= */
-
-$search =
-$_GET['search'] ?? '';
-
-$category =
-$_GET['category'] ?? 'All';
-
-/* ================= RENTALS QUERY ================= */
-
-$query = "
-
-SELECT rentals.*,
-users.fullname AS owner_name
-
-FROM rentals
-
-JOIN users
-ON users.id = rentals.owner_id
-
-WHERE rentals.status = 'approved'
-
-AND (
-
-    rentals.title LIKE :search
-
-    OR rentals.location LIKE :search
-
-)
-
-";
-
-$params = [
-
-    ':search' => "%$search%"
-];
-
-/* ================= CATEGORY FILTER ================= */
-
-if($category !== 'All'){
-
-    $map = [
-
-        'Cars' => 'car',
-        'Houses' => 'house',
-        'Motor Cycles' => 'motorcycle',
-        'Shop' => 'shop'
-    ];
-
-    if(isset($map[$category])){
-
-        $query .= "
-        AND rentals.category = :category
-        ";
-
-        $params[':category'] = $map[$category];
-    }
-}
-
-/* ================= ORDER ================= */
-
-$query .= "
-ORDER BY rentals.id DESC
-";
-
-$stmt = $db->prepare($query);
-
-$stmt->execute($params);
-
-$rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-/* ================= UNREAD MESSAGES ================= */
-
-$stmt = $db->prepare("
-
-SELECT COUNT(*)
-
-FROM messages
-
-WHERE receiver_id = ?
-AND is_read = 0
-
-");
-
-$stmt->execute([$renter_id]);
-
-$unread = $stmt->fetchColumn();
-
 /* ================= CURRENT PAGE ================= */
 
-$current = basename($_SERVER['PHP_SELF']);
+$currentPage =
+basename($_SERVER['PHP_SELF']);
+
+/* ================= UNREAD CHATS ================= */
+
+$unreadChats = 0;
+
+try{
+
+    $stmt = $db->prepare("
+        SELECT COUNT(*)
+        FROM messages
+        WHERE receiver_id = ?
+        AND is_read = 0
+    ");
+
+    $stmt->execute([$user['id']]);
+
+    $unreadChats = $stmt->fetchColumn();
+
+}catch(PDOException $e){
+
+    $unreadChats = 0;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -142,10 +62,10 @@ $current = basename($_SERVER['PHP_SELF']);
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>Renter Dashboard</title>
+<title>Renter Sidebar</title>
 
 <link rel="stylesheet"
-href="../assets/css/dashboardd.css">
+href="../assets/css/renter_sidebar.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -154,29 +74,29 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <body>
 
-<div class="dashboard">
+<!-- ================= MENU BUTTON ================= -->
 
-<!-- ================= SIDEBAR ================= -->
+<button class="menu-toggle" id="menuToggle">
 
-<button class="menu-toggle"
-id="menuToggle">
-
-    <i class="fa fa-bars"></i>
+    <i class="fas fa-bars"></i>
 
 </button>
+
+<!-- ================= OVERLAY ================= -->
 
 <div class="sidebar-overlay"
 id="sidebarOverlay"></div>
 
-<div class="sidebar"
-id="sidebar">
+<!-- ================= SIDEBAR ================= -->
 
-    <!-- SIDEBAR HEADER -->
+<aside class="sidebar" id="sidebar">
+
+    <!-- HEADER -->
 
     <div class="sidebar-header">
 
         <h2 class="sidebar-title">
-            RentFlow
+            Renter Panel
         </h2>
 
         <button class="close-btn"
@@ -188,25 +108,33 @@ id="sidebar">
 
     </div>
 
-    <!-- SIDEBAR LINKS -->
+    <!-- NAVIGATION -->
 
     <div class="sidebar-top">
 
         <a
         href="../index.php"
-        class="<?= ($current == 'index.php') ? 'active' : '' ?>">
+        class="<?= ($currentPage == 'index.php') ? 'active' : '' ?>">
 
-            <i class="fa fa-home"></i>
+            <i class="fas fa-home"></i>
 
             Home
 
         </a>
+ <a
+        href="dashboard.php"
+        class="<?= ($currentPage == 'dashboard.php') ? 'active' : '' ?>">
 
+            <i class="fas fa-dashboard"></i>
+
+            Dashboard
+
+        </a>
         <a
         href="saved.php"
-        class="<?= ($current == 'saved.php') ? 'active' : '' ?>">
+        class="<?= ($currentPage == 'saved.php') ? 'active' : '' ?>">
 
-            <i class="fa fa-heart"></i>
+            <i class="fas fa-bookmark"></i>
 
             Saved
 
@@ -214,17 +142,17 @@ id="sidebar">
 
         <a
         href="chat_list.php"
-        class="<?= ($current == 'chat_list.php') ? 'active' : '' ?>">
+        class="<?= ($currentPage == 'chat_list.php') ? 'active' : '' ?>">
 
-            <i class="fa fa-comments"></i>
+            <i class="fas fa-comments"></i>
 
-            Chat
+            Chats
 
-            <?php if($unread > 0): ?>
+            <?php if($unreadChats > 0): ?>
 
-                <span class="badge">
+                <span class="chat-badge">
 
-                    <?= $unread ?>
+                    <?= $unreadChats ?>
 
                 </span>
 
@@ -234,7 +162,7 @@ id="sidebar">
 
         <a href="../auth/logout.php">
 
-            <i class="fa fa-right-from-bracket"></i>
+            <i class="fas fa-right-from-bracket"></i>
 
             Logout
 
@@ -266,191 +194,9 @@ id="sidebar">
 
     </div>
 
-</div>
+</aside>
 
-<!-- ================= MAIN ================= -->
-
-<main class="main">
-
-    <!-- TOPBAR -->
-
-    <div class="topbar">
-
-        <div>
-
-            <h1>
-
-                Welcome,
-                <?= htmlspecialchars($user['fullname']) ?>
-
-            </h1>
-
-            <p>
-
-                Find approved rentals easily
-
-            </p>
-
-        </div>
-
-    </div>
-
-    <!-- SEARCH -->
-
-    <form class="search-bar"
-    method="GET">
-
-        <i class="fa fa-search"></i>
-
-        <input
-        type="text"
-        name="search"
-        placeholder="Search rentals..."
-        value="<?= htmlspecialchars($search) ?>">
-
-        <button type="submit">
-
-            Search
-
-        </button>
-
-    </form>
-
-    <!-- FILTERS -->
-
-    <div class="filters">
-
-        <?php
-
-        $cats = [
-
-            'All',
-            'Cars',
-            'Houses',
-            'Motor Cycles',
-            'Shop'
-        ];
-
-        foreach($cats as $c):
-
-        ?>
-
-        <a
-        href="?category=<?= urlencode($c) ?>"
-        class="<?= $category == $c ? 'active-filter' : '' ?>">
-
-            <?= $c ?>
-
-        </a>
-
-        <?php endforeach; ?>
-
-    </div>
-
-    <!-- RENTALS -->
-
-    <div class="property-grid">
-
-        <?php if(empty($rentals)): ?>
-
-            <p style="padding:20px;">
-
-                No approved rentals found.
-
-            </p>
-
-        <?php endif; ?>
-
-        <?php foreach($rentals as $r): ?>
-
-        <div class="property-card">
-
-            <!-- IMAGE -->
-
-            <div class="card-image">
-
-                <img
-                src="../assets/images/<?= htmlspecialchars($r['image']) ?>"
-                class="main-card-image"
-                alt="Rental Image">
-
-                <div class="card-actions">
-
-                    <a
-                    href="chat.php?owner=<?= $r['owner_id'] ?>&rental=<?= $r['id'] ?>"
-                    class="icon-btn">
-
-                        <i class="fa fa-comments"></i>
-
-                    </a>
-
-                </div>
-
-            </div>
-
-            <!-- CONTENT -->
-
-            <div class="property-content">
-
-                <div class="title-price">
-
-                    <h3>
-
-                        <?= htmlspecialchars($r['title']) ?>
-
-                    </h3>
-
-                    <span>
-
-                        ETB <?= number_format($r['price']) ?>
-
-                    </span>
-
-                </div>
-
-                <p class="location">
-
-                    <i class="fa fa-location-dot"></i>
-
-                    <?= htmlspecialchars($r['location']) ?>
-
-                </p>
-
-                <p class="owner-name">
-
-                    Owner:
-                    <?= htmlspecialchars($r['owner_name']) ?>
-
-                </p>
-
-                <p class="status">
-
-                    Status:
-                    <?= htmlspecialchars($r['status']) ?>
-
-                </p>
-
-                <a
-                href="view.php?id=<?= $r['id'] ?>"
-                class="view-btn">
-
-                    View Details
-
-                </a>
-
-            </div>
-
-        </div>
-
-        <?php endforeach; ?>
-
-    </div>
-
-</main>
-
-</div>
-
-<!-- ================= SIDEBAR SCRIPT ================= -->
+<!-- ================= JAVASCRIPT ================= -->
 
 <script>
 
@@ -466,7 +212,7 @@ document.getElementById("closeSidebar");
 const overlay =
 document.getElementById("sidebarOverlay");
 
-/* ================= OPEN ================= */
+/* ================= OPEN SIDEBAR ================= */
 
 menuToggle.onclick = () => {
 
@@ -477,7 +223,7 @@ menuToggle.onclick = () => {
     menuToggle.style.display = "none";
 };
 
-/* ================= CLOSE ================= */
+/* ================= CLOSE SIDEBAR ================= */
 
 function closeMenu(){
 
@@ -491,7 +237,7 @@ function closeMenu(){
     }
 }
 
-/* ================= BUTTON CLOSE ================= */
+/* ================= CLOSE BUTTON ================= */
 
 closeSidebar.onclick = () => {
 
@@ -505,7 +251,7 @@ overlay.onclick = () => {
     closeMenu();
 };
 
-/* ================= RESIZE ================= */
+/* ================= WINDOW RESIZE ================= */
 
 window.addEventListener("resize", () => {
 
@@ -526,7 +272,7 @@ window.addEventListener("resize", () => {
     }
 });
 
-/* ================= INITIAL ================= */
+/* ================= INITIAL LOAD ================= */
 
 window.addEventListener("load", () => {
 
@@ -543,4 +289,5 @@ window.addEventListener("load", () => {
 </script>
 
 </body>
+
 </html>
