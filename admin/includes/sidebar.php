@@ -58,7 +58,9 @@ $current = basename($_SERVER['PHP_SELF']);
         <a href="dashboard.php" class="<?= ($current == 'dashboard.php') ? 'active' : '' ?>">
             <i class="fas fa-chart-line"></i> Dashboard
         </a>
-
+<a href="messages.php" class="<?= ($current == 'messages.php') ? 'active' : '' ?>">
+            <i class="fas fa-comments"></i> Messages
+        </a>
         <a href="users.php" class="<?= ($current == 'users.php') ? 'active' : '' ?>">
             <i class="fas fa-users"></i> Manage Users
         </a>

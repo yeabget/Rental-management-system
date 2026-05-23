@@ -1,0 +1,166 @@
+/* ================= GLOBAL ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    background:#f8fafc;
+    color:#111827;
+}
+
+/* ================= CONTACT SECTION ================= */
+
+.contact-section{
+    display:flex;
+    justify-content:space-between;
+    gap:50px;
+
+    padding:90px 8%;
+}
+
+/* ================= LEFT ================= */
+
+.contact-info{
+    flex:1;
+}
+
+.contact-info h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.contact-info p{
+    color:#64748b;
+    margin-bottom:30px;
+}
+
+/* INFO CARD */
+
+.info-card{
+    display:flex;
+    align-items:center;
+    gap:15px;
+
+    background:#fff;
+    padding:20px;
+
+    border-radius:14px;
+
+    margin-bottom:15px;
+
+    box-shadow:0 10px 25px rgba(0,0,0,0.05);
+}
+
+.info-card i{
+    font-size:22px;
+    color:#2563eb;
+}
+
+/* ================= FORM ================= */
+
+.contact-form{
+    flex:1;
+
+    background:#fff;
+
+    padding:30px;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.06);
+}
+
+.contact-form h2{
+    margin-bottom:20px;
+}
+
+.contact-form input,
+.contact-form textarea{
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:15px;
+
+    border-radius:12px;
+
+    border:1px solid #e2e8f0;
+
+    outline:none;
+
+    transition:0.3s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,0.15);
+}
+
+.contact-form button{
+    width:100%;
+
+    padding:14px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+.contact-form button:hover{
+    background:#1d4ed8;
+}
+
+/* ================= MAP ================= */
+
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:900px){
+
+    .contact-section{
+        flex-direction:column;
+    }
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark{
+    background:#0f172a;
+    color:#e2e8f0;
+}
+
+body.dark .info-card,
+body.dark .contact-form{
+    background:#111827;
+}
+
+body.dark .contact-info p{
+    color:#94a3b8;
+}
+
+body.dark .contact-form input,
+body.dark .contact-form textarea{
+    background:#0f172a;
+    border-color:#334155;
+    color:#fff;
+}
+
+body.dark .map-box{
+    background:#1e293b;
+    color:#94a3b8;
+}

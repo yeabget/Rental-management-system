@@ -48,7 +48,7 @@ $totalRentals = $db->query("
 <head>
 
 <link rel="stylesheet"
-href="../assets/css/admin_dashboard.css">
+href="../assets/css/admins_dashboard.css">
 
 </head>
 <body>

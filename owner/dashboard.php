@@ -85,7 +85,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Owner Dashboard</title>
 
 <link rel="stylesheet"
-href="../assets/css/owners_dashboard.css">
+href="../assets/css/owner_dashboard.css">
 
 <link rel="stylesheet"
 href="../assets/css/owners_sidebar.css">

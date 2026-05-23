@@ -30,7 +30,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Add Rental</title>
 
 <link rel="stylesheet"
-href="../assets/css/add_rentals.css">
+href="../assets/css/add_rental.css">
 
 <link rel="stylesheet"
 href="../assets/css/owners_sidebar.css">

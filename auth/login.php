@@ -9,7 +9,9 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/login.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -20,7 +22,9 @@ session_start();
 <div class="form-container">
 
     <div class="form-box">
-
+ <a href="/rental-management-system/index.php" class="back-link">
+            <i class="fa fa-arrow-left"></i> Back
+        </a>
         <h2>Welcome Back</h2>
         <p class="form-subtitle">Login to continue</p>
 
@@ -56,6 +60,6 @@ session_start();
     </div>
 
 </div>
-
+<?php include "../includes/footer.php"; ?>
 </body>
 </html>

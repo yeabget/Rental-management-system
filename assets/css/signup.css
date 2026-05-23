@@ -1,0 +1,299 @@
+/* ================= GOOGLE FONT ================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ================= GLOBAL ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    background:#f8fafc;
+    color:#111827;
+}
+
+/* ================= CONTAINER ================= */
+
+.form-container{
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    padding:40px 20px;
+
+    background: radial-gradient(circle at top, #dbeafe, transparent 60%);
+}
+
+/* ================= FORM BOX ================= */
+
+.form-box{
+    width:100%;
+    max-width:460px;
+
+    background:#fff;
+
+    padding:40px 30px;
+
+    border-radius:20px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,0.08);
+
+    transition:0.3s ease;
+}
+
+.form-box:hover{
+    transform:translateY(-5px);
+}
+
+/* ================= TITLES ================= */
+
+.form-box h2{
+    font-size:28px;
+    margin-bottom:6px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+.form-subtitle{
+    color:#64748b;
+    margin-bottom:25px;
+    text-align: center;
+}
+
+/* ================= FORM GROUP ================= */
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:6px;
+    font-weight:500;
+    font-size:14px;
+}
+
+.form-group input,
+.form-group select{
+    width:100%;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    border:1px solid #e2e8f0;
+
+    outline:none;
+
+    transition:0.3s;
+    font-size:14px;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,0.15);
+}
+
+/* ================= PASSWORD ================= */
+
+.password-wrapper{
+    position:relative;
+}
+
+.password-wrapper input{
+    padding-right:45px;
+}
+
+.toggle-password{
+    position:absolute;
+
+    right:12px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    cursor:pointer;
+
+    color:#64748b;
+
+    font-size:16px;
+
+    transition:0.3s;
+}
+.back-link{
+   color:#2563eb;
+   font-weight: 600;
+   text-decoration: none; 
+}
+.back-link:hover{
+    text-decoration: underline;
+}
+.toggle-password:hover{
+    color:#2563eb;
+}
+
+/* ================= BUTTON ================= */
+
+button{
+    width:100%;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:0.3s;
+    font-size:15px;
+}
+
+button:hover{
+    background:#1d4ed8;
+    transform:translateY(-2px);
+}
+
+/* ================= FOOTER ================= */
+
+.form-footer{
+    margin-top:20px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    color:#64748b;
+}
+
+.form-footer a{
+    color:#2563eb;
+    font-weight:600;
+    text-decoration:none;
+}
+
+.form-footer a:hover{
+    text-decoration:underline;
+}
+
+/* ================= ERROR + SUCCESS ================= */
+
+.error-box{
+    background:#fee2e2;
+    color:#dc2626;
+
+    padding:12px;
+    border-radius:10px;
+
+    margin-bottom:15px;
+    font-size:14px;
+}
+
+.success-box{
+    background:#dcfce7;
+    color:#16a34a;
+
+    padding:12px;
+    border-radius:10px;
+
+    margin-bottom:15px;
+    font-size:14px;
+}
+
+/* ================= ANIMATION ================= */
+
+.fade-in{
+    animation:fadeIn 0.6s ease;
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:500px){
+
+    .form-box{
+        padding:30px 20px;
+    }
+
+    .form-box h2{
+        font-size:24px;
+    }
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark{
+    background:#0f172a;
+    color:#e2e8f0;
+}
+
+body.dark .form-container{
+    background: radial-gradient(circle at top,#1e293b,transparent 60%);
+}
+
+body.dark .form-box{
+    background:#111827;
+
+    box-shadow:0 20px 50px rgba(0,0,0,0.4);
+}
+
+body.dark .form-subtitle,
+body.dark .form-footer{
+    color:#94a3b8;
+}
+
+body.dark .form-group input,
+body.dark .form-group select{
+    background:#0f172a;
+    border-color:#334155;
+    color:#fff;
+}
+
+body.dark .form-group input:focus,
+body.dark .form-group select:focus{
+    box-shadow:0 0 0 4px rgba(37,99,235,0.25);
+}
+
+body.dark .toggle-password{
+    color:#94a3b8;
+}
+
+body.dark button{
+    background:#2563eb;
+}
+
+body.dark button:hover{
+    background:#1d4ed8;
+}
+
+body.dark .error-box{
+    background:#3f1d1d;
+    color:#fca5a5;
+}
+
+body.dark .success-box{
+    background:#14532d;
+    color:#86efac;
+}

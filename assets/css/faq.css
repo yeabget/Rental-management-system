@@ -1,0 +1,162 @@
+/* ================= GLOBAL ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    background:#f8fafc;
+    color:#111827;
+}
+
+/* ================= CONTAINER ================= */
+
+.faq-container{
+    max-width:900px;
+    margin:80px auto;
+    padding:0 20px;
+}
+
+/* ================= HEADER ================= */
+
+.faq-header{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.faq-header h1{
+    font-size:42px;
+    margin-bottom:10px;
+}
+
+.faq-header p{
+    color:#64748b;
+}
+
+/* ================= SEARCH ================= */
+
+.faq-search{
+    margin-top:25px;
+    position:relative;
+    max-width:500px;
+    margin-inline:auto;
+}
+
+.faq-search input{
+    width:100%;
+    padding:14px 40px;
+    border-radius:12px;
+    border:1px solid #e2e8f0;
+    outline:none;
+    font-size:15px;
+}
+
+.faq-search i{
+    position:absolute;
+    left:14px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#94a3b8;
+}
+
+/* ================= FAQ ITEM ================= */
+
+.faq-list{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+.faq-item{
+    background:#fff;
+    border-radius:14px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+    overflow:hidden;
+    transition:0.3s;
+}
+
+.faq-question{
+    width:100%;
+    padding:18px 20px;
+color: rgb(56, 56, 56);
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:none;
+    border:none;
+
+    font-size:16px;
+    font-weight:600;
+
+    cursor:pointer;
+}
+
+.faq-answer{
+    max-height:0;
+    overflow:hidden;
+
+    padding:0 20px;
+
+    color:#64748b;
+
+    transition:0.3s ease;
+}
+
+/* ACTIVE STATE */
+
+.faq-item.active .faq-answer{
+    max-height:200px;
+    padding:0 20px 18px;
+}
+
+.faq-item.active .faq-question i{
+    transform:rotate(180deg);
+}
+
+/* ================= ICON ================= */
+
+.faq-question i{
+    transition:0.3s;
+    color:#64748b;
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark{
+    background:#0f172a;
+    color:#e2e8f0;
+}
+
+body.dark .faq-item{
+    background:#111827;
+    
+}
+body.dark .faq-question{
+    color: rgb(182, 180, 180);
+}
+body.dark .faq-search input{
+    background:#0f172a;
+    border-color:#334155;
+    color:#fff;
+}
+
+body.dark .faq-header p{
+    color:#94a3b8;
+}
+
+body.dark .faq-answer{
+    color:#94a3b8;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:600px){
+
+    .faq-header h1{
+        font-size:30px;
+    }
+}

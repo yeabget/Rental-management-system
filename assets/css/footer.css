@@ -1,0 +1,179 @@
+/* ================= FOOTER ================= */
+
+.footer{
+    background: #0f172a;
+    color: #fff;
+
+    padding-top: 80px;
+
+    margin-top: 100px;
+}
+
+/* CONTAINER */
+
+.footer-container{
+    width: 90%;
+    max-width: 1300px;
+
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
+
+    gap: 50px;
+
+    padding-bottom: 60px;
+}
+
+/* BRAND */
+
+.footer-brand h2{
+    font-size: 34px;
+
+    margin-bottom: 18px;
+}
+
+.footer-brand p{
+    color: #94a3b8;
+
+    line-height: 1.8;
+
+    margin-bottom: 25px;
+}
+
+/* SOCIAL */
+
+.social-icons{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.social-icons a{
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+
+    background: #1e293b;
+
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.3s;
+}
+
+.social-icons a:hover{
+    background: #2563eb;
+
+    transform: translateY(-5px);
+}
+
+/* LINKS */
+
+.footer-links{
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-links h3{
+    font-size: 22px;
+
+    margin-bottom: 22px;
+}
+
+.footer-links a,
+.footer-links p{
+    color: #94a3b8;
+
+    margin-bottom: 14px;
+
+    transition: 0.3s;
+
+    line-height: 1.7;
+}
+
+.footer-links a:hover{
+    color: #fff;
+
+    transform: translateX(5px);
+}
+
+.footer-links i{
+    margin-right: 10px;
+
+    color: #60a5fa;
+}
+
+/* BOTTOM */
+
+.footer-bottom{
+    border-top: 1px solid #1e293b;
+
+    padding: 25px 20px;
+
+    text-align: center;
+}
+
+.footer-bottom p{
+    color: #94a3b8;
+
+    font-size: 15px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media(max-width:768px){
+
+    .footer{
+        padding-top: 60px;
+    }
+
+    .footer-container{
+        gap: 40px;
+    }
+
+    .footer-brand h2{
+        font-size: 28px;
+    }
+
+    .footer-links h3{
+        font-size: 20px;
+    }
+}
+
+@media(max-width:500px){
+
+    .footer{
+        text-align: center;
+    }
+
+    .social-icons{
+        justify-content: center;
+    }
+
+    .footer-links a:hover{
+        transform: none;
+    }
+}
+
+/* ================= DARK MODE SUPPORT ================= */
+
+body.dark .footer{
+    background: #020617;
+}
+
+body.dark .social-icons a{
+    background: #111827;
+}
+
+body.dark .social-icons a:hover{
+    background: #2563eb;
+}
+
+body.dark .footer-bottom{
+    border-top: 1px solid #111827;
+}

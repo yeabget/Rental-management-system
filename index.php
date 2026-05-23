@@ -1,194 +1,394 @@
+<?php
+require "config/Database.php";
+
+$db = (new Database())->connect();
+
+/* ================= GET LATEST APPROVED RENTALS ================= */
+
+$stmt = $db->prepare("
+    SELECT rentals.*,
+           users.fullname AS owner_name
+    FROM rentals
+    JOIN users ON users.id = rentals.owner_id
+    WHERE rentals.status = 'approved'
+    ORDER BY rentals.id DESC
+    LIMIT 10
+");
+
+$stmt->execute();
+
+$rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Rental Platform</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-   <link rel="stylesheet" href="assets/css/style.css?v=2">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Rent Flow</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<link rel="stylesheet"
+href="assets/css/nav.css">
+
+<link rel="stylesheet"
+href="assets/css/footer.css">
+<link rel="stylesheet"
+href="assets/css/home.css">
+
 </head>
+
 <body>
+
 <?php include "includes/navbar.php"; ?>
-<div>
-<section class="hero">
+
+<!-- ================= HERO ================= -->
+
+<section class="hero-section">
+
     <div class="hero-content">
-        <h1>Find Anything to Rent Easily</h1>
+
+        <span class="hero-badge">
+            Trusted Rental Marketplace
+        </span>
+
+        <h1>
+            Find Your Perfect Rental Easily
+        </h1>
+
         <p>
-          Cars, houses,special occasion clothes, electronics, and many more items are available for rent in one simple platform.  
-          Compare prices, explore trusted listings, and choose what fits your needs in seconds.   
-          Enjoy a fast, secure, and hassle-free rental experience all in one place.
+            Explore houses, cars, motorcycles and shops
+            from trusted owners across the platform.
         </p>
+
         <div class="hero-buttons">
-            <a href="#" class="btn primary">Browse Rentals</a>
-            <a href="owner/add_item.php" class="btn secondary">List Property</a>
+
+            <a href="auth/login.php"
+            class="primary-btn">
+
+                Explore Rentals
+
+            </a>
+
+            <a href="auth/register.php"
+            class="secondary-btn">
+
+                Become Owner
+
+            </a>
+
         </div>
+
     </div>
-    <div class="hero-image">
-        <img src="assets/images/bg.png" alt="Hero Image">
+
+   <div class="hero-image">
+
+    <div class="blob"></div>
+
+    <!-- BADGES -->
+
+    <div class="floating-badge badge1">
+        <i class="fa-solid fa-house"></i>
+        Houses
     </div>
+
+    <div class="floating-badge badge2">
+        <i class="fa-solid fa-car"></i>
+        Cars
+    </div>
+
+    <div class="floating-badge badge3">
+        <i class="fa-solid fa-motorcycle"></i>
+        Bikes
+    </div>
+
+    <div class="floating-badge badge4">
+        <i class="fa-solid fa-shop"></i>
+        Shops
+    </div>
+
+    <!-- IMAGE -->
+
+    <img
+    src="assets/images/bg.png"
+    alt="Hero">
+
+</div>
+
 </section>
-<section >
-    <h2 class="title">Why Choose Us?</h2>
-   <div class="features">
-      <div class="feature-card">
-        <div class="icon"> 
-            <i class="fas fa-star"></i>
-        </div>
-           <h3>Premium Listings</h3>
-           <p>We only list high-quality properties that meet our strict standards for comfort and safety.</p>
-       </div>
-       <div class="feature-card">
-           <div class="icon">
-              <i class="fas fa-shield-alt"></i>
-           </div>
-           <h3>Secure Process</h3>
-           <p>Your transactions and data are protected with the latest security protocols and verification.</p>
-        </div>
-       <div class="feature-card">
-           <div class="icon">
-               <i class="fas fa-clock"></i>
-            </div>
-            <h3>Quick Verification</h3>
-            <p>List your property in minutes and get verified within hours to start receiving offers.</p>
-       </div>
+
+<!-- ================= STATS ================= -->
+
+<section class="stats-section">
+
+    <div class="stat-box">
+        <h2>10K+</h2>
+        <p>Active Users</p>
     </div>
+
+    <div class="stat-box">
+        <h2>5K+</h2>
+        <p>Verified Rentals</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>99%</h2>
+        <p>Trusted Listings</p>
+    </div>
+
+    <div class="stat-box">
+        <h2>24/7</h2>
+        <p>Customer Support</p>
+    </div>
+
 </section>
-<!--category -->
-<div>
+
+<!-- ================= RENTALS ================= -->
+
+<section class="rentals-section">
+
+    <div class="section-header">
 
         <div>
-           
-            <div class="category-intro">
-                <div>
-                 <h2 class="title">Explore Popular Categories</h2>
-                <p>
-                  Discover a wide range of rental options across various categories. Whether you need a car for a weekend trip, a house for a vacation, or special occasion clothes, we have you covered.
-                </p>
+
+            <span class="section-badge">
+                Featured Rentals
+            </span>
+
+            <h2>
+                Latest Approved Rentals
+            </h2>
+
+        </div>
+
+        <a href="auth/login.php"
+        class="explore-btn">
+
+            Explore More
+
+            <i class="fa-solid fa-arrow-right"></i>
+
+        </a>
+
+    </div>
+
+    <div class="rental-grid">
+
+        <?php foreach($rentals as $r): ?>
+
+        <?php
+        $categoryLower = strtolower($r['category']);
+
+        if ($categoryLower === 'house' || $categoryLower === 'shop') {
+            $priceType = "/month";
+        } else {
+            $priceType = "/day";
+        }
+        ?>
+
+        <div class="rental-card">
+
+            <div class="rental-image">
+
+                <img
+                src="assets/images/<?= htmlspecialchars($r['image']) ?>"
+                alt="Rental">
+
+                <span class="category-tag">
+                    <?= htmlspecialchars($r['category']) ?>
+                </span>
+
+            </div>
+
+            <div class="rental-content">
+
+                <div class="title-price">
+
+                    <h3>
+                        <?= htmlspecialchars($r['title']) ?>
+                    </h3>
+
+                    <span>
+                        ETB <?= number_format($r['price']) ?>
+                        <?= $priceType ?>
+                    </span>
+
                 </div>
-                <a href="#" class="btn">Browse Rentals <i class="fa-solid fa-arrow-right"></i></a>
+
+                <p class="location">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                    <?= htmlspecialchars($r['location']) ?>
+
+                </p>
+
+                <p class="description">
+
+                    <?= htmlspecialchars(substr($r['description'],0,90)) ?>...
+
+                </p>
+
+                <a href="auth/login.php"
+                class="view-btn">
+
+                    View Details
+
+                </a>
+
             </div>
+
         </div>
-     
-    
-    <section class="categories">
-        <div class="category-card">
-            <img src="assets/images/carrs.jfif" alt="Cars">
-            <div class="icon-circle">
-                <i class="fas fa-car"></i>
-            </div>
-            <h3>Cars</h3>
-       </div>
-       <div class="category-card">
-            <img src="assets/images/home.jfif" alt="Houses">
-            <div class="icon-circle">
-              <i class="fas fa-home"></i>
-            </div>
-            <h3>Houses</h3>
-       </div>
-      <div class="category-card">
-          <img src="assets/images/dress.jpg" alt="Special Occasion Clothes">
-         <div class="icon-circle">
-            <i class="fas fa-tshirt"></i>
-         </div>
-         <h3>Special Occasion Clothes</h3>
-     </div>
-     <div class="category-card">
-       <img src="assets/images/wedding.jfif" alt="wedding dress">
-       <div class="icon-circle">
-           <i class="fas fa-person-dress"></i>
-        </div>
-        <h3>Wedding Dresses</h3>
-     </div>
-    <div class="category-card">
-        <img src="assets/images/hair.webp" alt="human hair">
-        <div class="icon-circle">
-            <i class="fa-solid fa-spa"></i>
-        </div>
-        <h3>Human Hair</h3>
+
+        <?php endforeach; ?>
+
     </div>
+
 </section>
-</div>
-<!-- TESTIMONIALS -->
-<section class="testimonials">
-      <h2 class="title">What Our Users Say</h2>
-      <div class="testimonial-slider">
-           <div class="testimonial-track">
-                 <div class="testimonial-card">
-                 <img src="assets/images/user1.jfif" alt="">
-                <p>
-                    “Very easy to rent a car within minutes.
-                    The platform is simple and professional.”
-                </p>
-                <h4>Daniel K.</h4>
-            </div>
-            <div class="testimonial-card">
-                <img src="assets/images/user4.jfif" alt="">
-                <p>
-                    “I found an affordable graduation outfit quickly.
-                    Highly recommended platform.”
-                </p>
-                <h4>Hana M.</h4>
-            </div>
-            <div class="testimonial-card">
-                <img src="assets/images/user3.jfif" alt="">
-                <p>
-                    “The rental process was smooth and secure.
-                    I will definitely use it again.”
-                </p>
-                <h4>Michael T.</h4>
-            </div>
-            <div class="testimonial-card">
-                <img src="assets/images/user5.jfif" alt="">
-                <p>
-                    “Amazing customer support and verified listings.
-                    Everything worked perfectly.”
-                </p>
-                <h4>Sara L.</h4>
-            </div>
-        </div>
+
+<!-- ================= FEATURES ================= -->
+
+<section class="features-section">
+
+    <div class="section-title-center">
+
+        <span class="section-badge">
+            Why Choose Us
+        </span>
+
+        <h2>
+            Built For Better Renting Experience
+        </h2>
+
     </div>
-</section>
-<!--content -->
-<section class="cta">
-    <h2 class="title">Start Renting Today</h2>
-    <p>
-        Join thousands of users finding affordable rentals every day.
-    </p>
-    <div class="hero-buttons">
-        <a href="#" class="btn primary">Browse Rentals</a>
-        <a href="#" class="btn secondary">Become an Owner</a>
-    </div>
-</section>
-<!-- footer -->
-<footer class="footer">
-    <div class="footer-container">
-        <div>
-        <div class="footer-logo">
-           <img src="assets/images/logo.png" alt="Logo" >
-        </div>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <h3>Trusted Listings</h3>
+
             <p>
-                Your trusted rental marketplace for everything.
+                Every rental is reviewed and approved.
             </p>
+
         </div>
-        <div >
-            <h3>Quick Links</h3>
-            <ul class="footer-links">
-            <li><a href="home.php">Home</a></li>
-            <li><a href="rentals.php">Rentals</a></li>
-            <li><a href="about.php">About</a></li>
-            <li><a href="contact.php">Contact</a></li>
-</ul>
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-comments"></i>
+
+            <h3>Easy Communication</h3>
+
+            <p>
+                Chat directly with rental owners instantly.
+            </p>
+
         </div>
-        <div>
-            <h3>Contact</h3>
-            <p>Email: ahadu_rental@gmail.com</p>
-            <p>Phone: +251 912344689</p>
+
+        <div class="feature-card">
+
+            <i class="fa-solid fa-bolt"></i>
+
+            <h3>Fast Access</h3>
+
+            <p>
+                Find rentals within seconds.
+            </p>
+
         </div>
+
     </div>
-    <div class="copyright">
-        © 2026 Ahadu Rental. All Rights Reserved.
+
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+
+<section class="testimonial-section">
+
+    <div class="section-title-center">
+
+        <span class="section-badge">
+            Testimonials
+        </span>
+
+        <h2>
+            What Our Users Say
+        </h2>
+
     </div>
-</footer>
-</div>
+
+    <div class="testimonial-grid">
+
+        <div class="testimonial-card">
+
+            <img src="assets/images/user1.jfif">
+
+            <p>
+                “Very smooth experience and trusted owners.”
+            </p>
+
+            <h4>Daniel K.</h4>
+
+        </div>
+
+        <div class="testimonial-card">
+
+            <img src="assets/images/user4.jfif">
+
+            <p>
+                “I found my apartment within one day.”
+            </p>
+
+            <h4>Hana M.</h4>
+
+        </div>
+
+        <div class="testimonial-card">
+
+            <img src="assets/images/user3.jfif">
+
+            <p>
+                “The best rental platform I have used.”
+            </p>
+
+            <h4>Abel T.</h4>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= CTA ================= -->
+
+<section class="cta-section">
+
+    <h2>
+        Ready To Start Renting?
+    </h2>
+
+    <p>
+        Join thousands of users exploring rentals daily.
+    </p>
+
+    <a href="auth/register.php"
+    class="cta-btn">
+
+        Get Started
+
+    </a>
+
+</section>
+
 <?php include "includes/footer.php"; ?>
+
 </body>
 </html>

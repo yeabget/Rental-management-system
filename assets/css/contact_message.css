@@ -1,0 +1,218 @@
+/* ================= GLOBAL ================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:"Inter",sans-serif;
+    background:#f8fafc;
+    color:#111827;
+    display:flex;
+}
+
+/* ================= SIDEBAR SPACE ================= */
+
+.container{
+    display:flex;
+    width:100%;
+}
+
+/* ================= MAIN AREA ================= */
+
+.main{
+    flex:1;
+    padding:30px;
+    margin-left:260px; /* adjust based on sidebar */
+}
+
+/* ================= TITLE ================= */
+
+.page-top{
+
+    width:100%;
+
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+
+    border-radius:30px;
+
+    padding:45px;
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+
+    margin-bottom:35px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.15);
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    flex-wrap:wrap;
+}
+
+/* TOP DECORATION */
+
+.page-top::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:250px;
+    height:250px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.08);
+
+    top:-80px;
+    right:-60px;
+}
+
+.page-top::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,0.06);
+
+    bottom:-60px;
+    left:-40px;
+}
+
+/* ================= WELCOME ================= */
+
+.welcome-box{
+    position:relative;
+    z-index:2;
+}
+
+.welcome-box h1{
+    font-size:40px;
+    font-weight:700;
+    margin-bottom:12px;
+}
+
+.welcome-box p{
+    font-size:16px;
+    opacity:0.9;
+}
+
+
+/* ================= MESSAGE CARD ================= */
+
+.message-card{
+    background:#fff;
+
+    border-radius:16px;
+
+    padding:20px;
+
+    margin-bottom:15px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,0.05);
+
+    transition:0.3s;
+}
+
+.message-card:hover{
+    transform:translateY(-3px);
+}
+
+/* ================= HEADER ================= */
+
+.message-card h3{
+    font-size:18px;
+    margin-bottom:10px;
+    color:#2563eb;
+}
+
+/* ================= TEXT ================= */
+
+.message-card p{
+    margin-bottom:6px;
+    color:#475569;
+    font-size:14px;
+}
+
+.message-card small{
+    color:#94a3b8;
+}
+
+/* ================= LABELS ================= */
+
+.message-card b{
+    color:#111827;
+}
+
+/* ================= GRID STYLE (optional upgrade) ================= */
+
+.messages-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:20px;
+}
+
+/* ================= DARK MODE ================= */
+/* ================= RESPONSIVE ================= */
+
+/* Tablets */
+@media (max-width: 992px){
+
+    .main{
+        margin-left: 0;
+        padding: 20px;
+    }
+
+    .messages-grid{
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 15px;
+    }
+}
+
+/* Mobile phones */
+@media (max-width: 600px){
+
+    h2{
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .main{
+        padding: 15px;
+    }
+
+    .messages-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .message-card{
+        padding: 15px;
+        border-radius: 14px;
+    }
+
+    .message-card h3{
+        font-size: 16px;
+    }
+
+    .message-card p{
+        font-size: 13px;
+    }
+
+    .message-card small{
+        font-size: 11px;
+    }
+}

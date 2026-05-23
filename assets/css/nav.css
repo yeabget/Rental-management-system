@@ -1,0 +1,427 @@
+/* ================= GOOGLE FONT ================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* ================= GLOBAL ================= */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: "Inter", sans-serif;
+    background: #f8fafc;
+    color: #111827;
+}
+
+/* ================= NAVBAR ================= */
+
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 16px 7%;
+
+    background: rgba(255,255,255,0.9);
+
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* ================= LOGO ================= */
+
+.logo a{
+    text-decoration: none;
+}
+
+.logo h1{
+    font-size: 28px;
+    font-weight: 700;
+    color: #111827;
+    letter-spacing: -1px;
+}
+
+/* ================= NAV ICONS ================= */
+
+.nav-icons{
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-toggle,
+.dark-toggle{
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    background: #f1f5f9;
+
+    transition: 0.3s;
+}
+
+.menu-toggle:hover,
+.dark-toggle:hover{
+    background: #e2e8f0;
+}
+
+.menu-toggle i,
+.dark-toggle i{
+    font-size: 18px;
+    color: #111827;
+}
+
+/* ================= PROFILE ================= */
+
+.profile-avatar{
+    width: 42px;
+    height: 42px;
+
+    border-radius: 50%;
+
+    background: linear-gradient(135deg,#2563eb,#1d4ed8);
+
+    color: #fff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* ================= OVERLAY ================= */
+
+.overlay{
+    position: fixed;
+    inset: 0;
+
+    background: rgba(0,0,0,0.45);
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition: 0.3s ease;
+
+    z-index: 998;
+}
+
+.overlay.active{
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ================= SIDEBAR ================= */
+
+.nav-right{
+    position: fixed;
+
+    top: 0;
+    left: -320px;
+
+    width: 300px;
+    height: 100vh;
+
+    background: #fff;
+
+    z-index: 999;
+
+    padding: 25px;
+
+    transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+
+    display: flex;
+    flex-direction: column;
+
+    box-shadow: 5px 0 30px rgba(0,0,0,0.08);
+}
+
+.nav-right.active{
+    left: 0;
+}
+
+/* ================= CLOSE BUTTON ================= */
+
+.close-btn{
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #f1f5f9;
+
+    cursor: pointer;
+
+    margin-bottom: 30px;
+}
+
+.close-btn i{
+    font-size: 18px;
+}
+
+/* ================= NAV LINKS ================= */
+
+.nav-links{
+    list-style: none;
+}
+
+.nav-links li{
+    margin-bottom: 12px;
+}
+
+.nav-links a{
+    display: flex;
+    align-items: center;
+
+    padding: 14px 16px;
+
+    border-radius: 12px;
+
+    text-decoration: none;
+
+    color: #111827;
+
+    font-weight: 500;
+
+    transition: 0.3s;
+}
+
+.nav-links a:hover{
+    background: #f1f5f9;
+    color: #2563eb;
+}
+
+.nav-links a.active{
+    background: #2563eb;
+    color: #fff;
+}
+
+/* ================= AUTH BUTTONS ================= */
+
+.auth-buttons{
+    margin-top: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nav-btn{
+    padding: 13px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.login-btn{
+    border: 1px solid #dbeafe;
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+.login-btn:hover{
+    background: #dbeafe;
+}
+
+.signup-btn{
+    background: #2563eb;
+    color: #fff;
+}
+
+.signup-btn:hover{
+    background: #1d4ed8;
+}
+
+/* ================= PROFILE WRAPPER ================= */
+
+.profile-wrapper{
+    margin-top: auto;
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.logout-btn{
+    text-decoration: none;
+
+    background: #fee2e2;
+    color: #dc2626;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.logout-btn:hover{
+    background: #fecaca;
+}
+
+/* ================= DESKTOP ================= */
+
+@media (min-width: 992px){
+
+    .menu-toggle{
+        display: none;
+    }
+
+    .close-btn{
+        display: none;
+    }
+
+    .overlay{
+        display: none;
+    }
+
+    .mobile-avatar{
+        display: none;
+    }
+
+    .nav-right{
+        position: static;
+
+        width: auto;
+        height: auto;
+
+        background: transparent;
+
+        flex-direction: row;
+        align-items: center;
+
+        padding: 0;
+
+        box-shadow: none;
+
+        left: 0;
+    }
+
+    .nav-links{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-links li{
+        margin: 0;
+    }
+
+    .nav-links a{
+        padding: 10px 16px;
+    }
+
+    .profile-wrapper{
+        flex-direction: row;
+        align-items: center;
+
+        margin-top: 0;
+        margin-left: 20px;
+    }
+
+    .auth-buttons{
+        flex-direction: row;
+
+        margin-top: 0;
+        margin-left: 20px;
+    }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 500px){
+
+    .navbar{
+        padding: 15px 5%;
+    }
+
+    .logo h1{
+        font-size: 23px;
+    }
+
+    .nav-right{
+        width: 270px;
+    }
+}
+
+/* ================= DARK MODE ================= */
+
+body.dark{
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+body.dark .navbar{
+    background: rgba(15,23,42,0.92);
+    border-bottom: 1px solid #1e293b;
+}
+
+body.dark .logo h1{
+    color: #fff;
+}
+
+body.dark .menu-toggle,
+body.dark .dark-toggle,
+body.dark .close-btn{
+    background: #1e293b;
+}
+
+body.dark .menu-toggle i,
+body.dark .dark-toggle i,
+body.dark .close-btn i{
+    color: #fff;
+}
+
+body.dark .nav-right{
+    background: #111827;
+}
+
+body.dark .nav-links a{
+    color: #e2e8f0;
+}
+
+body.dark .nav-links a:hover{
+    background: #1e293b;
+}
+
+body.dark .login-btn{
+    background: #1e293b;
+    border-color: #334155;
+    color: #fff;
+}
+
+body.dark .logout-btn{
+    background: #3f1d1d;
+    color: #fca5a5;
+}

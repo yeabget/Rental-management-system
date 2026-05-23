@@ -10,7 +10,9 @@ session_start();
     <title>Register</title>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="../assets/css/nav.css">
+     <link rel="stylesheet" href="../assets/css/signup.css">
+      <link rel="stylesheet" href="../assets/css/footer.css">
 </head>
 
 <body>
@@ -21,7 +23,9 @@ session_start();
 <div class="form-container">
 
     <div class="form-box fade-in">
-
+<a href="/rental-management-system/index.php" class="back-link">
+            <i class="fa fa-arrow-left"></i> Back
+        </a>
         <h2>Create Account</h2>
 
         <p class="form-subtitle">
@@ -58,11 +62,10 @@ session_start();
             </div>
 
             <!-- PHONE -->
-            <div class="form-group">
+<div class="form-group">
                 <label>Phone</label>
                 <input type="text" name="phone" placeholder="Enter your phone number" required>
             </div>
-
             <!-- PASSWORD -->
             <div class="form-group">
                 <label>Password</label>
@@ -111,7 +114,7 @@ session_start();
     </div>
 
 </div>
-
+<?php include "../includes/footer.php"; ?>
 <!-- JS -->
 <script>
 function togglePassword(){
