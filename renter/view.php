@@ -239,7 +239,7 @@ $category = strtolower($property['category']);
     Report
 </a>
 
-        <a href="book.php?id=<?= $property['id'] ?>" class="book-btn">
+       <a href="book.php?id=<?= $property['id'] ?>" class="book-btn">
     Book Now
 </a>
 
