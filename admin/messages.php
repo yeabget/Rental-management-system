@@ -10,15 +10,12 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Messages</title>
-
-    <link rel="stylesheet" href="../assets/css/contact_message.css">
+    <link rel="stylesheet" href="../assets/css/contact_messages.css">
 </head>
-
 <body>
 
 <div class="container">
@@ -32,7 +29,6 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <p>Message sent from users</p>
 </div>
 </div>
-       
 
         <div class="messages-grid">
 

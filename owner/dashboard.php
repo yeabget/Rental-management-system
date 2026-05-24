@@ -2,8 +2,6 @@
 session_start();
 require "../config/Database.php";
 
-/* ================= AUTH ================= */
-
 if (
     !isset($_SESSION['user']) ||
     $_SESSION['user']['role'] !== 'owner'
@@ -14,405 +12,207 @@ if (
 
 $db = (new Database())->connect();
 
-$user = $_SESSION['user'];
-$owner_id = $user['id'];
-
-/* ================= TOTAL LISTINGS ================= */
+$owner_id = $_SESSION['user']['id'];
 
 $stmt = $db->prepare("
     SELECT COUNT(*)
     FROM rentals
     WHERE owner_id = ?
 ");
-
 $stmt->execute([$owner_id]);
-
 $totalListings = $stmt->fetchColumn();
-
-/* ================= BOOKINGS ================= */
 
 $stmt = $db->prepare("
     SELECT COUNT(*)
-    FROM bookings
-    JOIN rentals
-    ON rentals.id = bookings.rental_id
-    WHERE rentals.owner_id = ?
+    FROM payments p
+    JOIN rentals r ON r.id = p.rental_id
+    WHERE r.owner_id = ?
+    AND p.status = 'success'
 ");
-
 $stmt->execute([$owner_id]);
-
 $totalBookings = $stmt->fetchColumn();
 
-/* ================= EARNINGS ================= */
 
 $stmt = $db->prepare("
-    SELECT SUM(rentals.price)
-    FROM bookings
-    JOIN rentals
-    ON rentals.id = bookings.rental_id
-    WHERE rentals.owner_id = ?
+    SELECT COALESCE(SUM(p.owner_amount),0)
+    FROM payments p
+    JOIN rentals r ON r.id = p.rental_id
+    WHERE r.owner_id = ?
+    AND p.status = 'success'
 ");
-
 $stmt->execute([$owner_id]);
-
-$totalEarnings = $stmt->fetchColumn() ?: 0;
-
-/* ================= OWNER RENTALS ================= */
+$totalEarnings = $stmt->fetchColumn();
 
 $stmt = $db->prepare("
     SELECT *
-    FROM rentals
-    WHERE owner_id = ?
-    ORDER BY id DESC
+    FROM rentals r
+    WHERE r.owner_id = ?
+    AND r.id NOT IN (
+        SELECT rental_id
+        FROM payments
+        WHERE status = 'success'
+    )
+    ORDER BY r.id DESC
 ");
-
 $stmt->execute([$owner_id]);
-
 $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Owner Dashboard</title>
 
-<link rel="stylesheet"
-href="../assets/css/owner_dashboard.css">
-
-<link rel="stylesheet"
-href="../assets/css/owners_sidebar.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+<link rel="stylesheet" href="../assets/css/owners_dashboard.css">
+<link rel="stylesheet" href="../assets/css/owners_sidebar.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
 <div class="dashboard">
 
-<!-- ================= SIDEBAR ================= -->
-
 <?php include "includes/sidebar.php"; ?>
-
-<!-- ================= MAIN ================= -->
 
 <main class="main">
 
-    <!-- ================= TOPBAR ================= -->
-
     <div class="topbar">
-
         <div>
-
             <h1>
-
-                Welcome,
-                <?= htmlspecialchars($user['fullname']) ?>
-
+                Welcome, <?= htmlspecialchars($_SESSION['user']['fullname']) ?>
             </h1>
-
-            <p>
-
-                Manage your rental business
-
-            </p>
-
+            <p>Manage your rental business</p>
         </div>
-
     </div>
-
-    <!-- ================= STATS ================= -->
 
     <div class="stats">
 
         <div class="stat-card">
-
             <i class="fa fa-building"></i>
-
-            <h2>
-
-                <?= $totalListings ?>
-
-            </h2>
-
+            <h2><?= $totalListings ?></h2>
             <p>Total Listings</p>
-
         </div>
 
         <div class="stat-card">
-
             <i class="fa fa-calendar-check"></i>
-
-            <h2>
-
-                <?= $totalBookings ?>
-
-            </h2>
-
-            <p>Bookings</p>
-
+            <h2><?= $totalBookings ?></h2>
+            <p>Bookings (Paid)</p>
         </div>
 
         <div class="stat-card">
-
-            <i class="fa fa-dollar-sign"></i>
-
-            <h2>
-
-                $<?= number_format($totalEarnings,2) ?>
-
-            </h2>
-
-            <p>Earnings</p>
-
+            <i class="fa fa-money-bill"></i>
+            <h2>ETB <?= number_format($totalEarnings,2) ?></h2>
+            <p>Earnings (after 2% commission)</p>
         </div>
 
     </div>
-
-    <!-- ================= TITLE ================= -->
 
     <div class="section-title">
-
         <h2>Your Properties</h2>
-
     </div>
-
-    <!-- ================= PROPERTY GRID ================= -->
 
     <div class="property-grid">
 
-        <?php if(count($rentals) > 0): ?>
+        <?php if (count($rentals) > 0): ?>
 
-            <?php foreach($rentals as $rental): ?>
+            <?php foreach ($rentals as $rental): ?>
 
                 <?php
+                $image = !empty($rental['image']) ? $rental['image'] : "default.png";
 
-                $image =
-                !empty($rental['image'])
-                ? $rental['image']
-                : "default.png";
-
-                $priceType = '';
-
-                if(
-                    strtolower($rental['category']) == 'house' ||
-                    strtolower($rental['category']) == 'shop'
-                ){
-
-                    $priceType = '/month';
-
-                }else{
-
-                    $priceType = '/day';
-                }
-
+                $priceType =
+                    (strtolower($rental['category']) == 'house' ||
+                     strtolower($rental['category']) == 'shop')
+                    ? '/month'
+                    : '/day';
                 ?>
-
-                <!-- ================= CARD ================= -->
 
                 <div class="property-card">
 
-                    <!-- IMAGE -->
-
-                    <img
-                    src="../assets/images/<?= htmlspecialchars($image) ?>"
-                    class="property-image"
-                    alt="Rental Image">
-
-                    <!-- CONTENT -->
+                    <img src="../assets/images/<?= htmlspecialchars($image) ?>"
+                         class="property-image"
+                         alt="Rental Image">
 
                     <div class="property-content">
 
-                        <!-- TITLE + PRICE -->
-
                         <div class="title-price">
-
-                            <h3>
-
-                                <?= htmlspecialchars($rental['title']) ?>
-
-                            </h3>
+                            <h3><?= htmlspecialchars($rental['title']) ?></h3>
 
                             <span class="price">
-
-                                $
-                                <?= number_format($rental['price'],2) ?>
-
+                                ETB <?= number_format($rental['price'],2) ?>
                                 <?= $priceType ?>
-
                             </span>
-
                         </div>
-
-                        <!-- CATEGORY -->
 
                         <div class="category-badge">
-
                             <?= ucfirst($rental['category']) ?>
-
                         </div>
-
-                        <!-- LOCATION -->
 
                         <div class="location-approval">
 
                             <p class="location">
-
                                 <i class="fa fa-location-dot"></i>
-
                                 <?= htmlspecialchars($rental['location']) ?>
-
                             </p>
 
-                            <!-- STATUS -->
-
-                            <div class="status-box">
-
-                                <?php if($rental['status'] == 'pending'): ?>
-
-                                    <p class="status pending">
-
-                                        Pending Admin Approval
-
-                                    </p>
-
-                                <?php elseif($rental['status'] == 'approved'): ?>
-
-                                    <p class="status approved">
-
-                                        Approved & Live
-
-                                    </p>
-
-                                <?php elseif($rental['status'] == 'rejected'): ?>
-
-                                    <p class="status rejected">
-
-                                        Rejected By Admin
-
-                                    </p>
-
-                                    <?php if(!empty($rental['reject_reason'])): ?>
-
-                                        <div class="reject-message">
-
-                                            <strong>Reason:</strong>
-
-                                            <br>
-
-                                            <?= htmlspecialchars($rental['reject_reason']) ?>
-
-                                        </div>
-
-                                    <?php endif; ?>
-
-                                <?php endif; ?>
-
-                            </div>
+                            <p class="status pending">
+                                Available
+                            </p>
 
                         </div>
 
-                        <!-- DESCRIPTION -->
-
-                        <?php if(!empty($rental['description'])): ?>
-
+                        <?php if (!empty($rental['description'])): ?>
                             <p class="description">
-
-                                <?= nl2br(
-                                    htmlspecialchars(
-                                        substr(
-                                            $rental['description'],
-                                            0,
-                                            100
-                                        )
-                                    )
-                                ) ?>
-
-                                ...
-
+                                <?= htmlspecialchars(substr($rental['description'], 0, 100)) ?>...
                             </p>
-
                         <?php endif; ?>
-
-                        <!-- EXTRA INFO -->
 
                         <div class="extra-info">
 
-                            <?php if(!empty($rental['bedrooms'])): ?>
-
+                            <?php if (!empty($rental['bedrooms'])): ?>
                                 <span>
-
-                                    🛏
-                                    <?= $rental['bedrooms'] ?>
-                                    Bedrooms
-
+                                    <i class="fa fa-bed"></i>
+                                    <?= $rental['bedrooms'] ?> Bedrooms
                                 </span>
-
                             <?php endif; ?>
 
-                            <?php if(!empty($rental['bathrooms'])): ?>
-
+                            <?php if (!empty($rental['bathrooms'])): ?>
                                 <span>
-
-                                    🚿
-                                    <?= $rental['bathrooms'] ?>
-                                    Bathrooms
-
+                                    <i class="fa fa-shower"></i>
+                                    <?= $rental['bathrooms'] ?> Bathrooms
                                 </span>
-
                             <?php endif; ?>
 
-                            <?php if(!empty($rental['brand'])): ?>
-
+                            <?php if (!empty($rental['brand'])): ?>
                                 <span>
-
-                                    🚗
+                                    <i class="fa fa-car"></i>
                                     <?= htmlspecialchars($rental['brand']) ?>
-
                                 </span>
-
                             <?php endif; ?>
 
-                            <?php if(!empty($rental['model'])): ?>
-
+                            <?php if (!empty($rental['model'])): ?>
                                 <span>
-
                                     <?= htmlspecialchars($rental['model']) ?>
-
                                 </span>
-
                             <?php endif; ?>
 
                         </div>
 
-                        <!-- BUTTONS -->
-
                         <div class="property-buttons">
 
-                            <a
-                            href="edit_rental.php?id=<?= $rental['id'] ?>"
-                            class="edit-btn">
-
+                            <a href="edit_rental.php?id=<?= $rental['id'] ?>"
+                               class="edit-btn">
                                 Edit
-
                             </a>
 
-                            <a
-                            href="delete_rental.php?id=<?= $rental['id'] ?>"
-                            class="delete-btn"
-                            onclick="return confirm('Delete this rental?')">
-
+                            <a href="delete_rental.php?id=<?= $rental['id'] ?>"
+                               class="delete-btn"
+                               onclick="return confirm('Delete this rental?')">
                                 Delete
-
                             </a>
 
                         </div>
@@ -425,20 +225,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
         <?php else: ?>
 
-            <!-- EMPTY -->
-
             <div class="empty-box">
-
                 <i class="fa fa-house"></i>
-
                 <h3>No Rentals Added</h3>
-
-                <p>
-
-                    Start by adding your first rental property.
-
-                </p>
-
+                <p>Start by adding your first property</p>
             </div>
 
         <?php endif; ?>
@@ -446,9 +236,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     </div>
 
 </main>
-
 </div>
 
 </body>
-
 </html>

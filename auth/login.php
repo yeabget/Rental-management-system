@@ -28,14 +28,12 @@ session_start();
         <h2>Welcome Back</h2>
         <p class="form-subtitle">Login to continue</p>
 
-        <!-- ERROR -->
         <?php if(isset($_GET['error'])): ?>
             <div class="error-box">
                 <?php echo htmlspecialchars($_GET['error']); ?>
             </div>
         <?php endif; ?>
 
-        <!-- FORM -->
         <form action="/rental-management-system/auth/login_process.php" method="POST">
 
             <div class="form-group">

@@ -2,7 +2,6 @@
 session_start();
 require "../config/Database.php";
 
-/* ================= AUTH CHECK ================= */
 
 if (
     !isset($_SESSION['user']) ||
@@ -16,28 +15,24 @@ $db = (new Database())->connect();
 
 $renter_id = $_SESSION['user']['id'];
 
-/* ================= USER INFO ================= */
 
 $stmt = $db->prepare("
     SELECT *
     FROM users
     WHERE id = ?
 ");
-
 $stmt->execute([$renter_id]);
-
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$user) {
     die("User not found");
 }
 
-/* ================= FILTERS ================= */
 
 $search = $_GET['search'] ?? '';
 $category = $_GET['category'] ?? 'All';
 
-/* ================= RENTALS QUERY ================= */
+
 
 $query = "
 SELECT rentals.*,
@@ -45,9 +40,24 @@ users.fullname AS owner_name
 FROM rentals
 JOIN users ON users.id = rentals.owner_id
 WHERE rentals.status = 'approved'
+
 AND (
     rentals.title LIKE :search
     OR rentals.location LIKE :search
+)
+
+AND NOT EXISTS (
+    SELECT 1
+    FROM bookings b
+    WHERE b.rental_id = rentals.id
+    AND b.status IN ('Approved', 'Booked', 'Success')
+)
+
+AND NOT EXISTS (
+    SELECT 1
+    FROM payments p
+    WHERE p.rental_id = rentals.id
+    AND p.status = 'success'
 )
 ";
 
@@ -55,7 +65,6 @@ $params = [
     ':search' => "%$search%"
 ];
 
-/* CATEGORY FILTER */
 
 if ($category !== 'All') {
 
@@ -78,7 +87,6 @@ $stmt = $db->prepare($query);
 $stmt->execute($params);
 $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-/* ================= UNREAD ================= */
 
 $stmt = $db->prepare("
 SELECT COUNT(*)
@@ -86,7 +94,6 @@ FROM messages
 WHERE receiver_id = ?
 AND is_read = 0
 ");
-
 $stmt->execute([$renter_id]);
 $unread = $stmt->fetchColumn();
 ?>
@@ -100,7 +107,7 @@ $unread = $stmt->fetchColumn();
 
 <title>Renter Dashboard</title>
 
-<link rel="stylesheet" href="../assets/css/renters_dashboard.css">
+<link rel="stylesheet" href="../assets/css/renter_dashboard.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -112,13 +119,11 @@ $unread = $stmt->fetchColumn();
 
 <main class="main">
 
-<!-- TOP TITLE -->
 <div class="page-title">
     <h1>Welcome, <?= htmlspecialchars($user['fullname']) ?></h1>
-    <p>Find approved rentals easily</p>
+    <p>Find available rentals easily</p>
 </div>
 
-<!-- SEARCH -->
 <form class="search-bar" method="GET">
     <i class="fa fa-search"></i>
     <input type="text" name="search"
@@ -127,7 +132,6 @@ $unread = $stmt->fetchColumn();
     <button type="submit">Search</button>
 </form>
 
-<!-- FILTERS -->
 <div class="filters">
 
 <?php
@@ -145,29 +149,24 @@ class="<?= $category == $c ? 'active-filter' : '' ?>">
 
 </div>
 
-<!-- GRID -->
 <div class="property-grid">
 
 <?php if (empty($rentals)): ?>
-    <p style="padding:20px;">No approved rentals found.</p>
+    <p style="padding:20px;">No available rentals found.</p>
 <?php endif; ?>
 
 <?php foreach ($rentals as $r): ?>
 
 <?php
-/* ================= PRICE TYPE FIX ================= */
 $categoryLower = strtolower($r['category']);
 
-if ($categoryLower === 'house' || $categoryLower === 'shop') {
-    $priceType = "/month";
-} else {
-    $priceType = "/day";
-}
+$priceType = ($categoryLower === 'house' || $categoryLower === 'shop')
+    ? "/month"
+    : "/day";
 ?>
 
 <div class="property-card">
 
-    <!-- IMAGE -->
     <div class="card-image">
         <img src="../assets/images/<?= htmlspecialchars($r['image']) ?>"
              class="main-card-image">
@@ -180,7 +179,6 @@ if ($categoryLower === 'house' || $categoryLower === 'shop') {
         </div>
     </div>
 
-    <!-- CONTENT -->
     <div class="property-content">
 
         <div class="title-price">
@@ -208,7 +206,6 @@ if ($categoryLower === 'house' || $categoryLower === 'shop') {
             </p>
         <?php endif; ?>
 
-        <!-- FEATURES -->
         <div class="property-features">
 
             <?php if($r['category'] == 'house'): ?>
@@ -228,29 +225,12 @@ if ($categoryLower === 'house' || $categoryLower === 'shop') {
                     <i class="fa fa-car"></i>
                     <strong><?= htmlspecialchars($r['brand']) ?></strong>
                 </div>
-
-                <div class="feature-box">
-                    <i class="fa fa-calendar"></i>
-                    <strong><?= $r['year'] ?></strong>
-                </div>
             <?php endif; ?>
 
             <?php if($r['category'] == 'motorcycle'): ?>
                 <div class="feature-box">
                     <i class="fa fa-motorcycle"></i>
                     <strong><?= htmlspecialchars($r['brand']) ?></strong>
-                </div>
-
-                <div class="feature-box">
-                    <i class="fa fa-gauge"></i>
-                    <strong><?= $r['mileage'] ?></strong>
-                </div>
-            <?php endif; ?>
-
-            <?php if($r['category'] == 'shop'): ?>
-                <div class="feature-box">
-                    <i class="fa fa-shop"></i>
-                    <strong>Shop</strong>
                 </div>
             <?php endif; ?>
 
@@ -261,7 +241,6 @@ if ($categoryLower === 'house' || $categoryLower === 'shop') {
         </a>
 
     </div>
-
 </div>
 
 <?php endforeach; ?>

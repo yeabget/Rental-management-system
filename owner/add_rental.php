@@ -2,7 +2,6 @@
 session_start();
 require "../config/Database.php";
 
-/* ================= AUTH ================= */
 
 if(
     !isset($_SESSION['user']) ||
@@ -30,7 +29,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Add Rental</title>
 
 <link rel="stylesheet"
-href="../assets/css/add_rental.css">
+href="../assets/css/add_rentals.css">
 
 <link rel="stylesheet"
 href="../assets/css/owners_sidebar.css">
@@ -44,15 +43,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <div class="dashboard">
 
-    <!-- SIDEBAR -->
 
     <?php include "includes/sidebar.php"; ?>
 
-    <!-- MAIN -->
 
     <div class="container">
 
-        <!-- PAGE TOP -->
 
         <div class="page-top">
 
@@ -69,12 +65,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
             </div>
 
         </div>
-
-        <!-- FORM -->
-
         <div class="form-box">
-
-            <!-- BACK BUTTON -->
 
             <a href="dashboard.php"
             class="back-btn">
@@ -85,14 +76,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             </a>
 
-            <!-- FORM -->
-
-            <form
+          <form
             action="save_rental.php"
             method="POST"
             enctype="multipart/form-data">
-
-                <!-- CATEGORY -->
 
                 <div>
 
@@ -128,8 +115,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 </div>
 
-                <!-- BASIC INFO -->
-
                 <div class="grid">
 
                     <div>
@@ -158,8 +143,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 </div>
 
-                <!-- LICENSE -->
-
                 <div>
 
                     <label>
@@ -173,8 +156,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                     required>
 
                 </div>
-
-                <!-- HOUSE -->
 
                 <div id="house"
                 class="section">
@@ -200,7 +181,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                     <input
                     type="number"
                     name="house_size"
-                    placeholder="Size">
+                    placeholder="Size in care meter">
 
                     <input
                     type="number"
@@ -217,8 +198,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                     accept="image/*">
 
                 </div>
-
-                <!-- SHOP -->
 
                 <div id="shop"
                 class="section">
@@ -247,8 +226,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                     accept="image/*">
 
                 </div>
-
-                <!-- CAR -->
 
                 <div id="car"
                 class="section">
@@ -311,8 +288,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 </div>
 
-                <!-- MOTOR -->
-
                 <div id="motorcycle"
                 class="section">
 
@@ -374,8 +349,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 </div>
 
-                <!-- STATUS -->
-
                 <div>
 
                     <label>
@@ -398,7 +371,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 </div>
 
-                <!-- SUBMIT -->
 
                 <button type="submit">
 

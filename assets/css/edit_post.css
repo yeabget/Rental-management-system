@@ -1,7 +1,6 @@
-/* ================= GOOGLE FONT ================= */
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
-/* ================= ROOT COLORS ================= */
 :root{
 
     --primary:#2563eb;
@@ -24,8 +23,6 @@
     --hover-shadow:
     0 22px 50px rgba(15,23,42,0.15);
 }
-
-/* ================= RESET ================= */
 *{
     margin:0;
     padding:0;
@@ -50,8 +47,6 @@ body{
 
     overflow-x:hidden;
 }
-
-/* ================= SCROLLBAR ================= */
 ::-webkit-scrollbar{
     width:10px;
 }
@@ -64,22 +59,16 @@ body{
 ::-webkit-scrollbar-thumb:hover{
     background:#94a3b8;
 }
-
-/* ================= DASHBOARD ================= */
 .dashboard{
     display:flex;
     min-height:100vh;
 }
-
-/* ================= MAIN ================= */
 .main{
     flex:1;
     margin-left:260px;
     padding:35px;
     transition:0.3s ease;
 }
-
-/* ================= TOPBAR ================= */
 .topbar{
 
     position:relative;
@@ -102,8 +91,6 @@ body{
     box-shadow:
     0 18px 40px rgba(37,99,235,0.28);
 }
-
-/* GLOW EFFECT */
 
 .topbar::before{
 
@@ -141,7 +128,6 @@ body{
     left:-60px;
 }
 
-/* ================= TOPBAR CONTENT ================= */
 .topbar-content{
     position:relative;
     z-index:2;
@@ -167,8 +153,6 @@ body{
     line-height:1.7;
 }
 
-/* ================= PROPERTY GRID ================= */
-
 .property-grid{
 
     display:grid;
@@ -178,8 +162,6 @@ body{
 
     gap:28px;
 }
-
-/* ================= PROPERTY CARD ================= */
 .property-card{
 
     position:relative;
@@ -204,8 +186,6 @@ body{
     min-height:100%;
 }
 
-/* HOVER EFFECT */
-
 .property-card:hover{
 
     transform:
@@ -213,8 +193,6 @@ body{
 
     box-shadow:var(--hover-shadow);
 }
-
-/* ================= IMAGE ================= */
 .property-image{
 
     width:100%;
@@ -230,8 +208,6 @@ body{
 
     transform:scale(1.08);
 }
-
-/* ================= IMAGE OVERLAY ================= */
 .property-card::before{
 
     content:"";
@@ -256,7 +232,6 @@ body{
     pointer-events:none;
 }
 
-/* ================= CONTENT ================= */
 .property-content{
 
     padding:24px;
@@ -266,8 +241,6 @@ body{
 
     flex:1;
 }
-
-/* ================= TITLE + PRICE ================= */
 .title-price{
 
     display:flex;
@@ -294,7 +267,6 @@ body{
     color:var(--dark);
 }
 
-/* ================= PRICE ================= */
 .price{
 
     background:
@@ -318,8 +290,6 @@ body{
 
     border:1px solid #bfdbfe;
 }
-
-/* ================= CATEGORY ================= */
 .category-badge{
 
     width:fit-content;
@@ -344,7 +314,6 @@ body{
     margin-bottom:18px;
 }
 
-/* ================= LOCATION + STATUS ================= */
 .location-approval{
 
     display:flex;
@@ -359,8 +328,6 @@ body{
 
     margin-bottom:18px;
 }
-
-/* ================= LOCATION ================= */
 .location{
 
     display:flex;
@@ -377,8 +344,6 @@ body{
 .location i{
     color:#ef4444;
 }
-
-/* ================= STATUS ================= */
 .status{
 
     display:inline-flex;
@@ -396,16 +361,12 @@ body{
     font-weight:700;
 }
 
-/* PENDING */
-
 .pending{
 
     background:#fef3c7;
 
     color:#92400e;
 }
-
-/* APPROVED */
 
 .approved{
 
@@ -414,16 +375,12 @@ body{
     color:#166534;
 }
 
-/* REJECTED */
-
 .rejected{
 
     background:#ffe4e6;
 
     color:#be123c;
 }
-
-/* ================= REJECT MESSAGE ================= */
 .reject-message{
 
     background:#fff1f2;
@@ -442,8 +399,6 @@ body{
 
     line-height:1.7;
 }
-
-/* ================= DESCRIPTION ================= */
 .description{
 
     color:#475569;
@@ -462,8 +417,6 @@ body{
 
     overflow:hidden;
 }
-
-/* ================= EXTRA INFO ================= */
 .extra-info{
 
     display:flex;
@@ -474,8 +427,6 @@ body{
 
     margin-bottom:24px;
 }
-
-/* EXTRA BOX */
 
 .extra-info span{
 
@@ -501,9 +452,6 @@ body{
 
     transition:0.3s ease;
 }
-
-/* EXTRA HOVER */
-
 .extra-info span:hover{
 
     background:#eff6ff;
@@ -519,8 +467,6 @@ body{
 
     font-size:14px;
 }
-
-/* ================= BUTTONS ================= */
 .property-buttons{
 
     display:flex;
@@ -529,8 +475,6 @@ body{
 
     margin-top:auto;
 }
-
-/* BUTTON BASE */
 
 .edit-btn,
 .delete-btn{
@@ -556,7 +500,6 @@ body{
     overflow:hidden;
 }
 
-/* SHINE EFFECT */
 
 .edit-btn::before,
 .delete-btn::before{
@@ -587,8 +530,6 @@ body{
 
     left:100%;
 }
-
-/* ================= EDIT BUTTON ================= */
 .edit-btn{
 
     background:
@@ -611,8 +552,6 @@ body{
     box-shadow:
     0 18px 30px rgba(37,99,235,0.35);
 }
-
-/* ================= DELETE BUTTON ================= */
 .delete-btn{
 
     background:#fff1f2;
@@ -631,8 +570,6 @@ body{
     box-shadow:
     0 14px 25px rgba(225,29,72,0.18);
 }
-
-/* ================= EMPTY BOX ================= */
 .empty-box{
 
     grid-column:1/-1;
@@ -672,109 +609,82 @@ body{
 
     font-size:15px;
 }
+@media (max-width: 1100px) {
 
-/* ================= RESPONSIVE ================= */
-
-/* TABLET */
-
-@media(max-width:1100px){
-
-    .main{
-
-        margin-left:0;
-
-        padding:95px 22px 22px;
+    .main {
+        margin-left: 0;
+        padding: 20px;
     }
 
-    .topbar{
-
-        padding:38px 28px;
+    .topbar {
+        padding: 32px 24px;
     }
 
-    .topbar h1{
-
-        font-size:34px;
+    .topbar h1 {
+        font-size: 30px;
     }
 }
+@media (max-width: 768px) {
 
-/* MOBILE */
-
-@media(max-width:768px){
-
-    .property-grid{
-
-        grid-template-columns:1fr;
+    .main {
+        padding: 16px 16px 16px !important;
     }
 
-    .property-buttons{
-
-        flex-direction:column;
+    .topbar {
+       
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-top: 0 !important;
+        padding: 22px 18px;
+        border-radius: 20px;
+    }
+    .property-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
     }
 
-    .title-price{
-
-        flex-direction:column;
+    .property-buttons {
+        flex-direction: column;
     }
 
-    .property-image{
-
-        height:220px;
+    .title-price {
+        flex-direction: column;
     }
 
-    .topbar{
-
-        border-radius:24px;
-    }
-
-    .topbar h1{
-
-        font-size:28px;
-    }
-
-    .topbar p{
-
-        font-size:14px;
+    .property-image {
+        height: 210px;
     }
 }
-
-/* SMALL MOBILE */
-
-@media(max-width:500px){
-
-    .main{
-
-        padding:90px 14px 20px;
+@media (max-width: 500px) {
+    .main {
+        padding: 12px 12px 16px !important;
     }
 
-    .property-content{
-
-        padding:18px;
+    .topbar {
+        padding: 18px 14px;
+        margin-top: 0 !important;
+        border-radius: 18px;
     }
 
-    .property-image{
-
-        height:200px;
+    .topbar h1 {
+        font-size: 22px;
     }
 
-    .topbar{
+    
 
-        padding:28px 20px;
+    .property-content {
+        padding: 16px;
     }
 
-    .topbar h1{
-
-        font-size:24px;
+    .property-image {
+        height: 190px;
     }
 
-    .title-price h3{
-
-        font-size:19px;
-    }
-
-    .extra-info span{
-
-        width:100%;
-
-        justify-content:center;
+    .extra-info span {
+        width: 100%;
+        justify-content: center;
     }
 }

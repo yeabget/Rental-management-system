@@ -2,8 +2,6 @@
 session_start();
 require "../config/Database.php";
 
-/* ================= AUTH ================= */
-
 if (
     !isset($_SESSION['user']) ||
     $_SESSION['user']['role'] !== 'owner'
@@ -16,7 +14,6 @@ $db = (new Database())->connect();
 
 $owner_id = $_SESSION['user']['id'];
 
-/* ================= VALIDATE ID ================= */
 
 if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
     header("Location: edit_posts.php");
@@ -25,7 +22,6 @@ if (!isset($_GET['id']) || !is_numeric($_GET['id'])) {
 
 $id = (int) $_GET['id'];
 
-/* ================= GET RENTAL ================= */
 
 $stmt = $db->prepare("
     SELECT *
@@ -43,7 +39,6 @@ if (!$rental) {
     exit();
 }
 
-/* ================= GET GALLERY ================= */
 
 $galleryStmt = $db->prepare("
     SELECT *
@@ -55,7 +50,6 @@ $galleryStmt->execute([$id]);
 
 $galleryImages = $galleryStmt->fetchAll(PDO::FETCH_ASSOC);
 
-/* ================= UPDATE ================= */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -67,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $image = $rental['image'];
     $license_image = $rental['license_image'];
 
-    /* ================= MAIN IMAGE ================= */
 
     if (!empty($_FILES['image']['name'])) {
 
@@ -85,7 +78,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    /* ================= LICENSE IMAGE ================= */
 
     if (!empty($_FILES['license_image']['name'])) {
 
@@ -103,7 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    /* ================= UPDATE RENTAL ================= */
 
     $update = $db->prepare("
         UPDATE rentals SET
@@ -158,9 +149,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <div class="edit-container">
 
-                <!-- TOP BAR -->
-               
-
    <div class="page-title">
      <h1>
            Saved Items
@@ -169,7 +157,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  <p>Edit Your rental items post</p>
 </div>
  
-                <!-- FORM -->
                 <form method="POST" enctype="multipart/form-data" class="edit-form">
 <a href="edit_posts.php" class="back-btn">
                         <i class="fa fa-arrow-left"></i> Back
@@ -211,7 +198,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 </form>
 
-                <!-- GALLERY -->
                 <div class="gallery-grid">
 
                     <?php foreach ($galleryImages as $g): ?>

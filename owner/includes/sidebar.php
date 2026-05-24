@@ -4,7 +4,6 @@ if(session_status() === PHP_SESSION_NONE){
     session_start();
 }
 
-/* ================= AUTH CHECK ================= */
 
 if(
     !isset($_SESSION['user']) ||
@@ -23,12 +22,8 @@ $user = $_SESSION['user'];
 $firstLetter =
 strtoupper(substr($user['fullname'],0,1));
 
-/* ================= CURRENT PAGE ================= */
-
 $currentPage =
 basename($_SERVER['PHP_SELF']);
-
-/* ================= UNREAD CHATS ================= */
 
 $unreadChats = 0;
 
@@ -74,7 +69,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <body>
 
-<!-- ================= MENU BUTTON ================= -->
 
 <button class="menu-toggle" id="menuToggle">
 
@@ -82,16 +76,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 </button>
 
-<!-- ================= OVERLAY ================= -->
 
 <div class="sidebar-overlay"
 id="sidebarOverlay"></div>
 
-<!-- ================= SIDEBAR ================= -->
 
 <aside class="sidebar" id="sidebar">
-
-    <!-- HEADER -->
 
     <div class="sidebar-header">
 
@@ -107,9 +97,6 @@ id="sidebarOverlay"></div>
         </button>
 
     </div>
-
-    <!-- NAVIGATION -->
-
     <div class="sidebar-top">
 
         <a
@@ -151,6 +138,24 @@ id="sidebarOverlay"></div>
             Edit Posts
 
         </a>
+        <a
+        href="owner_bookings.php"
+        class="<?= ($currentPage == 'owner_bookings.php') ? 'active' : '' ?>">
+
+            <i class="fa fa-calendar-check"></i>
+
+           Booking
+
+        </a>
+        <a
+        href="earnings.php"
+        class="<?= ($currentPage == 'earnings.php') ? 'active' : '' ?>">
+
+            <i class="fa fa-coins"></i>
+
+            Earnings
+
+        </a>
 
         <a
         href="owner_chat_list.php"
@@ -182,7 +187,6 @@ id="sidebarOverlay"></div>
 
     </div>
 
-    <!-- PROFILE -->
 
     <div class="sidebar-profile">
 
@@ -208,8 +212,6 @@ id="sidebarOverlay"></div>
 
 </aside>
 
-<!-- ================= JAVASCRIPT ================= -->
-
 <script>
 
 const sidebar =
@@ -224,7 +226,6 @@ document.getElementById("closeSidebar");
 const overlay =
 document.getElementById("sidebarOverlay");
 
-/* ================= OPEN SIDEBAR ================= */
 
 menuToggle.onclick = () => {
 
@@ -235,7 +236,7 @@ menuToggle.onclick = () => {
     menuToggle.style.display = "none";
 };
 
-/* ================= CLOSE SIDEBAR ================= */
+
 
 function closeMenu(){
 
@@ -249,21 +250,20 @@ function closeMenu(){
     }
 }
 
-/* ================= CLOSE BUTTON ================= */
+
 
 closeSidebar.onclick = () => {
 
     closeMenu();
 };
 
-/* ================= OVERLAY CLOSE ================= */
 
 overlay.onclick = () => {
 
     closeMenu();
 };
 
-/* ================= WINDOW RESIZE ================= */
+
 
 window.addEventListener("resize", () => {
 
@@ -284,7 +284,6 @@ window.addEventListener("resize", () => {
     }
 });
 
-/* ================= INITIAL LOAD ================= */
 
 window.addEventListener("load", () => {
 

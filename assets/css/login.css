@@ -1,7 +1,5 @@
-/* ================= GOOGLE FONT ================= */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* ================= GLOBAL ================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 *{
     margin:0;
@@ -14,8 +12,6 @@ body{
     background:#f8fafc;
     color:#111827;
 }
-
-/* ================= FORM PAGE LAYOUT ================= */
 
 .form-container{
     min-height:100vh;
@@ -31,8 +27,6 @@ body{
     #dbeafe,
     transparent 60%);
 }
-
-/* ================= FORM BOX ================= */
 
 .form-box{
     width:100%;
@@ -53,8 +47,6 @@ body{
     transform:translateY(-5px);
 }
 
-/* ================= TITLE ================= */
-
 .form-box h2{
     text-align: center;
     font-size:28px;
@@ -69,8 +61,6 @@ body{
     margin-bottom:25px;
 }
 
-/* ================= ERROR ================= */
-
 .error-box{
     background:#fee2e2;
 
@@ -84,9 +74,6 @@ body{
 
     font-size:14px;
 }
-
-/* ================= INPUT GROUP ================= */
-
 .form-group{
     margin-bottom:18px;
 }
@@ -120,9 +107,6 @@ body{
 
     box-shadow:0 0 0 4px rgba(37,99,235,0.15);
 }
-
-/* ================= BUTTON ================= */
-
 button{
     width:100%;
 
@@ -148,9 +132,6 @@ button:hover{
 
     transform:translateY(-2px);
 }
-
-/* ================= FOOTER ================= */
-
 .form-footer{
     margin-top:20px;
 
@@ -172,9 +153,6 @@ button:hover{
 .form-footer a:hover{
     text-decoration:underline;
 }
-
-/* ================= BACK LINK ================= */
-
 .form-box a{
     display:inline-block;
 
@@ -191,8 +169,6 @@ button:hover{
     text-decoration:underline;
 }
 
-/* ================= RESPONSIVE ================= */
-
 @media(max-width:500px){
 
     .form-box{
@@ -203,8 +179,6 @@ button:hover{
         font-size:24px;
     }
 }
-
-/* ================= DARK MODE ================= */
 
 body.dark{
     background:#0f172a;

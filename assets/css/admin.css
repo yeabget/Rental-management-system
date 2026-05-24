@@ -14,7 +14,6 @@ body{
     min-height:100vh;
 }
 
-/* SIDEBAR */
 
 .sidebar{
     width:260px;
@@ -44,8 +43,6 @@ body{
     background:#1e293b;
     color:white;
 }
-
-/* MAIN */
 
 .main{
     margin-left:260px;
@@ -82,7 +79,6 @@ table td{
     border-radius:8px;
     text-decoration:none;
 }
-/* STATS */
 
 .stats{
     display:grid;

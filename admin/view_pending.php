@@ -2,7 +2,6 @@
 session_start();
 require "../config/Database.php";
 
-/* ================= ADMIN CHECK ================= */
 
 if(
     !isset($_SESSION['user']) ||
@@ -21,7 +20,6 @@ $db = (new Database())->connect();
 
 $id = $_GET['id'];
 
-/* ================= GET RENTAL ================= */
 
 $stmt = $db->prepare("
 
@@ -71,13 +69,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <div class="dashboard">
 
-    <!-- SIDEBAR -->
     <?php include "includes/sidebar.php"; ?>
 
-    <!-- MAIN -->
     <div class="main">
 
-        <!-- HEADER -->
         <div class="page-top">
 
             <div>
@@ -94,10 +89,8 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
         </div>
 
-        <!-- DETAILS CARD -->
         <div class="details-card">
 
-            <!-- IMAGE -->
             <div class="image-box">
 
                 <img
@@ -107,7 +100,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             </div>
 
-            <!-- CONTENT -->
             <div class="details-content">
 
                 <h2>
@@ -160,7 +152,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 </div>
 
-                <!-- DESCRIPTION -->
+               
                 <div class="description">
 
                     <h3>Description</h3>
@@ -171,7 +163,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 </div>
 
-                <!-- LICENSE -->
+              
                 <div class="license-section">
 
                     <h3>License Document</h3>
@@ -184,7 +176,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 </div>
 
-                <!-- BUTTONS -->
+              
                 <div class="actions">
 
                     <a
@@ -225,7 +217,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     class="close-preview"
     onclick="closePreview()">
 
-        ×
+       <i class="fa fa-times"></i>
 
     </span>
 

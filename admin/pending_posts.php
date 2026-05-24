@@ -2,7 +2,6 @@
 session_start();
 require "../config/Database.php";
 
-/* ================= ADMIN CHECK ================= */
 if (
     !isset($_SESSION['user']) ||
     $_SESSION['user']['role'] !== 'admin'
@@ -13,7 +12,6 @@ if (
 
 $db = (new Database())->connect();
 
-/* ================= GET PENDING RENTALS ================= */
 $stmt = $db->prepare("
     SELECT 
         rentals.*,
@@ -37,18 +35,15 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <title>Pending Rentals</title>
 
-<link rel="stylesheet" href="../assets/css/p.css">
+<link rel="stylesheet" href="../assets/css/pending_request.css">
 
-<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
 
-<!-- SIDEBAR (include) -->
 <?php include "includes/sidebar.php"; ?>
 
-<!-- MAIN CONTENT -->
 <div class="main">
 <div class="page-top">
     <div class="welcome-box">

@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+
 *{
     margin:0;
     padding:0;
@@ -11,7 +11,6 @@ body{
     overflow-x:hidden;
 }
 
-/* ================= SIDEBAR ================= */
 .sidebar{
     position:fixed;
     top:0;
@@ -44,7 +43,6 @@ body{
     border-radius:20px;
 }
 
-/* ================= TOP ================= */
 .sidebar-top{
     display:flex;
     flex-direction:column;
@@ -60,7 +58,6 @@ body{
     font-weight:800;
 }
 
-/* ================= LINKS ================= */
 .sidebar a{
     display:flex;
     align-items:center;
@@ -85,21 +82,18 @@ body{
     text-align:center;
 }
 
-/* HOVER */
 .sidebar a:hover{
     background:rgba(255,255,255,0.08);
     color:white;
     transform:translateX(5px);
 }
 
-/* ACTIVE */
 .sidebar a.active{
     background:#2563eb;
     color:white;
     box-shadow:0 10px 25px rgba(37,99,235,0.35);
 }
 
-/* ================= PROFILE ================= */
 .sidebar-profile{
     display:flex;
     align-items:center;
@@ -143,7 +137,6 @@ body{
     color:#9ca3af;
 }
 
-/* ================= MENU BUTTON ================= */
 .menu-toggle{
     position:fixed;
     top:15px;
@@ -175,7 +168,6 @@ body{
     transform:scale(1.05);
 }
 
-/* ================= OVERLAY ================= */
 .sidebar-overlay{
     position:fixed;
     inset:0;
@@ -193,14 +185,12 @@ body{
     visibility:visible;
 }
 
-/* ================= DESKTOP ================= */
 @media(min-width:769px){
     .sidebar{
         transform:translateX(0);
     }
 }
 
-/* ================= TABLET & MOBILE ================= */
 @media(max-width:768px){
 
     .menu-toggle{
@@ -217,7 +207,6 @@ body{
     }
 }
 
-/* ================= SMALL MOBILE ================= */
 @media(max-width:500px){
 
     .sidebar{

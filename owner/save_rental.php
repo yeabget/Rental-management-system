@@ -3,7 +3,6 @@
 session_start();
 require "../config/Database.php";
 
-/* ================= AUTH ================= */
 
 if(
     !isset($_SESSION['user']) ||
@@ -17,7 +16,6 @@ $db = (new Database())->connect();
 
 $owner_id = $_SESSION['user']['id'];
 
-/* ================= BASIC ================= */
 
 $category = trim($_POST['category']);
 $title = trim($_POST['title']);
@@ -40,7 +38,6 @@ $transmission = null;
 $seats = null;
 $mileage = null;
 
-/* ================= CATEGORY ================= */
 
 if($category == "house"){
 
@@ -111,7 +108,6 @@ elseif($category == "motorcycle"){
     $file = $_FILES['motor_image'];
 }
 
-/* ================= LICENSE IMAGE ================= */
 
 $license_image = "";
 
@@ -132,7 +128,6 @@ if(
     );
 }
 
-/* ================= MAIN IMAGE ================= */
 
 $uploadDir = "../assets/images/";
 
@@ -187,7 +182,6 @@ if(
     die("Please upload image");
 }
 
-/* ================= INSERT ================= */
 
 $stmt = $db->prepare("
 
@@ -247,7 +241,6 @@ $stmt->execute([
 
 ]);
 
-/* ================= REDIRECT ================= */
 
 header("Location: dashboard.php?success=Rental added");
 

@@ -13,30 +13,25 @@ if(
 
 $db = (new Database())->connect();
 
-/* TOTAL USERS */
 $totalUsers = $db->query("
     SELECT COUNT(*) FROM users
 ")->fetchColumn();
 
-/* OWNERS */
 $totalOwners = $db->query("
     SELECT COUNT(*) FROM users
     WHERE role='owner'
 ")->fetchColumn();
 
-/* RENTERS */
 $totalRenters = $db->query("
     SELECT COUNT(*) FROM users
     WHERE role='renter'
 ")->fetchColumn();
 
-/* ADMINS */
 $totalAdmins = $db->query("
     SELECT COUNT(*) FROM users
     WHERE role='admin'
 ")->fetchColumn();
 
-/* RENTALS */
 $totalRentals = $db->query("
     SELECT COUNT(*) FROM rentals
 ")->fetchColumn();
@@ -48,7 +43,7 @@ $totalRentals = $db->query("
 <head>
 
 <link rel="stylesheet"
-href="../assets/css/admins_dashboard.css">
+href="../assets/css/admin_dashboard.css">
 
 </head>
 <body>

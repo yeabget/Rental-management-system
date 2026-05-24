@@ -11,7 +11,6 @@ $db = (new Database())->connect();
 
 $user_id = $_SESSION['user']['id'];
 
-/* UNREAD MESSAGES */
 $stmt = $db->prepare("
     SELECT COUNT(*) 
     FROM messages 
@@ -20,7 +19,6 @@ $stmt = $db->prepare("
 $stmt->execute([$user_id]);
 $unread = $stmt->fetchColumn();
 
-/* GET PROPERTY */
 if(!isset($_GET['id']) || !is_numeric($_GET['id'])){
     die("Invalid Property");
 }
@@ -59,7 +57,7 @@ $category = strtolower($property['category']);
 
 <div class="dashboard">
 <?php include "includes/sidebar.php"; ?>
-<!-- ================= MAIN ================= -->
+
 <main class="main">
 <div class="page-title">
      <h1>
@@ -71,15 +69,13 @@ $category = strtolower($property['category']);
 <a href="javascript:history.back()" class="back-btn">
     <i class="fa fa-arrow-left"></i> Back
 </a>
-<!-- HERO IMAGE -->
+
 <div class="hero-section">
     <img src="../assets/images/<?= htmlspecialchars($property['image']) ?>" class="hero-image">
 </div>
 
-<!-- DETAILS -->
 <div class="details-container">
 
-    <!-- HEADER -->
     <div class="details-header">
 
         <div>
@@ -93,7 +89,6 @@ $category = strtolower($property['category']);
         
         </div>
 
-        <!-- PRICE -->
         <div class="price-box">
             <h2>$<?= number_format($property['price'],2) ?></h2>
             <span><?= in_array($category,['house','shop']) ? '/month' : '/day' ?></span>
@@ -101,7 +96,6 @@ $category = strtolower($property['category']);
 
     </div>
 
-    <!-- ================= FEATURES (DYNAMIC) ================= -->
     <div class="features-grid">
 
         <div class="feature-card">
@@ -176,13 +170,11 @@ $category = strtolower($property['category']);
 
     </div>
 
-    <!-- DESCRIPTION -->
     <div class="section-card">
         <h2>About This Rental</h2>
         <p><?= nl2br(htmlspecialchars($property['description'])) ?></p>
     </div>
 
-    <!-- AMENITIES (ONLY FOR HOUSE/SHOP) -->
     <?php if(in_array($category,['house','shop'])): ?>
     <div class="section-card">
 
@@ -209,7 +201,6 @@ $category = strtolower($property['category']);
     </div>
     <?php endif; ?>
 
-    <!-- OWNER -->
     <div class="owner-card">
 
         <div class="owner-info">
@@ -233,7 +224,6 @@ $category = strtolower($property['category']);
 
     </div>
 
-    <!-- ACTIONS -->
     <div class="action-buttons">
 <a href="report.php?id=<?= $property['id']; ?>" class="report-btn">
     Report
@@ -249,7 +239,6 @@ $category = strtolower($property['category']);
 
     </div>
 
-    <!-- GUARANTEE -->
     <div class="guarantee-box">
         <h2>RentFlow Protection</h2>
         <p>

@@ -18,7 +18,6 @@ if ($user_id <= 0) {
     exit();
 }
 
-/* GET RENTER */
 $stmt = $db->prepare("SELECT id, fullname FROM users WHERE id = ? AND role='renter'");
 $stmt->execute([$user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -31,27 +30,23 @@ if (!$user) {
 $renter_name = $user['fullname'];
 $firstLetter = strtoupper(substr($renter_name, 0, 1));
 
-/* MARK AS READ */
 $db->prepare("
     UPDATE messages
     SET is_read = 1
     WHERE sender_id = ? AND receiver_id = ?
 ")->execute([$user_id, $owner_id]);
 
-/* ================= SEND MESSAGE ================= */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $message = trim($_POST['message'] ?? '');
     $fileName = null;
 
-    /* UPLOAD DIR (SAME FOR BOTH) */
     $uploadDir = "../assets/uploads/";
 
     if (!is_dir($uploadDir)) {
         mkdir($uploadDir, 0777, true);
     }
 
-    /* FILE UPLOAD */
     if (!empty($_FILES['file']['name'])) {
 
         $ext = strtolower(pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION));
@@ -66,7 +61,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    /* SAVE MESSAGE */
     if ($message !== '' || $fileName) {
 
         $stmt = $db->prepare("
@@ -86,7 +80,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-/* ================= LOAD CHAT ================= */
 $stmt = $db->prepare("
     SELECT *
     FROM messages
@@ -107,7 +100,7 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Owner Chat</title>
 
-<link rel="stylesheet" href="../assets/css/owner_chat.css">
+<link rel="stylesheet" href="../assets/css/ownerss_chat.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -138,7 +131,6 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </div>
 
-<!-- CHAT BOX -->
 <div class="chat-box" id="chatBox">
 
 <?php foreach ($messages as $m): ?>
@@ -155,14 +147,12 @@ $isMe = $m['sender_id'] == $owner_id;
 
 <div class="msg <?= $isMe ? 'me' : 'them' ?>">
 
-    <!-- TEXT -->
     <?php if (!empty($m['message'])): ?>
         <div class="text">
             <?= nl2br(htmlspecialchars($m['message'])) ?>
         </div>
     <?php endif; ?>
 
-    <!-- FILE / IMAGE -->
     <?php if (!empty($file) && file_exists($path)): ?>
 
         <?php if ($isImage): ?>
@@ -178,7 +168,6 @@ $isMe = $m['sender_id'] == $owner_id;
 
     <?php endif; ?>
 
-    <!-- TIME -->
     <div class="time">
         <?= date("h:i A", strtotime($m['created_at'])) ?>
     </div>
@@ -189,7 +178,6 @@ $isMe = $m['sender_id'] == $owner_id;
 
 </div>
 
-<!-- INPUT -->
 <form method="POST" enctype="multipart/form-data" class="chat-input">
 
     <label class="file-btn">
@@ -214,7 +202,6 @@ $isMe = $m['sender_id'] == $owner_id;
 const chatBox = document.getElementById("chatBox");
 chatBox.scrollTop = chatBox.scrollHeight;
 
-/* show file name in input */
 const fileInput = document.getElementById("fileInput");
 const messageInput = document.getElementById("messageInput");
 

@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+
 *{
     margin:0;
     padding:0;
@@ -10,14 +10,11 @@ body{
     background:#f3f4f6;
     color:#111827;
 }
-
-/* ================= LAYOUT ================= */
 .dashboard{
     display:flex;
     min-height:100vh;
 }
 
-/* ================= MAIN (FIX SIDEBAR OVERLAP) ================= */
 .main{
     flex:1;
     padding:25px;
@@ -26,14 +23,12 @@ body{
     margin-left:270px;
 }
 
-/* ================= PAGE TITLE ================= */
 .main h1{
     font-size:28px;
     font-weight:800;
     margin-bottom:20px;
 }
 
-/* ================= PAGE TOP ================= */
 .page-top{
     width:100%;
     background:linear-gradient(135deg,#2563eb,#7c3aed);
@@ -85,7 +80,6 @@ body{
     margin-bottom:12px;
 }
 
-/* ================= TABLE ================= */
 table{
     width:100%;
     border-collapse:collapse;
@@ -95,7 +89,6 @@ table{
     box-shadow:0 10px 25px rgba(0,0,0,0.06);
 }
 
-/* HEADER */
 table th{
     background:#111827;
     color:white;
@@ -104,19 +97,16 @@ table th{
     font-size:14px;
 }
 
-/* CELLS */
 table td{
     padding:14px;
     border-bottom:1px solid #e5e7eb;
     font-size:14px;
 }
 
-/* HOVER */
 table tr:hover{
     background:#f9fafb;
 }
 
-/* ================= TYPE BADGES ================= */
 .badge{
     font-weight:bold;
     padding:5px 10px;
@@ -134,7 +124,6 @@ table tr:hover{
     background:#fef3c7;
 }
 
-/* ================= RESPONSIVE TABLE ================= */
 @media(max-width:900px){
   
     table{
@@ -144,7 +133,6 @@ table tr:hover{
     }
 }
 
-/* ================= MOBILE ================= */
 @media(max-width:768px){
 
     .main{

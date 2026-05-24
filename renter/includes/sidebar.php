@@ -4,8 +4,6 @@ if(session_status() === PHP_SESSION_NONE){
     session_start();
 }
 
-/* ================= AUTH CHECK ================= */
-
 if(
     !isset($_SESSION['user']) ||
     $_SESSION['user']['role'] !== 'renter'
@@ -23,12 +21,8 @@ $user = $_SESSION['user'];
 $firstLetter =
 strtoupper(substr($user['fullname'],0,1));
 
-/* ================= CURRENT PAGE ================= */
-
 $currentPage =
 basename($_SERVER['PHP_SELF']);
-
-/* ================= UNREAD CHATS ================= */
 
 $unreadChats = 0;
 
@@ -74,25 +68,16 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <body>
 
-<!-- ================= MENU BUTTON ================= -->
-
 <button class="menu-toggle" id="menuToggle">
 
     <i class="fas fa-bars"></i>
 
 </button>
 
-<!-- ================= OVERLAY ================= -->
-
 <div class="sidebar-overlay"
 id="sidebarOverlay"></div>
 
-<!-- ================= SIDEBAR ================= -->
-
 <aside class="sidebar" id="sidebar">
-
-    <!-- HEADER -->
-
     <div class="sidebar-header">
 
         <h2 class="sidebar-title">
@@ -107,8 +92,6 @@ id="sidebarOverlay"></div>
         </button>
 
     </div>
-
-    <!-- NAVIGATION -->
 
     <div class="sidebar-top">
 
@@ -170,8 +153,6 @@ id="sidebarOverlay"></div>
 
     </div>
 
-    <!-- PROFILE -->
-
     <div class="sidebar-profile">
 
         <div class="profile-avatar">
@@ -196,8 +177,6 @@ id="sidebarOverlay"></div>
 
 </aside>
 
-<!-- ================= JAVASCRIPT ================= -->
-
 <script>
 
 const sidebar =
@@ -212,8 +191,6 @@ document.getElementById("closeSidebar");
 const overlay =
 document.getElementById("sidebarOverlay");
 
-/* ================= OPEN SIDEBAR ================= */
-
 menuToggle.onclick = () => {
 
     sidebar.classList.add("active");
@@ -222,8 +199,6 @@ menuToggle.onclick = () => {
 
     menuToggle.style.display = "none";
 };
-
-/* ================= CLOSE SIDEBAR ================= */
 
 function closeMenu(){
 
@@ -237,21 +212,15 @@ function closeMenu(){
     }
 }
 
-/* ================= CLOSE BUTTON ================= */
-
 closeSidebar.onclick = () => {
 
     closeMenu();
 };
 
-/* ================= OVERLAY CLOSE ================= */
-
 overlay.onclick = () => {
 
     closeMenu();
 };
-
-/* ================= WINDOW RESIZE ================= */
 
 window.addEventListener("resize", () => {
 
@@ -271,8 +240,6 @@ window.addEventListener("resize", () => {
         }
     }
 });
-
-/* ================= INITIAL LOAD ================= */
 
 window.addEventListener("load", () => {
 

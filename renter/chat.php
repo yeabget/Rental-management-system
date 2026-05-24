@@ -2,7 +2,6 @@
 session_start();
 require "../config/Database.php";
 
-/* AUTH */
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'renter') {
     header("Location: ../auth/login.php");
     exit();
@@ -13,13 +12,11 @@ $db = (new Database())->connect();
 $renter_id = $_SESSION['user']['id'];
 $owner_id  = isset($_GET['owner']) ? (int)$_GET['owner'] : 0;
 
-/* INVALID OWNER */
 if ($owner_id <= 0) {
     header("Location: chat_list.php");
     exit();
 }
 
-/* OWNER INFO */
 $stmt = $db->prepare("
     SELECT id, fullname
     FROM users
@@ -35,7 +32,7 @@ if (!$owner) {
     exit();
 }
 
-/* UNREAD */
+
 $stmt = $db->prepare("
     SELECT COUNT(*)
     FROM messages
@@ -47,7 +44,7 @@ $stmt->execute([$renter_id]);
 
 $unread = $stmt->fetchColumn();
 
-/* MARK READ */
+
 $stmt = $db->prepare("
     UPDATE messages
     SET is_read = 1
@@ -57,14 +54,12 @@ $stmt = $db->prepare("
 
 $stmt->execute([$owner_id, $renter_id]);
 
-/* SEND MESSAGE / FILE */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $message = trim($_POST['message'] ?? '');
 
     $file_name = null;
 
-    /* FILE UPLOAD */
     if (!empty($_FILES['file']['name'])) {
 
         $uploadDir = "../assets/uploads/";
@@ -102,7 +97,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    /* SAVE MESSAGE */
     if ($message !== '' || $file_name !== null) {
 
         $stmt = $db->prepare("
@@ -123,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit();
 }
 
-/* LOAD CHAT */
+
 $stmt = $db->prepare("
     SELECT *
     FROM messages
@@ -157,7 +151,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Chat</title>
 
 <link rel="stylesheet"
-href="../assets/css/renter_chat.css">
+href="../assets/css/renter_chats.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -174,8 +168,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <div class="chat-wrapper">
 
-    <!-- HEADER -->
-
     <div class="topbar">
 
         <a href="chat_list.php" class="back-btn">
@@ -185,6 +177,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
             Back
 
         </a>
+        <div>
 
         <h2>
 
@@ -193,10 +186,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         </h2>
 
         <p>Property Owner</p>
-
+        </div>
     </div>
 
-    <!-- CHAT BOX -->
 
     <div class="chat-box" id="chatBox">
 
@@ -204,7 +196,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <div class="empty-chat">
 
-                No messages yet 👋
+                No messages yet 
 
             </div>
 
@@ -243,7 +235,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             <div class="message <?= $isMe ? 'me' : 'them' ?>">
 
-                <!-- TEXT -->
 
                 <?php if (!empty($m['message'])): ?>
 
@@ -257,7 +248,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 <?php endif; ?>
 
-                <!-- IMAGE -->
 
                 <?php if (!empty($file) && $isImage): ?>
 
@@ -271,7 +261,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 <?php endif; ?>
 
-                <!-- FILE -->
 
                 <?php if (!empty($file) && !$isImage): ?>
 
@@ -292,8 +281,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 <?php endif; ?>
 
-                <!-- TIME -->
-
                 <div class="msg-time">
 
                     <?= date(
@@ -309,14 +296,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
     </div>
 
-    <!-- INPUT -->
-
     <form
     method="POST"
     enctype="multipart/form-data"
     class="chat-input">
 
-        <!-- FILE BUTTON -->
 
         <label class="file-upload">
 
@@ -329,7 +313,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
         </label>
 
-        <!-- MESSAGE INPUT -->
 
         <input
         type="text"
@@ -337,7 +320,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         id="messageInput"
         placeholder="Type message...">
 
-        <!-- SEND BUTTON -->
 
         <button type="submit">
 
@@ -352,8 +334,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 </main>
 </div>
 
-<!-- AUTO SCROLL -->
-
 <script>
 
 const chatBox =
@@ -362,7 +342,7 @@ document.getElementById("chatBox");
 chatBox.scrollTop =
 chatBox.scrollHeight;
 
-/* ================= SHOW FILE NAME ================= */
+
 
 const fileInput =
 document.getElementById("fileInput");

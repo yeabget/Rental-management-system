@@ -11,7 +11,6 @@ $db = (new Database())->connect();
 
 $user_id = $_SESSION['user']['id'];
 
-/* UNREAD CHAT */
 $stmt = $db->prepare("
     SELECT COUNT(*)
     FROM messages
@@ -23,7 +22,6 @@ $stmt->execute([$user_id]);
 
 $unread = $stmt->fetchColumn();
 
-/* SAVED ITEMS */
 
 $stmt = $db->prepare("
     SELECT rentals.*
@@ -52,7 +50,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Saved Items</title>
 
 <link rel="stylesheet"
-href="../assets/css/saved_item.css">
+href="../assets/css/saved_items.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -64,7 +62,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 <div class="dashboard">
 <?php include "includes/sidebar.php"; ?>
 
-<!-- MAIN -->
 <main class="main">
 
 <div class="page-title">

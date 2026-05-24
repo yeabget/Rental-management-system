@@ -1,53 +1,56 @@
 <?php
 session_start();
 require "../config/Database.php";
+require "../config/chapa.php";
 
-/* ================= CHECK LOGIN ================= */
-if (!isset($_SESSION['user'])) {
+if(!isset($_SESSION['user'])){
     header("Location: ../auth/login.php");
     exit();
 }
 
 $db = (new Database())->connect();
-$user = $_SESSION['user'];
 
-/* ================= GET RENTAL ================= */
-if (!isset($_GET['id'])) {
+if(!isset($_GET['id'])){
     die("Invalid Rental");
 }
 
-$rental_id = intval($_GET['id']);
+$rental_id = $_GET['id'];
 
 $stmt = $db->prepare("SELECT * FROM rentals WHERE id = ?");
 $stmt->execute([$rental_id]);
 $rental = $stmt->fetch(PDO::FETCH_ASSOC);
 
-if (!$rental) {
+if(!$rental){
     die("Rental not found");
 }
 
-/* ================= CHAPA CONFIG ================= */
-$secret_key = "CHASECK_TEST-vw8wSfJc7cw1fgY6LiYyNldQ5gewME6V"; // your TEST secret key
+$user = $_SESSION['user'];
 
-$tx_ref = "rentflow_" . time() . rand(1000, 9999);
-$amount = $rental['price'];
+$tx_ref = uniqid("rentflow_");
+$amount = (float)$rental['price'];
 
-/* ================= SAVE PAYMENT (PENDING) ================= */
+$admin_percent = 2;
+$admin_amount = ($amount * $admin_percent) / 100;
+$owner_amount = $amount - $admin_amount;
+
 $stmt = $db->prepare("
-    INSERT INTO payments (rental_id, user_id, tx_ref, amount, status)
-    VALUES (?, ?, ?, ?, 'pending')
+    INSERT INTO payments
+    (rental_id, user_id, tx_ref, amount, admin_amount, owner_amount, status)
+    VALUES (?, ?, ?, ?, ?, ?, 'pending')
 ");
 
 $stmt->execute([
     $rental_id,
     $user['id'],
     $tx_ref,
-    $amount
+    $amount,
+    $admin_amount,
+    $owner_amount
 ]);
 
-/* ================= CHAPA REQUEST ================= */
-$callback_url = "http://localhost/rental-management-system/renter/verify_payment.php";
-$return_url   = "http://localhost/rental-management-system/renter/payment_success.php";
+$secret_key = "CHASECK_TEST-vw8wSfJc7cw1fgY6LiYyNldQ5gewME6V";
+
+$curl = curl_init();
 
 $data = [
     "amount" => $amount,
@@ -55,15 +58,13 @@ $data = [
     "email" => $user['email'],
     "first_name" => $user['fullname'],
     "tx_ref" => $tx_ref,
-    "callback_url" => $callback_url,
-    "return_url" => $return_url,
+    "callback_url" => "http://localhost/rental-management-system/renter/verify_payment.php",
+    "return_url" => "http://localhost/rental-management-system/renter/verify_payment.php?tx_ref=".$tx_ref,
     "customization" => [
         "title" => "RentFlow Booking",
-        "description" => "Rental payment"
+        "description" => "Rental Payment"
     ]
 ];
-
-$curl = curl_init();
 
 curl_setopt_array($curl, [
     CURLOPT_URL => "https://api.chapa.co/v1/transaction/initialize",
@@ -77,27 +78,15 @@ curl_setopt_array($curl, [
 ]);
 
 $response = curl_exec($curl);
-
-/* ================= DEBUG (IMPORTANT) ================= */
-if (curl_errno($curl)) {
-    die("Curl Error: " . curl_error($curl));
-}
-
 curl_close($curl);
 
 $result = json_decode($response, true);
 
-/* ================= CHECK RESPONSE ================= */
-if (isset($result['status']) && $result['status'] === "success") {
-
-    header("Location: " . $result['data']['checkout_url']);
+if(isset($result['data']['checkout_url'])){
+    header("Location: ".$result['data']['checkout_url']);
     exit();
-
-} else {
-
-    echo "<pre>";
-    echo "Payment Failed:\n";
+}else{
+    echo "Payment Initialization Failed";
     print_r($result);
-    echo "</pre>";
 }
 ?>

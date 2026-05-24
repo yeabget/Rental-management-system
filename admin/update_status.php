@@ -3,7 +3,6 @@ session_start();
 
 require "../config/Database.php";
 
-/* ADMIN CHECK */
 
 if(
     !isset($_SESSION['user']) ||

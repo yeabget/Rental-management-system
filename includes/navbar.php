@@ -16,14 +16,12 @@ if (isset($_SESSION['user'])) {
 
 <nav class="navbar">
 
-    <!-- LOGO -->
     <div class="logo">
         <a href="/rental-management-system/index.php">
           <h1> Rent Flow</h1>
         </a>
     </div>
 
-    <!-- MOBILE ICONS -->
     <div class="nav-icons">
 
         <?php if(isset($_SESSION['user'])): ?>
@@ -42,7 +40,6 @@ if (isset($_SESSION['user'])) {
 
     </div>
 
-    <!-- SIDEBAR MENU -->
     <div class="nav-right" id="navMenu">
 
         <div class="close-btn" id="closeBtn">
@@ -113,7 +110,6 @@ menuToggle.addEventListener("click", openMenu);
 closeBtn.addEventListener("click", closeMenu);
 overlay.addEventListener("click", closeMenu);
 
-/* DARK MODE */
 const darkToggle = document.getElementById("darkToggle");
 
 if (localStorage.getItem("theme") === "dark") {

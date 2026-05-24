@@ -19,11 +19,9 @@ session_start();
 
 <?php include "includes/navbar.php"; ?>
 
-<!-- ================= CONTACT SECTION ================= -->
 
 <section class="contact-section">
 
-    <!-- LEFT INFO -->
     <div class="contact-info">
 
         <h1>Contact Us</h1>
@@ -55,7 +53,6 @@ session_start();
 
     </div>
 
-    <!-- RIGHT FORM -->
     <div class="contact-form">
 
         <h2>Send Message</h2>
@@ -79,9 +76,6 @@ session_start();
     </div>
 
 </section>
-
-<!-- ================= MAP SECTION ================= -->
-
 
 <?php include "includes/footer.php"; ?>
 

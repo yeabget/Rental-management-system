@@ -5,13 +5,11 @@ body{
     background: #f4f7fb;
 }
 
-/* LAYOUT */
 .dashboard{
     display: flex;
     min-height: 100vh;
 }
 
-/* SIDEBAR */
 .sidebar{
     width: 260px;
     background: #111827;
@@ -51,21 +49,18 @@ body{
     color: white;
 }
 
-/* MAIN */
 .main{
     margin-left: 260px;
     width: calc(100% - 260px);
     padding: 35px;
 }
 
-/* PAGE TITLE */
 .page-title{
     font-size: 32px;
     margin-bottom: 25px;
     color: #111827;
 }
 
-/* BOOKING TABLE */
 .booking-table{
     width: 100%;
     border-collapse: collapse;
@@ -93,7 +88,6 @@ body{
     background: #f9fafb;
 }
 
-/* STATUS */
 .status{
     padding: 8px 14px;
     border-radius: 30px;
@@ -117,7 +111,6 @@ body{
     color: #991b1b;
 }
 
-/* ACTION BUTTONS */
 .actions{
     display: flex;
     gap: 10px;
@@ -150,7 +143,6 @@ body{
     background: #b91c1c;
 }
 
-/* EMPTY STATE */
 .empty-box{
     background: white;
     padding: 40px;
@@ -160,7 +152,6 @@ body{
     box-shadow: 0 10px 35px rgba(0,0,0,0.06);
 }
 
-/* MOBILE */
 @media(max-width:900px){
 
     .sidebar{

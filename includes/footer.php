@@ -2,7 +2,6 @@
 
     <div class="footer-container">
 
-        <!-- BRAND -->
         <div class="footer-brand">
 
             <h2>Rent Flow</h2>
@@ -34,7 +33,6 @@
 
         </div>
 
-        <!-- LINKS -->
         <div class="footer-links">
 
             <h3>Quick Links</h3>
@@ -57,7 +55,6 @@
 
         </div>
 
-        <!-- CATEGORIES -->
         <div class="footer-links">
 
             <h3>Categories</h3>
@@ -80,7 +77,6 @@
 
         </div>
 
-        <!-- CONTACT -->
         <div class="footer-links">
 
             <h3>Contact</h3>
@@ -103,8 +99,6 @@
         </div>
 
     </div>
-
-    <!-- COPYRIGHT -->
 
     <div class="footer-bottom">
 

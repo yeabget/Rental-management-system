@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+
 
 *{
     margin:0;
@@ -12,8 +12,6 @@ body{
     overflow:hidden;
 }
 
-/* ================= LAYOUT ================= */
-
 .dashboard{
     display:flex;
     min-height:100vh;
@@ -25,8 +23,6 @@ body{
     padding:20px;
 }
 
-/* ================= CHAT WRAPPER ================= */
-
 .chat-wrapper{
     background:#fff;
     height:calc(100vh - 40px);
@@ -36,9 +32,6 @@ body{
     overflow:hidden;
     box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
-
-/* ================= HEADER ================= */
-
 .chat-header{
     height:80px;
     padding:0 20px;
@@ -97,8 +90,6 @@ body{
     font-size:13px;
 }
 
-/* ================= CHAT BOX ================= */
-
 .chat-box{
     flex:1;
     overflow-y:auto;
@@ -109,7 +100,6 @@ body{
     gap:15px;
 }
 
-/* ================= MESSAGE ================= */
 
 .message{
     max-width:75%;
@@ -139,9 +129,6 @@ body{
     font-size:14px;
     line-height:1.5;
 }
-
-/* ================= IMAGE ================= */
-
 .chat-image{
     width:100%;
     max-width:300px;
@@ -150,8 +137,6 @@ body{
     display:block;
     cursor:pointer;
 }
-
-/* ================= FILE ================= */
 
 .file-box{
     margin-top:10px;
@@ -171,8 +156,6 @@ body{
     background:#f3f4f6;
 }
 
-/* ================= TIME ================= */
-
 .msg-time{
     margin-top:8px;
     font-size:11px;
@@ -180,16 +163,11 @@ body{
     text-align:right;
 }
 
-/* ================= EMPTY ================= */
-
 .empty-chat{
     margin:auto;
     color:#6b7280;
     font-size:15px;
 }
-
-/* ================= INPUT ================= */
-
 .chat-input{
     padding:15px;
     border-top:1px solid #e5e7eb;
@@ -243,9 +221,6 @@ body{
 .chat-input button:hover{
     transform:scale(1.05);
 }
-
-/* ================= ANIMATION ================= */
-
 @keyframes fadeIn{
 
     from{
@@ -258,9 +233,6 @@ body{
         transform:translateY(0);
     }
 }
-
-/* ================= SCROLLBAR ================= */
-
 .chat-box::-webkit-scrollbar{
     width:6px;
 }
@@ -269,8 +241,6 @@ body{
     background:#cbd5e1;
     border-radius:20px;
 }
-
-/* ================= TABLET ================= */
 
 @media(max-width:1024px){
 
@@ -283,9 +253,6 @@ body{
         height:calc(100vh - 30px);
     }
 }
-
-/* ================= MOBILE ================= */
-
 @media(max-width:600px){
 
     .main{

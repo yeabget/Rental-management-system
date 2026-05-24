@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+
 *{
     margin:0;
     padding:0;
@@ -12,13 +12,10 @@ body{
     color:#111827;
 }
 
-/* ================= DASHBOARD ================= */
 .dashboard{
     display:flex;
     min-height:100vh;
 }
-
-/* ================= MAIN ================= */
 .main{
     flex:1;
     margin-left:270px;
@@ -26,7 +23,6 @@ body{
     height:100vh;
 }
 
-/* ================= CHAT PAGE ================= */
 .chat-page{
     height:calc(100vh - 50px);
     background:#fff;
@@ -37,7 +33,6 @@ body{
     box-shadow:0 15px 40px rgba(0,0,0,0.08);
 }
 
-/* ================= TOP BAR ================= */
 .top-bar{
     padding:18px 22px;
     border-bottom:1px solid #e5e7eb;
@@ -46,8 +41,6 @@ body{
     gap:18px;
     background:#fff;
 }
-
-/* BACK */
 .back-btn{
     display:flex;
     align-items:center;
@@ -66,14 +59,12 @@ body{
     color:#fff;
 }
 
-/* USER */
 .chat-header-user{
     display:flex;
     align-items:center;
     gap:14px;
 }
 
-/* AVATAR */
 .avatar{
     width:52px;
     height:52px;
@@ -87,7 +78,6 @@ body{
     font-weight:800;
 }
 
-/* INFO */
 .user-info h2{
     font-size:19px;
     margin-bottom:3px;
@@ -97,8 +87,6 @@ body{
     font-size:13px;
     color:#6b7280;
 }
-
-/* ================= CHAT BOX ================= */
 .chat-box{
     flex:1;
     overflow-y:auto;
@@ -109,25 +97,18 @@ body{
     flex-direction:column;
     gap:16px;
 }
-
-/* ================= MESSAGE ================= */
 .msg{
     max-width:75%;
     display:flex;
     flex-direction:column;
 }
 
-/* MY MSG */
 .msg.me{
     align-self:flex-end;
 }
-
-/* THEIR MSG */
 .msg.them{
     align-self:flex-start;
 }
-
-/* TEXT */
 .text{
     padding:14px 16px;
     border-radius:18px;
@@ -135,22 +116,17 @@ body{
     font-size:14px;
     word-break:break-word;
 }
-
-/* ME */
 .msg.me .text{
     background:linear-gradient(135deg,#2563eb,#1d4ed8);
     color:#fff;
     border-bottom-right-radius:5px;
 }
 
-/* THEM */
 .msg.them .text{
     background:#fff;
     border:1px solid #e5e7eb;
     border-bottom-left-radius:5px;
 }
-
-/* ================= IMAGE ================= */
 .chat-img{
     margin-top:8px;
     width:260px;
@@ -164,8 +140,6 @@ body{
 .chat-img:hover{
     transform:scale(1.02);
 }
-
-/* ================= FILE ================= */
 .file-link{
     margin-top:8px;
     text-decoration:none;
@@ -186,8 +160,6 @@ body{
     background:#2563eb;
     color:#fff;
 }
-
-/* ================= TIME ================= */
 .time{
     font-size:11px;
     color:#6b7280;
@@ -198,8 +170,6 @@ body{
 .msg.me .time{
     text-align:right;
 }
-
-/* ================= INPUT ================= */
 .chat-input{
     border-top:1px solid #e5e7eb;
     background:#fff;
@@ -208,8 +178,6 @@ body{
     align-items:center;
     gap:12px;
 }
-
-/* FILE BUTTON */
 .file-btn{
     width:48px;
     height:48px;
@@ -228,8 +196,6 @@ body{
     background:#2563eb;
     color:#fff;
 }
-
-/* INPUT */
 .chat-input input[type="text"]{
     flex:1;
     height:50px;
@@ -240,8 +206,6 @@ body{
     outline:none;
     font-size:14px;
 }
-
-/* SEND */
 .chat-input button{
     width:50px;
     height:50px;
@@ -257,8 +221,6 @@ body{
 .chat-input button:hover{
     transform:scale(1.05);
 }
-
-/* EMPTY */
 .empty-chat{
     margin:auto;
     background:#fff;
@@ -267,8 +229,6 @@ body{
     border:1px solid #e5e7eb;
     color:#6b7280;
 }
-
-/* ================= MOBILE ================= */
 @media(max-width:1024px){
 
     .main{

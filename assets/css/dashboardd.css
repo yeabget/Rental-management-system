@@ -1,4 +1,3 @@
-/* ================= RESET ================= */
 
 *{
     margin:0;
@@ -17,24 +16,16 @@ body{
     overflow-x:hidden;
 }
 
-/* ================= DASHBOARD ================= */
-
 .dashboard{
     display:flex;
     min-height:100vh;
 }
-
-/* ================= MAIN ================= */
-
 .main{
     flex:1;
     margin-left:270px;
     width:calc(100% - 270px);
     padding:30px;
 }
-
-/* ================= TOPBAR ================= */
-
 .topbar{
     background:linear-gradient(135deg,#2563eb,#1d4ed8);
     border-radius:28px;
@@ -70,8 +61,6 @@ body{
     opacity:0.9;
     font-size:15px;
 }
-
-/* ================= SEARCH ================= */
 
 .search-bar{
     background:white;
@@ -110,9 +99,6 @@ body{
     background:#1d4ed8;
     transform:translateY(-2px);
 }
-
-/* ================= FILTERS ================= */
-
 .filters{
     display:flex;
     gap:12px;
@@ -141,9 +127,6 @@ body{
     background:#2563eb !important;
     color:white !important;
 }
-
-/* ================= GRID ================= */
-
 .property-grid{
     display:grid;
 
@@ -152,9 +135,6 @@ body{
 
     gap:28px;
 }
-
-/* ================= CARD ================= */
-
 .property-card{
     background:white;
     border-radius:26px;
@@ -171,8 +151,6 @@ body{
     box-shadow:0 20px 40px rgba(37,99,235,0.14);
 }
 
-/* ================= IMAGE ================= */
-
 .card-image{
     position:relative;
     overflow:hidden;
@@ -188,9 +166,6 @@ body{
 .property-card:hover .main-card-image{
     transform:scale(1.06);
 }
-
-/* ================= ACTIONS ================= */
-
 .card-actions{
     position:absolute;
     top:15px;
@@ -217,18 +192,12 @@ body{
     color:white;
     transform:scale(1.08);
 }
-
-/* ================= CONTENT ================= */
-
 .property-content{
     padding:22px;
     display:flex;
     flex-direction:column;
     flex:1;
 }
-
-/* ================= TITLE PRICE ================= */
-
 .title-price{
     display:flex;
     justify-content:space-between;
@@ -251,9 +220,6 @@ body{
     font-weight:700;
     white-space:nowrap;
 }
-
-/* ================= TEXT ================= */
-
 .location,
 .owner-name,
 .status{
@@ -274,17 +240,12 @@ body{
     font-weight:600;
 }
 
-/* ================= DESCRIPTION ================= */
-
 .description{
     margin-top:8px;
     color:#4b5563;
     line-height:1.6;
     font-size:14px;
 }
-
-/* ================= FEATURES ================= */
-
 .property-features{
     display:grid;
     grid-template-columns:repeat(2,1fr);
@@ -317,9 +278,6 @@ body{
     margin-top:4px;
     color:#111827;
 }
-
-/* ================= BUTTON ================= */
-
 .view-btn{
     margin-top:auto;
     display:flex;
@@ -340,16 +298,11 @@ body{
     transform:translateY(-2px);
     box-shadow:0 10px 20px rgba(37,99,235,0.25);
 }
-
-/* ================= EMPTY ================= */
-
 .property-grid p{
     background:white;
     padding:30px;
     border-radius:20px;
 }
-
-/* ================= LARGE TABLET ================= */
 
 @media(max-width:1200px){
 
@@ -357,9 +310,6 @@ body{
         grid-template-columns:repeat(2,1fr);
     }
 }
-
-/* ================= TABLET ================= */
-
 @media(max-width:768px){
 
     .main{
@@ -393,9 +343,6 @@ body{
         grid-template-columns:1fr;
     }
 }
-
-/* ================= MOBILE ================= */
-
 @media(max-width:500px){
 
     .topbar{

@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+
 
 *{
     margin:0;
@@ -12,14 +12,10 @@ body{
     color:#111827;
 }
 
-/* ================= DASHBOARD ================= */
-
 .owner-dashboard{
     display:flex;
     min-height:100vh;
 }
-
-/* ================= SIDEBAR ================= */
 
 .owner-sidebar{
     width:270px;
@@ -37,16 +33,11 @@ body{
     flex-direction:column;
     flex:1;
 }
-
-/* LOGO */
-
 .owner-sidebar h2{
     color:white;
     font-size:30px;
     margin-bottom:25px;
 }
-
-/* MENU */
 
 .owner-sidebar ul{
     list-style:none;
@@ -55,7 +46,6 @@ body{
     gap:10px;
 }
 
-/* LINKS */
 
 .owner-sidebar ul li a{
     text-decoration:none;
@@ -70,7 +60,6 @@ body{
     font-weight:500;
 }
 
-/* HOVER */
 
 .owner-sidebar ul li a:hover{
    background: #1f2937;
@@ -78,14 +67,10 @@ body{
     transform:translateX(-5px);
 }
 
-/* ACTIVE */
-
 .owner-sidebar ul li.active a{
     background:#2563eb;
     color:white;
 }
-
-/* ================= BADGE ================= */
 
 .badge{
     margin-left:auto;
@@ -101,9 +86,6 @@ body{
     font-size:11px;
     font-weight:700;
 }
-
-/* ================= PROFILE ================= */
-
 .sidebar-profile{
     margin-top:auto;
     display:flex;
@@ -137,14 +119,10 @@ body{
     font-size:12px;
 }
 
-/* ================= MAIN ================= */
-
 .owner-main{
     flex:1;
     padding:35px;
 }
-
-/* ================= TOPBAR ================= */
 
 .owner-topbar{
     margin-bottom:30px;
@@ -159,8 +137,6 @@ body{
     color:#6b7280;
 }
 
-/* ================= TABLE BOX ================= */
-
 .booking-table{
     background:white;
     border-radius:24px;
@@ -168,8 +144,6 @@ body{
     box-shadow:0 8px 25px rgba(0,0,0,0.06);
     overflow-x:auto;
 }
-
-/* ================= TABLE ================= */
 
 table{
     width:100%;
@@ -197,8 +171,6 @@ table tr:hover{
     background:#f9fafb;
 }
 
-/* ================= STATUS ================= */
-
 .status{
     padding:8px 14px;
     border-radius:50px;
@@ -222,16 +194,12 @@ table tr:hover{
     color:#991b1b;
 }
 
-/* ================= EMPTY ================= */
-
 .booking-table p{
     text-align:center;
     padding:40px;
     color:#6b7280;
     font-size:16px;
 }
-
-/* ================= RESPONSIVE ================= */
 
 @media(max-width:900px){
 

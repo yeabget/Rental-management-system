@@ -30,7 +30,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <title>Manage Users</title>
 
-<link rel="stylesheet" href="../assets/css/manage.css">
+<link rel="stylesheet" href="../assets/css/manage_users.css">
 
 </head>
 

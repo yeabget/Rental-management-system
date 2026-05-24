@@ -2,7 +2,6 @@
 session_start();
 require "../config/Database.php";
 
-/* ================= ADMIN AUTH ================= */
 
 if (
     !isset($_SESSION['user']) ||
@@ -14,7 +13,6 @@ if (
 
 $db = (new Database())->connect();
 
-/* ================= GET PENDING RENTALS ================= */
 
 $stmt = $db->prepare("
     SELECT *

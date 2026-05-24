@@ -14,7 +14,6 @@ $db = (new Database())->connect();
 
 $owner_id = $_SESSION['user']['id'];
 
-/* ================= UNREAD TOTAL ================= */
 
 $stmt = $db->prepare("
     SELECT COUNT(*)
@@ -27,7 +26,6 @@ $stmt->execute([$owner_id]);
 
 $unread = $stmt->fetchColumn();
 
-/* ================= CHAT LIST ================= */
 
 $stmt = $db->prepare("
     SELECT 
@@ -137,7 +135,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Messages</title>
 
 <link rel="stylesheet"
-href="../assets/css/owner_chat_list.css">
+href="../assets/css/owners_chat_list.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -170,7 +168,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
             </div>
 
-            <!-- CHAT LIST -->
 
             <div class="chat-list">
 
@@ -200,17 +197,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                         href="owner_chat.php?user_id=<?= $c['id'] ?>"
                         class="chat-card">
 
-                            <!-- AVATAR -->
 
                             <div class="avatar">
                                 <?= htmlspecialchars($cLetter) ?>
                             </div>
 
-                            <!-- DETAILS -->
 
                             <div class="chat-details">
-
-                                <!-- TOP -->
 
                                 <div class="chat-top-info">
 
@@ -264,8 +257,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                                 </div>
 
-                                <!-- MESSAGE -->
-
                                 <div class="chat-bottom-info">
 
                                     <p>
@@ -291,8 +282,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                                     </p>
 
-                                    <!-- UNREAD -->
-
                                     <?php if($c['unread_count'] > 0): ?>
 
                                         <div class="msg-count">
@@ -310,8 +299,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                     <?php endforeach; ?>
 
                 <?php else: ?>
-
-                    <!-- EMPTY -->
 
                     <div class="empty-state">
 

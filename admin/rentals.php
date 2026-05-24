@@ -31,7 +31,7 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <title>Manage Rentals</title>
 
-<link rel="stylesheet" href="../assets/css/rental.css?v=3">
+<link rel="stylesheet" href="../assets/css/rentals.css?v=3">
 </head>
 
 <body>

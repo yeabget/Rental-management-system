@@ -2,7 +2,6 @@
 session_start();
 require "../config/Database.php";
 
-/* AUTH CHECK */
 if(!isset($_SESSION['user']) || strtolower($_SESSION['user']['role']) !== 'owner'){
     header("Location: ../auth/login.php");
     exit();
@@ -38,7 +37,6 @@ $listings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="owner-dashboard">
 
-<!-- SIDEBAR -->
 <aside class="owner-sidebar">
 
     <h2>RentFlow</h2>
@@ -54,7 +52,6 @@ $listings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </aside>
 
-<!-- MAIN -->
 <main class="owner-main">
 
 <div class="owner-topbar">
@@ -70,7 +67,6 @@ $listings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 </div>
 
-<!-- LISTINGS -->
 <div class="listing-grid">
 
 <?php if(empty($listings)): ?>

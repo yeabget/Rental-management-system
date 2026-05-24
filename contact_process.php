@@ -4,21 +4,18 @@ require "config/Database.php";
 
 $db = (new Database())->connect();
 
-/* ================= GET FORM DATA ================= */
 
 $name = trim($_POST['name']);
 $email = trim($_POST['email']);
 $subject = trim($_POST['subject']);
 $message = trim($_POST['message']);
 
-/* ================= VALIDATION ================= */
 
 if (empty($name) || empty($email) || empty($subject) || empty($message)) {
     header("Location: contact.php?error=All fields are required");
     exit();
 }
 
-/* ================= INSERT INTO DB ================= */
 
 $stmt = $db->prepare("
     INSERT INTO contact_messages (name, email, subject, message)

@@ -24,7 +24,6 @@ $image_id = $_GET['id'];
 $rental_id = $_GET['rental'];
 $owner_id = $_SESSION['user']['id'];
 
-/* GET IMAGE */
 
 $stmt = $db->prepare("
     SELECT rental_gallery.*
@@ -48,15 +47,12 @@ if(!$image){
     die("Image not found");
 }
 
-/* DELETE FILE */
 
 $file = "../assets/images/" . $image['image'];
 
 if(file_exists($file)){
     unlink($file);
 }
-
-/* DELETE DATABASE */
 
 $delete = $db->prepare("
     DELETE FROM rental_gallery

@@ -1,4 +1,4 @@
-/* ================= FOOTER ================= */
+
 
 .footer{
     background: #0f172a;
@@ -8,8 +8,6 @@
 
     margin-top: 100px;
 }
-
-/* CONTAINER */
 
 .footer-container{
     width: 90%;
@@ -25,8 +23,6 @@
     padding-bottom: 60px;
 }
 
-/* BRAND */
-
 .footer-brand h2{
     font-size: 34px;
 
@@ -40,8 +36,6 @@
 
     margin-bottom: 25px;
 }
-
-/* SOCIAL */
 
 .social-icons{
     display: flex;
@@ -72,7 +66,6 @@
     transform: translateY(-5px);
 }
 
-/* LINKS */
 
 .footer-links{
     display: flex;
@@ -108,8 +101,6 @@
     color: #60a5fa;
 }
 
-/* BOTTOM */
-
 .footer-bottom{
     border-top: 1px solid #1e293b;
 
@@ -124,7 +115,6 @@
     font-size: 15px;
 }
 
-/* ================= RESPONSIVE ================= */
 
 @media(max-width:768px){
 
@@ -160,7 +150,6 @@
     }
 }
 
-/* ================= DARK MODE SUPPORT ================= */
 
 body.dark .footer{
     background: #020617;

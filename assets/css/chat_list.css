@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+
 *{
     margin:0;
     padding:0;
@@ -11,20 +11,17 @@ body{
     color:#111827;
 }
 
-/* ================= DASHBOARD LAYOUT ================= */
 .dashboard{
     display:flex;
     min-height:100vh;
 }
 
-/* ================= SIDEBAR FIX ================= */
 .sidebar{
     width:260px;
     flex-shrink:0;
     background:#111827;
 }
 
-/* ================= MAIN FIX (IMPORTANT) ================= */
 .main{
     flex:1;
     margin-left:260px;
@@ -32,7 +29,6 @@ body{
     overflow-y:auto;
 }
 
-/* ================= TOP BAR (WELCOME STYLE) ================= */
 .top-bar{
     background: linear-gradient(135deg, #2563eb, #7c3aed);
     color:white;
@@ -82,14 +78,12 @@ body{
     opacity:0.9;
 }
 
-/* ================= CHAT LIST ================= */
 .chat-list{
     display:flex;
     flex-direction:column;
     gap:18px;
 }
 
-/* ================= CHAT CARD ================= */
 .chat-card{
     background:white;
     padding:20px;
@@ -109,8 +103,6 @@ body{
     border-color:#dbeafe;
     box-shadow:0 12px 28px rgba(37,99,235,0.12);
 }
-
-/* ================= AVATAR ================= */
 .avatar{
     width:65px;
     height:65px;
@@ -124,8 +116,6 @@ body{
     font-size:22px;
     flex-shrink:0;
 }
-
-/* ================= CHAT DETAILS ================= */
 .chat-details{
     flex:1;
     overflow:hidden;
@@ -157,7 +147,6 @@ body{
     max-width:90%;
 }
 
-/* ================= EMPTY STATE ================= */
 .empty-state{
     text-align:center;
     padding:80px 20px;
@@ -177,7 +166,6 @@ body{
     margin-bottom:10px;
 }
 
-/* ================= SCROLL ================= */
 .main::-webkit-scrollbar{
     width:8px;
 }
@@ -187,13 +175,11 @@ body{
     border-radius:20px;
 }
 
-/* UNREAD TEXT */
 .unread-text{
     font-weight:700;
     color:#111827;
 }
 
-/* UNREAD BADGE */
 .chat-badge{
     position:absolute;
     right:12px;
@@ -211,9 +197,10 @@ body{
     font-weight:700;
 }
 
-/* ================= RESPONSIVE ================= */
 @media(max-width:900px){
-
+.top-bar{
+    text-align: center;
+}
     .dashboard{
         flex-direction:column;
     }

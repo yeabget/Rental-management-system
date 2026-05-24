@@ -1,7 +1,5 @@
-/* ================= GOOGLE FONT ================= */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
-/* ================= GLOBAL ================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 *{
     margin:0;
@@ -15,8 +13,6 @@ body{
     color:#111827;
 }
 
-/* ================= CONTAINER ================= */
-
 .form-container{
     min-height:100vh;
 
@@ -28,8 +24,6 @@ body{
 
     background: radial-gradient(circle at top, #dbeafe, transparent 60%);
 }
-
-/* ================= FORM BOX ================= */
 
 .form-box{
     width:100%;
@@ -50,7 +44,6 @@ body{
     transform:translateY(-5px);
 }
 
-/* ================= TITLES ================= */
 
 .form-box h2{
     font-size:28px;
@@ -65,7 +58,6 @@ body{
     text-align: center;
 }
 
-/* ================= FORM GROUP ================= */
 
 .form-group{
     margin-bottom:18px;
@@ -100,7 +92,6 @@ body{
     box-shadow:0 0 0 4px rgba(37,99,235,0.15);
 }
 
-/* ================= PASSWORD ================= */
 
 .password-wrapper{
     position:relative;
@@ -138,7 +129,6 @@ body{
     color:#2563eb;
 }
 
-/* ================= BUTTON ================= */
 
 button{
     width:100%;
@@ -166,7 +156,6 @@ button:hover{
     transform:translateY(-2px);
 }
 
-/* ================= FOOTER ================= */
 
 .form-footer{
     margin-top:20px;
@@ -188,7 +177,6 @@ button:hover{
     text-decoration:underline;
 }
 
-/* ================= ERROR + SUCCESS ================= */
 
 .error-box{
     background:#fee2e2;
@@ -212,12 +200,26 @@ button:hover{
     font-size:14px;
 }
 
-/* ================= ANIMATION ================= */
 
 .fade-in{
     animation:fadeIn 0.6s ease;
 }
+.field-error{
+    color:#dc2626;
+    font-size:13px;
+    margin-bottom:8px;
+    font-weight:500;
+}
 
+.input-error{
+    border:1px solid #dc2626 !important;
+    background:#fef2f2;
+}
+
+.input-error:focus{
+    border-color:#dc2626 !important;
+    box-shadow:0 0 0 4px rgba(220,38,38,0.15) !important;
+}
 @keyframes fadeIn{
     from{
         opacity:0;
@@ -229,8 +231,6 @@ button:hover{
     }
 }
 
-/* ================= RESPONSIVE ================= */
-
 @media(max-width:500px){
 
     .form-box{
@@ -241,8 +241,6 @@ button:hover{
         font-size:24px;
     }
 }
-
-/* ================= DARK MODE ================= */
 
 body.dark{
     background:#0f172a;

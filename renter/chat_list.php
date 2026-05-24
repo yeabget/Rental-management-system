@@ -14,9 +14,6 @@ $user_id = $_SESSION['user']['id'];
 $name = $_SESSION['user']['fullname'];
 $firstLetter = strtoupper(substr($name, 0, 1));
 
-/* =========================
-   CHAT LIST WITH UNREAD PER USER
-========================= */
 $stmt = $db->prepare("
     SELECT 
         u.id,
@@ -78,7 +75,7 @@ $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <title>Messages</title>
 
-<link rel="stylesheet" href="../assets/css/chats_list.css">
+<link rel="stylesheet" href="../assets/css/chat_list.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -87,12 +84,10 @@ $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <div class="dashboard">
 <?php include "includes/sidebar.php"; ?>
 
-<!-- ================= MAIN ================= -->
 <main class="main">
 
 <div class="chat-page">
 
-    <!-- TOP BAR -->
     <div class="top-bar">
         <div>
             <h1>Messages</h1>
@@ -100,7 +95,6 @@ $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </div>
     </div>
 
-    <!-- CHAT LIST -->
     <div class="chat-list">
 
         <?php if (empty($chats)): ?>
@@ -112,10 +106,8 @@ $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <a href="chat.php?owner=<?= $c['id'] ?>" class="chat-card">
 
-                <!-- AVATAR -->
                 <div class="avatar"><?= $letter ?></div>
 
-                <!-- CONTENT -->
                 <div class="chat-details">
 
                     <div class="chat-top-info">
@@ -140,7 +132,6 @@ $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
                         </div>
                     </div>
 
-                    <!-- MESSAGE PREVIEW -->
                     <p class="<?= ($c['unread_count'] > 0) ? 'unread-text' : '' ?>">
 
                         <?php if ($c['unread_count'] > 0): ?>
@@ -154,7 +145,6 @@ $chats = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 </div>
 
-                <!-- UNREAD BADGE -->
                 <?php if ($c['unread_count'] > 0): ?>
                     <span class="chat-badge">
                         <?= $c['unread_count'] ?>

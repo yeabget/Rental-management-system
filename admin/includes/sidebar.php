@@ -19,29 +19,21 @@ $current = basename($_SERVER['PHP_SELF']);
 
     <title>Admin Panel</title>
 
-    <!-- CSS -->
     <link rel="stylesheet" href="../assets/css/admin_sidebar.css">
 
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
 <body>
-
-<!-- MENU BUTTON -->
 <button class="menu-toggle" id="menuToggle">
     <i class="fas fa-bars"></i>
 </button>
 
-<!-- OVERLAY -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
-
-<!-- SIDEBAR -->
 <aside class="sidebar" id="sidebar">
 
     <div class="sidebar-top">
 
-        <!-- HEADER (ADMIN PANEL + CLOSE BUTTON) -->
         <div class="sidebar-header">
             <h2 class="sidebar-title">Admin Panel</h2>
 
@@ -50,7 +42,6 @@ $current = basename($_SERVER['PHP_SELF']);
             </button>
         </div>
 
-        <!-- LINKS -->
         <a href="../index.php" class="<?= ($current == 'index.php') ? 'active' : '' ?>">
             <i class="fas fa-home"></i> Home
         </a>
@@ -58,7 +49,10 @@ $current = basename($_SERVER['PHP_SELF']);
         <a href="dashboard.php" class="<?= ($current == 'dashboard.php') ? 'active' : '' ?>">
             <i class="fas fa-chart-line"></i> Dashboard
         </a>
-<a href="messages.php" class="<?= ($current == 'messages.php') ? 'active' : '' ?>">
+        <a href="earnings.php" class="<?= ($current == 'earnings.php') ? 'active' : '' ?>">
+            <i class="fa-solid fa-coins"></i> Earnings
+        </a>
+        <a href="messages.php" class="<?= ($current == 'messages.php') ? 'active' : '' ?>">
             <i class="fas fa-comments"></i> Messages
         </a>
         <a href="users.php" class="<?= ($current == 'users.php') ? 'active' : '' ?>">
@@ -83,7 +77,6 @@ $current = basename($_SERVER['PHP_SELF']);
 
     </div>
 
-    <!-- PROFILE -->
     <div class="sidebar-profile">
 
         <div class="profile-avatar">
@@ -99,7 +92,6 @@ $current = basename($_SERVER['PHP_SELF']);
 
 </aside>
 
-<!-- SCRIPT -->
 <script>
 const menuToggle = document.getElementById("menuToggle");
 const sidebar = document.getElementById("sidebar");

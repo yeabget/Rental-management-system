@@ -1,4 +1,4 @@
-/* ================= GLOBAL ================= */
+
 
 *{
     margin:0;
@@ -12,7 +12,6 @@ body{
     color:#111827;
 }
 
-/* ================= CONTAINER ================= */
 
 .faq-container{
     max-width:900px;
@@ -20,7 +19,6 @@ body{
     padding:0 20px;
 }
 
-/* ================= HEADER ================= */
 
 .faq-header{
     text-align:center;
@@ -36,7 +34,6 @@ body{
     color:#64748b;
 }
 
-/* ================= SEARCH ================= */
 
 .faq-search{
     margin-top:25px;
@@ -62,7 +59,6 @@ body{
     color:#94a3b8;
 }
 
-/* ================= FAQ ITEM ================= */
 
 .faq-list{
     display:flex;
@@ -106,7 +102,6 @@ color: rgb(56, 56, 56);
     transition:0.3s ease;
 }
 
-/* ACTIVE STATE */
 
 .faq-item.active .faq-answer{
     max-height:200px;
@@ -117,14 +112,12 @@ color: rgb(56, 56, 56);
     transform:rotate(180deg);
 }
 
-/* ================= ICON ================= */
 
 .faq-question i{
     transition:0.3s;
     color:#64748b;
 }
 
-/* ================= DARK MODE ================= */
 
 body.dark{
     background:#0f172a;
@@ -152,7 +145,6 @@ body.dark .faq-answer{
     color:#94a3b8;
 }
 
-/* ================= RESPONSIVE ================= */
 
 @media(max-width:600px){
 

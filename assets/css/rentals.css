@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+
 *{
     margin:0;
     padding:0;
@@ -12,7 +12,6 @@ body{
     overflow-x:hidden;
 }
 
-/* ================= SIDEBAR ================= */
 .sidebar{
     position:fixed;
     top:0;
@@ -24,17 +23,14 @@ body{
     overflow-y:auto;
     z-index:1000;
 }
-
-/* ================= MAIN CONTENT ================= */
 .main{
-    margin-left:270px; /* IMPORTANT FIX */
+    margin-left:270px;
     padding:25px;
     min-height:100vh;
     width:calc(100% - 270px);
     overflow-x:hidden;
 }
 
-/* ================= PAGE TOP ================= */
 .page-top{
     width:100%;
     background:linear-gradient(135deg,#2563eb,#7c3aed);
@@ -53,13 +49,11 @@ body{
     opacity:0.9;
 }
 
-/* ================= TABLE WRAPPER ================= */
 .table-wrapper{
     width:100%;
     overflow-x:auto;
 }
 
-/* ================= TABLE ================= */
 table{
     width:100%;
     border-collapse:collapse;
@@ -87,15 +81,12 @@ table tr:hover{
     background:#f9fafb;
 }
 
-/* ================= IMAGE ================= */
 .image{
     width:80px;
     height:60px;
     object-fit:cover;
     border-radius:10px;
 }
-
-/* ================= DELETE BUTTON ================= */
 .delete-btn{
     background:#ef4444;
     color:white;
@@ -113,9 +104,6 @@ table tr:hover{
     transform:translateY(-2px);
 }
 
-/* ================= RESPONSIVE ================= */
-
-/* TABLET */
 @media (max-width: 900px){
 
     .sidebar{
@@ -131,9 +119,14 @@ table tr:hover{
     }
 }
 
-/* MOBILE */
 @media (max-width: 600px){
-
+.page-top{
+    text-align: center;
+  
+}
+.welcome-box h1{
+    font-size: 22px;
+}
     table th,
     table td{
         font-size:12px;

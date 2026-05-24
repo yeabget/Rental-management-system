@@ -3,7 +3,6 @@ require "config/Database.php";
 
 $db = (new Database())->connect();
 
-/* ================= GET LATEST APPROVED RENTALS ================= */
 
 $stmt = $db->prepare("
     SELECT rentals.*,
@@ -47,8 +46,6 @@ href="assets/css/home.css">
 
 <?php include "includes/navbar.php"; ?>
 
-<!-- ================= HERO ================= -->
-
 <section class="hero-section">
 
     <div class="hero-content">
@@ -90,8 +87,6 @@ href="assets/css/home.css">
 
     <div class="blob"></div>
 
-    <!-- BADGES -->
-
     <div class="floating-badge badge1">
         <i class="fa-solid fa-house"></i>
         Houses
@@ -112,7 +107,6 @@ href="assets/css/home.css">
         Shops
     </div>
 
-    <!-- IMAGE -->
 
     <img
     src="assets/images/bg.png"
@@ -121,8 +115,6 @@ href="assets/css/home.css">
 </div>
 
 </section>
-
-<!-- ================= STATS ================= -->
 
 <section class="stats-section">
 
@@ -147,8 +139,6 @@ href="assets/css/home.css">
     </div>
 
 </section>
-
-<!-- ================= RENTALS ================= -->
 
 <section class="rentals-section">
 
@@ -251,8 +241,6 @@ href="assets/css/home.css">
 
 </section>
 
-<!-- ================= FEATURES ================= -->
-
 <section class="features-section">
 
     <div class="section-title-center">
@@ -309,8 +297,6 @@ href="assets/css/home.css">
 
 </section>
 
-<!-- ================= TESTIMONIALS ================= -->
-
 <section class="testimonial-section">
 
     <div class="section-title-center">
@@ -366,8 +352,6 @@ href="assets/css/home.css">
     </div>
 
 </section>
-
-<!-- ================= CTA ================= -->
 
 <section class="cta-section">
 

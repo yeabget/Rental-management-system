@@ -1,4 +1,4 @@
-/* ================= RESET ================= */
+
 
 *{
     margin:0;
@@ -16,16 +16,11 @@ body{
     color:#111827;
     overflow-x:hidden;
 }
-
-/* ================= DASHBOARD ================= */
-
 .dashboard{
     display:flex;
     width:100%;
     min-height:100vh;
 }
-
-/* ================= MAIN ================= */
 
 .main{
 
@@ -41,9 +36,6 @@ body{
 
     transition:0.3s;
 }
-
-/* ================= PAGE TOP ================= */
-
 .page-top{
 
     background:
@@ -64,9 +56,6 @@ body{
     box-shadow:
     0 15px 35px rgba(37,99,235,0.18);
 }
-
-/* DECORATION */
-
 .page-top::before{
 
     content:"";
@@ -100,9 +89,6 @@ body{
     bottom:-60px;
     left:-40px;
 }
-
-/* TEXT */
-
 .page-top h1{
 
     position:relative;
@@ -123,8 +109,6 @@ body{
     font-size:15px;
 }
 
-/* ================= DETAILS CARD ================= */
-
 .details-card{
 
     background:white;
@@ -144,8 +128,6 @@ body{
     box-shadow:
     0 10px 30px rgba(0,0,0,0.05);
 }
-
-/* ================= IMAGE ================= */
 
 .image-box{
 
@@ -172,16 +154,12 @@ body{
     transform:scale(1.02);
 }
 
-/* ================= CONTENT ================= */
-
 .details-content{
 
     flex:1;
 
     min-width:0;
 }
-
-/* TITLE */
 
 .details-content h2{
 
@@ -193,9 +171,6 @@ body{
 
     color:#111827;
 }
-
-/* ================= INFO GRID ================= */
-
 .info-grid{
 
     display:grid;
@@ -260,18 +235,12 @@ body{
 
     word-wrap:break-word;
 }
-
-/* PRICE */
-
 .price{
 
     color:#2563eb !important;
 
     font-size:24px !important;
 }
-
-/* ================= DESCRIPTION ================= */
-
 .description{
 
     margin-bottom:30px;
@@ -302,8 +271,6 @@ body{
 
     font-size:15px;
 }
-
-/* ================= LICENSE ================= */
 
 .license-section{
 
@@ -338,8 +305,6 @@ body{
 
     border-color:#2563eb;
 }
-
-/* ================= BUTTONS ================= */
 
 .actions{
 
@@ -376,8 +341,6 @@ body{
     transition:0.3s;
 }
 
-/* APPROVE */
-
 .approve-btn{
 
     background:
@@ -392,8 +355,6 @@ body{
     0 12px 24px rgba(34,197,94,0.25);
 }
 
-/* REJECT */
-
 .reject-btn{
 
     background:
@@ -407,8 +368,6 @@ body{
     box-shadow:
     0 12px 24px rgba(239,68,68,0.25);
 }
-
-/* ================= PREVIEW ================= */
 
 .preview-box{
 
@@ -438,8 +397,6 @@ body{
     border-radius:22px;
 }
 
-/* CLOSE */
-
 .close-preview{
 
     position:absolute;
@@ -463,8 +420,6 @@ body{
     transform:rotate(90deg);
 }
 
-/* ================= TABLET ================= */
-
 @media(max-width:1200px){
 
     .details-card{
@@ -482,8 +437,6 @@ body{
         height:350px;
     }
 }
-
-/* ================= MOBILE ================= */
 
 @media(max-width:768px){
 
@@ -544,8 +497,6 @@ body{
         width:100%;
     }
 }
-
-/* ================= SMALL MOBILE ================= */
 
 @media(max-width:500px){
 
