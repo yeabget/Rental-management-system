@@ -41,15 +41,15 @@
                 Home
             </a>
 
-            <a href="#">
+            <a href="/rental-management-system/auth/login.php">
                 Rentals
             </a>
 
-            <a href="#">
-                About
+            <a href="/rental-management-system/faq.php">
+               FAQ
             </a>
 
-            <a href="#">
+            <a href="/rental-management-system/contact.php">
                 Contact
             </a>
 
