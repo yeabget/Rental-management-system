@@ -1,13 +1,10 @@
 <?php
-
-if(session_status() === PHP_SESSION_NONE){
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if(
-    !isset($_SESSION['user']) ||
-    $_SESSION['user']['role'] !== 'renter'
-){
+// Security Gatekeeper: Ensure only authenticated renters access this layout
+if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'renter') {
     header("Location: ../auth/login.php");
     exit();
 }
@@ -15,246 +12,125 @@ if(
 require_once "../config/Database.php";
 
 $db = (new Database())->connect();
-
 $user = $_SESSION['user'];
 
-$firstLetter =
-strtoupper(substr($user['fullname'],0,1));
-
-$currentPage =
-basename($_SERVER['PHP_SELF']);
-
+// Extract the profile initial dynamically
+$firstLetter = strtoupper(substr($user['fullname'], 0, 1));
+$currentPage = basename($_SERVER['PHP_SELF']);
 $unreadChats = 0;
 
-try{
-
+try {
+    // Live unread message indicator query
     $stmt = $db->prepare("
         SELECT COUNT(*)
         FROM messages
         WHERE receiver_id = ?
         AND is_read = 0
     ");
-
     $stmt->execute([$user['id']]);
-
     $unreadChats = $stmt->fetchColumn();
-
-}catch(PDOException $e){
-
+} catch (PDOException $e) {
     $unreadChats = 0;
 }
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
-
-<title>Renter Sidebar</title>
-
-<link rel="stylesheet"
-href="../assets/css/renter_sidebar.css">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RentFlow Platform</title>
+    <link rel="stylesheet" href="../assets/css/renters_sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-
 <body>
 
-<button class="menu-toggle" id="menuToggle">
+<header class="ecommerce-header">
+    <div class="header-container">
+        
+        <a href="dashboard.php" class="brand-logo" title="RentFlow Home">
+            <i class="fa-solid fa-bag-shopping"></i> Rent<span>Flow</span>
+        </a>
 
-    <i class="fas fa-bars"></i>
-
-</button>
-
-<div class="sidebar-overlay"
-id="sidebarOverlay"></div>
-
-<aside class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-
-        <h2 class="sidebar-title">
-            Renter Panel
-        </h2>
-
-        <button class="close-btn"
-        id="closeSidebar">
-
-            <i class="fas fa-times"></i>
-
+        <button class="mobile-nav-toggle" id="mobileNavToggle" aria-label="Toggle Navigation">
+            <i class="fas fa-bars"></i>
         </button>
 
-    </div>
+        <nav class="main-nav" id="mainNav">
+            <a href="../index.php" class="<?= ($currentPage == 'index.php') ? 'active' : '' ?>">
+                <i class="fas fa-home"></i> Home
+            </a>
+            <a href="dashboard.php" class="<?= ($currentPage == 'dashboard.php') ? 'active' : '' ?>">
+                <i class="fas fa-compass"></i> Explore Items
+            </a>
+            <a href="saved.php" class="<?= ($currentPage == 'saved.php') ? 'active' : '' ?>">
+                <i class="fas fa-heart"></i> Saved Items
+            </a>
+        </nav>
 
-    <div class="sidebar-top">
+        <div class="header-actions">
+            
+            <a href="chat_list.php" class="action-icon-btn <?= ($currentPage == 'chat_list.php') ? 'active' : '' ?>" title="Chat Inbox">
+                <i class="fas fa-paper-plane"></i>
+                <?php if ($unreadChats > 0): ?>
+                    <span class="badge-count"><?= $unreadChats ?></span>
+                <?php endif; ?>
+            </a>
 
-        <a
-        href="../index.php"
-        class="<?= ($currentPage == 'index.php') ? 'active' : '' ?>">
-
-            <i class="fas fa-home"></i>
-
-            Home
-
-        </a>
- <a
-        href="dashboard.php"
-        class="<?= ($currentPage == 'dashboard.php') ? 'active' : '' ?>">
-
-            <i class="fas fa-dashboard"></i>
-
-            Dashboard
-
-        </a>
-        <a
-        href="saved.php"
-        class="<?= ($currentPage == 'saved.php') ? 'active' : '' ?>">
-
-            <i class="fas fa-bookmark"></i>
-
-            Saved
-
-        </a>
-
-        <a
-        href="chat_list.php"
-        class="<?= ($currentPage == 'chat_list.php') ? 'active' : '' ?>">
-
-            <i class="fas fa-comments"></i>
-
-            Chats
-
-            <?php if($unreadChats > 0): ?>
-
-                <span class="chat-badge">
-
-                    <?= $unreadChats ?>
-
-                </span>
-
-            <?php endif; ?>
-
-        </a>
-
-        <a href="../auth/logout.php">
-
-            <i class="fas fa-right-from-bracket"></i>
-
-            Logout
-
-        </a>
-
-    </div>
-
-    <div class="sidebar-profile">
-
-        <div class="profile-avatar">
-
-            <?= $firstLetter ?>
+            <div class="user-profile-menu">
+                <div class="header-avatar" id="profileDropdownBtn" title="Profile Options">
+                    <?= $firstLetter ?>
+                </div>
+                
+                <div class="profile-dropdown" id="profileDropdownMenu">
+                    <div class="dropdown-header">
+                        <h4><?= htmlspecialchars($user['fullname']) ?></h4>
+                        <p>Verified Customer</p>
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    
+                    <a href="../auth/logout.php" class="logout-item">
+                        <i class="fas fa-arrow-right-from-bracket"></i> Logout
+                    </a>
+                </div>
+            </div>
 
         </div>
-
-        <div class="profile-info">
-
-            <h4>
-                <?= htmlspecialchars($user['fullname']) ?>
-            </h4>
-
-            <p>
-                Renter
-            </p>
-
-        </div>
-
     </div>
-
-</aside>
+</header>
 
 <script>
+    const dropdownBtn = document.getElementById('profileDropdownBtn');
+    const dropdownMenu = document.getElementById('profileDropdownMenu');
+    const mobileToggle = document.getElementById('mobileNavToggle');
+    const mainNav = document.getElementById('mainNav');
 
-const sidebar =
-document.getElementById("sidebar");
+    // Profile Menu Toggle Animation Thread
+    if (dropdownBtn && dropdownMenu) {
+        dropdownBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
 
-const menuToggle =
-document.getElementById("menuToggle");
-
-const closeSidebar =
-document.getElementById("closeSidebar");
-
-const overlay =
-document.getElementById("sidebarOverlay");
-
-menuToggle.onclick = () => {
-
-    sidebar.classList.add("active");
-
-    overlay.classList.add("active");
-
-    menuToggle.style.display = "none";
-};
-
-function closeMenu(){
-
-    sidebar.classList.remove("active");
-
-    overlay.classList.remove("active");
-
-    if(window.innerWidth <= 768){
-
-        menuToggle.style.display = "flex";
+        document.addEventListener('click', () => {
+            if (dropdownMenu.classList.contains('show')) {
+                dropdownMenu.classList.remove('show');
+            }
+        });
     }
-}
 
-closeSidebar.onclick = () => {
-
-    closeMenu();
-};
-
-overlay.onclick = () => {
-
-    closeMenu();
-};
-
-window.addEventListener("resize", () => {
-
-    if(window.innerWidth > 768){
-
-        menuToggle.style.display = "none";
-
-        sidebar.classList.remove("active");
-
-        overlay.classList.remove("active");
-
-    }else{
-
-        if(!sidebar.classList.contains("active")){
-
-            menuToggle.style.display = "flex";
-        }
+    // Responsive Mobile Drawer Handler Logic
+    if (mobileToggle && mainNav) {
+        mobileToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('open');
+            const icon = mobileToggle.querySelector('i');
+            if (mainNav.classList.contains('open')) {
+                icon.className = 'fas fa-times';
+            } else {
+                icon.className = 'fas fa-bars';
+            }
+        });
     }
-});
-
-window.addEventListener("load", () => {
-
-    if(window.innerWidth <= 768){
-
-        menuToggle.style.display = "flex";
-
-    }else{
-
-        menuToggle.style.display = "none";
-    }
-});
-
 </script>
 
 </body>
-
 </html>
