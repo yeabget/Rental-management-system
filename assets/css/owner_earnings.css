@@ -1,0 +1,211 @@
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #eff6ff;
+    
+    --success: #10b981;
+    --success-light: #ecfdf5;
+    
+    --warning: #f59e0b;
+    --warning-light: #fffbeb;
+    
+    --danger: #ef4444;
+    --danger-light: #fef2f2;
+    
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-400: #94a3b8;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-900: #0f172a;
+    
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    
+    --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 10px 20px -4px rgba(15, 23, 42, 0.06), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
+    --shadow-lg: 0 20px 25px -5px rgba(15, 23, 42, 0.08), 0 10px 10px -5px rgba(15, 23, 42, 0.04);
+    
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background-color: var(--slate-50);
+    color: var(--slate-900);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+.owner-dashboard {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+.owner-main {
+    flex: 1;
+    min-width: 0;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.owner-topbar {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.owner-topbar::after {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 75%);
+    border-radius: 50%;
+}
+
+.owner-topbar h1 {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.75px;
+    margin: 0 0 10px 0;
+    text-align: center;
+}
+
+.owner-topbar p {
+    color: #cbd5e1;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+}
+
+.earnings-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 24px;
+    width: 100%;
+}
+
+.earn-card {
+    background: #ffffff;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--slate-200);
+    padding: 28px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.3s var(--transition-smooth), box-shadow 0.3s var(--transition-smooth);
+    position: relative;
+}
+
+.earn-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.earn-card h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--slate-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.earn-card h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--slate-900);
+    word-break: break-all;
+    line-height: 1.2;
+}
+
+.earn-card p {
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--slate-400);
+    line-height: 1.4;
+    margin-top: auto;
+}
+
+.earn-card:nth-child(1) h2 { color: var(--success); }   
+.earn-card:nth-child(2) h2 { color: var(--primary); }   
+.earn-card:nth-child(3) h2 { color: var(--warning); }   
+.earn-card:nth-child(4) h2 { color: var(--slate-700); }  
+
+@media (min-width: 769px) {
+    .owner-main {
+        margin-left: 270px;
+        padding: 40px;
+        width: calc(100vw - 270px);
+    }
+}
+
+@media (max-width: 1100px) {
+    .owner-main {
+        padding: 24px;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .owner-dashboard {
+        flex-direction: column;
+    }
+
+    .owner-main {
+        margin-left: 0;
+        padding: 20px 16px 24px 16px; 
+        width: 100%;
+        gap: 20px;
+    }
+
+    .owner-topbar {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .owner-topbar h1 {
+        font-size: 26px;
+    }
+
+    .owner-topbar p {
+        font-size: 14px;
+    }
+
+    .earnings-cards {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .earn-card {
+        padding: 20px;
+        border-radius: var(--radius-lg);
+        gap: 8px;
+    }
+
+    .earn-card h2 {
+        font-size: 1.6rem;
+    }
+}

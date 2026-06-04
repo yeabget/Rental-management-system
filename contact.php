@@ -39,7 +39,7 @@ session_start();
             <i class="fa fa-envelope"></i>
             <div>
                 <h3>Email</h3>
-                <p>support@rentflow.com</p>
+                <p>rentflow@gmail.com</p>
             </div>
         </div>
 

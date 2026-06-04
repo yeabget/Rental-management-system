@@ -29,7 +29,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Add Rental</title>
 
 <link rel="stylesheet"
-href="../assets/css/add_rentals.css">
+href="../assets/css/add_rental.css">
 
 <link rel="stylesheet"
 href="../assets/css/owners_sidebar.css">
@@ -49,22 +49,22 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
     <div class="container">
 
+<div class="page-top">
 
-        <div class="page-top">
+        <div class="welcome-box">
 
-            <div class="welcome-box">
+            <h1>
+               Add New Rental
+            </h1>
 
-                <h1>
-                    Add New Rental
-                </h1>
-
-                <p>
-                    Add and manage your rental listings easily
-                </p>
-
-            </div>
+            <p>
+               Add and manage your rental listings easily
+            </p>
 
         </div>
+
+    </div>
+    
         <div class="form-box">
 
             <a href="dashboard.php"
@@ -348,30 +348,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                     accept="image/*">
 
                 </div>
-
-                <div>
-
-                    <label>
-                        Rental Status
-                    </label>
-
-                    <select
-                    name="status"
-                    required>
-
-                        <option value="available">
-                            Available
-                        </option>
-
-                        <option value="booked">
-                            Booked
-                        </option>
-
-                    </select>
-
-                </div>
-
-
                 <button type="submit">
 
                     <i class="fa fa-paper-plane"></i>

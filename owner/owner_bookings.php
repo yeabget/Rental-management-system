@@ -14,7 +14,6 @@ $db = (new Database())->connect();
 
 $owner_id = $_SESSION['user']['id'];
 
-/* ================= FIXED QUERY ================= */
 
 $stmt = $db->prepare("
     SELECT 
@@ -97,7 +96,7 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <title>Owner Bookings</title>
 
-<link rel="stylesheet" href="../assets/css/owner_bookings.css">
+<link rel="stylesheet" href="../assets/css/owner_booking.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -110,7 +109,7 @@ $bookings = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <main class="main">
 
     <div class="topbar">
-        <div>
+        <div class="hero-text-content">
             <h1>Bookings</h1>
             <p>Who booked your rentals and payment details</p>
         </div>

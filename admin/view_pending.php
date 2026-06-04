@@ -58,7 +58,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Rental Details</title>
 
 <link rel="stylesheet"
-href="../assets/css/view_pendings.css">
+href="../assets/css/view_pending.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -75,7 +75,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
         <div class="page-top">
 
-            <div>
+            <div class="welcome-box">
                 <h1>Rental Details</h1>
 
                 <p>

@@ -14,7 +14,6 @@ $db = (new Database())->connect();
 
 $owner_id = $_SESSION['user']['id'];
 
-/* ================= TOTAL LISTINGS ================= */
 
 $stmt = $db->prepare("
     SELECT COUNT(*)
@@ -26,7 +25,6 @@ $stmt->execute([$owner_id]);
 
 $totalListings = $stmt->fetchColumn();
 
-/* ================= TOTAL BOOKINGS (PAID) ================= */
 
 $stmt = $db->prepare("
     SELECT COUNT(*)
@@ -40,7 +38,6 @@ $stmt->execute([$owner_id]);
 
 $totalBookings = $stmt->fetchColumn();
 
-/* ================= TOTAL EARNINGS ================= */
 
 $stmt = $db->prepare("
     SELECT COALESCE(SUM(p.owner_amount),0)
@@ -54,7 +51,6 @@ $stmt->execute([$owner_id]);
 
 $totalEarnings = $stmt->fetchColumn();
 
-/* ================= AVAILABLE RENTALS ONLY ================= */
 
 $stmt = $db->prepare("
     SELECT *
@@ -86,10 +82,10 @@ content="width=device-width, initial-scale=1.0">
 <title>Owner Dashboard</title>
 
 <link rel="stylesheet"
-href="../assets/css/owners_dashboard.css">
+href="../assets/css/owner_dashboards.css">
 
 <link rel="stylesheet"
-href="../assets/css/owners_sidebar.css">
+href="../assets/css/owner_sidebar.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -104,11 +100,9 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
 <main class="main">
 
-    <!-- TOPBAR -->
-
     <div class="topbar">
 
-        <div>
+        <div class="hero-text-content">
 
             <h1>
                 Welcome,
@@ -122,8 +116,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         </div>
 
     </div>
-
-    <!-- STATS -->
 
     <div class="stats">
 
@@ -167,15 +159,11 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
     </div>
 
-    <!-- SECTION TITLE -->
-
     <div class="section-title">
 
         <h2>Your Properties</h2>
 
     </div>
-
-    <!-- PROPERTY GRID -->
 
     <div class="property-grid">
 
@@ -208,18 +196,12 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                 <div class="property-card">
 
-                    <!-- IMAGE -->
-
                     <img
                     src="../assets/images/<?= htmlspecialchars($image) ?>"
                     class="property-image"
                     alt="Rental Image">
 
-                    <!-- CONTENT -->
-
                     <div class="property-content">
-
-                        <!-- TITLE + PRICE -->
 
                         <div class="title-price">
 
@@ -238,7 +220,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                         </div>
 
-                        <!-- CATEGORY -->
 
                         <div class="category-badge">
 
@@ -246,7 +227,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                         </div>
 
-                        <!-- LOCATION + STATUS -->
 
                         <div class="location-approval">
 
@@ -290,7 +270,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                         </div>
 
-                        <!-- REJECT REASON -->
 
                         <?php if(
                             $rental['status'] == 'rejected' &&
@@ -308,8 +287,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
                             </div>
 
                         <?php endif; ?>
-
-                        <!-- DESCRIPTION -->
 
                         <?php if(!empty($rental['description'])): ?>
 
@@ -331,7 +308,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                         <?php endif; ?>
 
-                        <!-- EXTRA INFO -->
 
                         <div class="extra-info">
 
@@ -385,8 +361,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
 
                         </div>
 
-                        <!-- BUTTONS -->
-
                         <div class="property-buttons">
 
                             <a
@@ -415,8 +389,6 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
             <?php endforeach; ?>
 
         <?php else: ?>
-
-            <!-- EMPTY -->
 
             <div class="empty-box">
 

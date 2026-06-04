@@ -3,7 +3,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Security Gatekeeper: Ensure only authenticated renters access this layout
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'renter') {
     header("Location: ../auth/login.php");
     exit();
@@ -21,7 +20,6 @@ $user = $stmt->fetch(PDO::FETCH_ASSOC);
 if (!$user) {
     die("User database error context missing.");
 }
-
 $search = $_GET['search'] ?? '';
 $category = $_GET['category'] ?? 'All';
 
@@ -78,7 +76,7 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Explore Marketplace | RentFlow</title>
     <link rel="stylesheet" href="../assets/css/renters_dashboard.css">
-   <link rel="stylesheet" href="../assets/css/footer.css">
+    <link rel="stylesheet" href="../assets/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -90,13 +88,14 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
         <div class="welcome-hero-banner">
             <div class="hero-text-content">
-                <h1>Welcome back, <?= htmlspecialchars(explode(' ', $user['fullname'])[0]) ?>! </h1>
+                <h1>Welcome back, <?= htmlspecialchars(explode(' ', $user['fullname'])[0]) ?>!</h1>
                 <p>Explore luxury accommodations, premium high-performance vehicles, and strategic workspaces tailored for you.</p>
             </div>
         </div>
 
         <div class="search-filter-section">
             <form class="search-bar-form" method="GET">
+                <input type="hidden" name="category" value="<?= htmlspecialchars($category) ?>">
                 <div class="input-icon-group">
                     <i class="fa fa-search search-icon"></i>
                     <input type="text" name="search"
@@ -116,8 +115,14 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     if($c === 'Houses') $icon = '<i class="fa-solid fa-house"></i>';
                     if($c === 'Motor Cycles') $icon = '<i class="fa-solid fa-motorcycle"></i>';
                     if($c === 'Shop') $icon = '<i class="fa-solid fa-shop"></i>';
+                    
+                    // FIX: Append active text search string to category links to keep filter terms alive
+                    $categoryUrl = "?category=" . urlencode($c);
+                    if (!empty($search)) {
+                        $categoryUrl .= "&search=" . urlencode($search);
+                    }
                 ?>
-                <a href="?category=<?= urlencode($c) ?>" class="filter-chip <?= $category == $c ? 'active-filter' : '' ?>">
+                <a href="<?= $categoryUrl ?>" class="filter-chip <?= $category == $c ? 'active-filter' : '' ?>">
                     <?= $icon ?> <span><?= $c ?></span>
                 </a>
                 <?php endforeach; ?>

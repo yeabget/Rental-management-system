@@ -29,7 +29,7 @@ $reports = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="../assets/css/reports.css">
+<link rel="stylesheet" href="../assets/css/reported.css">
 </head>
 
 <body>

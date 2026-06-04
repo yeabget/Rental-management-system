@@ -1,0 +1,471 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+    overflow-x: hidden;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+}
+
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
+    background: #f8fafc;
+
+}
+
+.main {
+    flex: 1;
+    padding: 40px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.page-title {
+    position: relative;
+    background: #111827; 
+    color: white;
+    padding: 45px 30px;
+    border-radius: 24px;
+    margin-bottom: 40px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(15, 23, 42, 0.05);
+    margin-top: 50px;
+    padding: 25px 20px;
+}
+
+.page-badge {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    color: #94a3b8;
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.page-title h1 {
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+}
+
+.page-title p {
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 400;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+.property-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+    gap: 25px;
+}
+
+
+.property-card {
+    background: #ffffff;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+    border: 1px solid rgba(241, 245, 249, 0.8);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+}
+
+.property-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(15, 23, 42, 0.06);
+}
+
+.property-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+    background-color: #f1f5f9;
+}
+
+.main-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.category-tag {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: rgba(15, 23, 42, 0.75);
+    backdrop-filter: blur(8px);
+    padding: 5px 12px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #ffffff;
+    z-index: 2;
+}
+.property-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 12px;
+}
+
+.title-price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.title-price h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1e293b;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.price-tag {
+    color: #2563eb; 
+    font-weight: 700;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.price-tag small {
+    font-size: 11px;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.location {
+    font-size: 13px;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.location i {
+    color: #cbd5e1;
+}
+
+.action-buttons {
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.view-btn {
+    flex: 1;
+    text-align: center;
+    padding: 11px;
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    color: #475569;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.property-card:hover .view-btn {
+    background: #2563eb;
+    color: #ffffff;
+    border-color: #2563eb;
+}
+
+.delete-btn {
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: #fff1f2;
+    color: #f43f5e;
+    border: 1px solid #ffe4e6;
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+.delete-btn:hover {
+    background: #f43f5e;
+    color: #ffffff;
+    border-color: #f43f5e;
+}
+footer {
+    background: #0b0f19; 
+    color: #ffffff;
+    padding: 60px 40px 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    width: 100%;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-brand h2 {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+}
+
+.footer-brand p {
+    color: #94a3b8;
+    font-size: 14px;
+    line-height: 1.6;
+    max-width: 320px;
+    margin-bottom: 20px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 12px;
+}
+
+.social-icons a {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.social-icons a:hover {
+    background: #2563eb;
+    transform: translateY(-2px);
+}
+
+.footer-links-column h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+.footer-links-column ul {
+    list-style: none;
+}
+
+.footer-links-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-links-column ul li a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.footer-links-column ul li a:hover {
+    color: #ffffff;
+}
+
+.footer-contact {
+    grid-column: 1 / -1;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: 24px;
+}
+
+.footer-contact h4 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.contact-item i {
+    color: #2563eb;
+}
+
+.empty-box {
+    grid-column: 1 / -1;
+    background: #ffffff;
+    padding: 60px 40px;
+    border-radius: 20px;
+    text-align: center;
+    border: 1px dashed #e2e8f0;
+    max-width: 480px;
+    margin: 40px auto;
+}
+
+.empty-box i {
+    font-size: 44px;
+    color: #94a3b8;
+    margin-bottom: 16px;
+}
+
+.empty-box h3 {
+    font-size: 18px;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.empty-box p {
+    color: #64748b;
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.empty-box .explore-btn {
+    display: inline-block;
+    background: #2563eb;
+    color: white;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 13px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+@media (max-width: 768px) {
+    .main {
+        padding: 20px;
+    }
+.page-title {
+       margin-top: 70px;
+       padding: 25px 20px;
+    }
+   
+    .property-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .property-card {
+        flex-direction: row;
+        height: 150px; 
+        border-radius: 20px;
+    }
+
+   
+    .property-image-wrapper {
+        width: 140px;
+        height: 100%;
+        flex-shrink: 0;
+    }
+
+    .category-tag {
+        top: 10px;
+        left: 10px;
+        padding: 4px 8px;
+        font-size: 9px;
+    }
+
+    .property-content {
+        padding: 14px;
+        justify-content: space-between;
+        gap: 0;
+        overflow: hidden;
+    }
+
+    .title-price {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+    }
+
+    .title-price h3 {
+        font-size: 14px;
+        max-width: 100%;
+        color: #1e293b;
+    }
+
+    .price-tag {
+        font-size: 14px;
+        margin-top: 1px;
+    }
+
+    .location {
+        font-size: 12px;
+        margin-top: 2px;
+    }
+    .action-buttons {
+        margin-top: auto;
+        gap: 8px;
+    }
+
+    .view-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+        border-radius: 8px;
+        background: #2563eb;
+        color: #ffffff;
+        border-color: #2563eb;
+    }
+
+    .delete-btn {
+        width: 34px;
+        height: 34px;
+        border-radius: 8px;
+        font-size: 12px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+}

@@ -123,15 +123,12 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <?php
         $categoryLower = strtolower($r['category']);
         $priceType = ($categoryLower === 'house' || $categoryLower === 'shop') ? "/month" : "/day";
-        
-        // Define clean icons based on category type
+    
         $catIcon = "fa-layer-group";
         if ($categoryLower === 'house') $catIcon = "fa-house-chimney";
         if ($categoryLower === 'car') $catIcon = "fa-car";
         if ($categoryLower === 'motorcycle') $catIcon = "fa-motorcycle";
         if ($categoryLower === 'shop') $catIcon = "fa-shop";
-
-        // Generate synthetic consistent rating weights for pristine UI presentation
         $ratingScore = number_format(4.5 + (($index * 7) % 6) / 10, 1);
         $reviewCount = (12 + ($index * 13) % 40);
         ?>

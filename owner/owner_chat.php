@@ -100,7 +100,7 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Owner Chat</title>
 
-<link rel="stylesheet" href="../assets/css/ownerss_chat.css">
+<link rel="stylesheet" href="../assets/css/owner_chat.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 
@@ -113,7 +113,6 @@ $messages = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="chat-page">
 
-<!-- TOP BAR -->
 <div class="topbar">
 
     <a href="owner_chat_list.php" class="back-btn">

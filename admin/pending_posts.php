@@ -35,7 +35,7 @@ $rentals = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <title>Pending Rentals</title>
 
-<link rel="stylesheet" href="../assets/css/pending_request.css">
+<link rel="stylesheet" href="../assets/css/pending_requests.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>

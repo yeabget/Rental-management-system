@@ -1,0 +1,270 @@
+
+:root {
+    --primary: #2563eb;
+    --primary-dark: #1d4ed8;
+    --primary-light: #eff6ff;
+    
+    --success: #10b981;
+    --success-light: #ecfdf5;
+    
+    --danger: #ef4444;
+    --danger-dark: #dc2626;
+    --danger-light: #fef2f2;
+    
+    --warning: #f59e0b;
+    --warning-light: #fffbeb;
+    
+    --slate-50: #f8fafc;
+    --slate-100: #f1f5f9;
+    --slate-200: #e2e8f0;
+    --slate-500: #64748b;
+    --slate-600: #475569;
+    --slate-700: #334155;
+    --slate-900: #0f172a;
+    
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-xl: 28px;
+    
+    --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.04);
+    --shadow-md: 0 10px 20px -4px rgba(15, 23, 42, 0.06), 0 4px 6px -2px rgba(15, 23, 42, 0.03);
+    
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
+    background-color: var(--slate-50);
+    color: var(--slate-900);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+}
+
+.dashboard {
+    display: flex;
+    min-height: 100vh;
+    width: 100vw;
+}
+
+.main {
+    flex: 1;
+    min-width: 0;
+    padding: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.page-top {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #ffffff;
+    padding: 30px;
+    border-radius: 30px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.page-top::after {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -10%;
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(37, 99, 235, 0.12) 0%, transparent 75%);
+    border-radius: 50%;
+}
+
+.welcome-box h1 {
+    font-size: 34px;
+    font-weight: 800;
+    letter-spacing: -0.75px;
+    margin: 0 0 10px 0;
+    text-align: center;
+}
+
+.welcome-box p {
+    color: #cbd5e1;
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 0;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    background: #ffffff;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--slate-200);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden; 
+}
+
+th {
+    background: var(--slate-50);
+    color: var(--slate-600);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 18px 24px;
+    border-bottom: 2px solid var(--slate-200);
+    white-space: nowrap;
+}
+
+td {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--slate-100);
+    color: var(--slate-700);
+    font-size: 0.95rem;
+    vertical-align: middle;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover td {
+    background-color: var(--slate-50);
+}
+
+td:nth-child(1) {
+    font-weight: 700;
+    color: var(--slate-500);
+}
+
+td:nth-child(4) {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.status-active,
+.status-suspended {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    padding: 4px 10px;
+    border-radius: 6px;
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+.status-active {
+    background: var(--success-light);
+    color: var(--success);
+    border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.status-suspended {
+    background: var(--danger-light);
+    color: var(--danger);
+    border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+td a {
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+td a:not(.delete-btn):not([href*="activate"]) {
+    color: var(--warning);
+    background: var(--warning-light);
+}
+
+td a:not(.delete-btn):not([href*="activate"]):hover {
+    background: #fef3c7;
+}
+
+td a[href*="activate"] {
+    color: var(--primary);
+    background: var(--primary-light);
+}
+
+td a[href*="activate"]:hover {
+    background: #dbeafe;
+}
+
+/* Terminal Delete Option styling */
+td a.delete-btn {
+    color: var(--danger);
+    background: var(--danger-light);
+}
+
+td a.delete-btn:hover {
+    background: var(--danger-dark);
+    color: #ffffff;
+}
+
+@media (min-width: 769px) {
+    .main {
+        margin-left: 270px;
+        padding: 40px;
+        width: calc(100vw - 270px);
+    }
+}
+
+@media (max-width: 1100px) {
+    .main {
+        padding: 24px;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard {
+        flex-direction: column;
+    }
+
+    .main {
+        margin-left: 0;
+        padding: 20px 16px 24px 16px; 
+        width: 100%;
+        gap: 20px;
+    }
+
+    .page-top {
+        padding: 20px;
+        border-radius: 20px;
+    }
+
+    .welcome-box h1 {
+        font-size: 26px;
+    }
+
+    .welcome-box p {
+        font-size: 14px;
+    }
+
+   
+    .main {
+        overflow-x: auto;
+    }
+
+    table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    th, td {
+        padding: 12px 16px;
+        font-size: 0.88rem;
+    }
+}

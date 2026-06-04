@@ -135,7 +135,7 @@ content="width=device-width, initial-scale=1.0">
 <title>Messages</title>
 
 <link rel="stylesheet"
-href="../assets/css/owners_chat_list.css">
+href="../assets/css/owners_chats_list.css">
 
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">

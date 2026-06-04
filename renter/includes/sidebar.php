@@ -3,7 +3,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Security Gatekeeper: Ensure only authenticated renters access this layout
 if (!isset($_SESSION['user']) || $_SESSION['user']['role'] !== 'renter') {
     header("Location: ../auth/login.php");
     exit();
@@ -14,13 +13,12 @@ require_once "../config/Database.php";
 $db = (new Database())->connect();
 $user = $_SESSION['user'];
 
-// Extract the profile initial dynamically
 $firstLetter = strtoupper(substr($user['fullname'], 0, 1));
 $currentPage = basename($_SERVER['PHP_SELF']);
 $unreadChats = 0;
 
 try {
-    // Live unread message indicator query
+   
     $stmt = $db->prepare("
         SELECT COUNT(*)
         FROM messages
@@ -104,7 +102,6 @@ try {
     const mobileToggle = document.getElementById('mobileNavToggle');
     const mainNav = document.getElementById('mainNav');
 
-    // Profile Menu Toggle Animation Thread
     if (dropdownBtn && dropdownMenu) {
         dropdownBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -118,7 +115,6 @@ try {
         });
     }
 
-    // Responsive Mobile Drawer Handler Logic
     if (mobileToggle && mainNav) {
         mobileToggle.addEventListener('click', () => {
             mainNav.classList.toggle('open');

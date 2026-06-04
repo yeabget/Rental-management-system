@@ -44,7 +44,7 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 <title>Edit Posts</title>
 
-<link rel="stylesheet" href="../assets/css/edit_post.css">
+<link rel="stylesheet" href="../assets/css/edit_postss.css">
 <link rel="stylesheet" href="../assets/css/owners_sidebar.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
@@ -58,8 +58,8 @@ $posts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <main class="main">
 
-        <div class="topbar">
-            <div class="topbar-content">
+        <div class="page-top">
+            <div class="welcome-box">
                 <h1>Edit Posts</h1>
                 <p>Manage, update and organize your rental listings</p>
             </div>
